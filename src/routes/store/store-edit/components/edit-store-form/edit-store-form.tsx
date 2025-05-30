@@ -6,18 +6,18 @@ import { z } from "zod"
 
 import { Form } from "../../../../../components/common/form"
 
-import { RouteDrawer, useRouteModal } from "../../../../../components/modals"
-import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
-import { StoreVendor } from "../../../../../types/user"
-import { useUpdateMe } from "../../../../../hooks/api"
-import { MediaSchema } from "../../../../products/product-create/constants"
+import { HttpTypes } from "@medusajs/types"
+import { useCallback } from "react"
 import {
   FileType,
   FileUpload,
 } from "../../../../../components/common/file-upload"
-import { useCallback } from "react"
+import { RouteDrawer, useRouteModal } from "../../../../../components/modals"
+import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
+import { useUpdateMe } from "../../../../../hooks/api"
 import { uploadFilesQuery } from "../../../../../lib/client"
-import { HttpTypes } from "@medusajs/types"
+import { StoreVendor } from "../../../../../types/user"
+import { MediaSchema } from "../../../../products/product-create/constants"
 
 export const EditStoreSchema = z.object({
   name: z.string().min(1),
@@ -150,8 +150,11 @@ export const EditStoreForm = ({ seller }: { seller: StoreVendor }) => {
 
   return (
     <RouteDrawer.Form form={form}>
-      <KeyboundForm onSubmit={handleSubmit} className="flex h-full flex-col">
-        <RouteDrawer.Body>
+      <KeyboundForm
+        onSubmit={handleSubmit}
+        className="flex size-full flex-col overflow-hidden"
+      >
+        <RouteDrawer.Body className="flex size-full flex-col gap-y-8 overflow-auto">
           <div className="flex flex-col gap-y-8">
             <Form.Field
               name="media"
@@ -234,7 +237,7 @@ export const EditStoreForm = ({ seller }: { seller: StoreVendor }) => {
             />
           </div>
         </RouteDrawer.Body>
-        <RouteDrawer.Footer>
+        <RouteDrawer.Footer className="flex-shrink-0">
           <div className="flex items-center justify-end gap-x-2">
             <RouteDrawer.Close asChild>
               <Button size="small" variant="secondary">
