@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button, Divider, Heading, Input, Switch, toast } from "@medusajs/ui"
+import { Button, Divider, Heading, Input, toast } from "@medusajs/ui"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { z } from "zod"
@@ -98,7 +98,7 @@ export const ProductEditVariantForm = ({
 
     await mutateAsync(
       {
-        id: variant?.id!,
+        // id: variant?.id!,
         weight: transformNullableFormNumber(weight),
         height: transformNullableFormNumber(height),
         width: transformNullableFormNumber(width),
