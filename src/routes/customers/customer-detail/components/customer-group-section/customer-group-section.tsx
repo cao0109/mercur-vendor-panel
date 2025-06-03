@@ -12,7 +12,6 @@ import { t } from "i18next"
 import { useMemo, useState } from "react"
 
 import { PencilSquare, Trash } from "@medusajs/icons"
-import { keepPreviousData } from "@tanstack/react-query"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
@@ -46,20 +45,28 @@ export const CustomerGroupSection = ({
     prefix: PREFIX,
   })
 
-  const { customer_groups, count, isLoading, isError, error } =
-    useCustomerGroups(
-      {
-        ...searchParams,
-        fields: "+customers.id",
-        customers: { id: customer.id },
-      },
-      undefined,
-      {
-        created_at: searchParams.created_at,
-        updated_at: searchParams.updated_at,
-        sort: searchParams.order,
-      }
-    )
+  const {
+    customer_groups: customerGroups,
+    count,
+    isLoading,
+    isError,
+    error,
+  } = useCustomerGroups(
+    {
+      ...searchParams,
+      fields: "+customers.id",
+    },
+    undefined,
+    {
+      created_at: searchParams.created_at,
+      updated_at: searchParams.updated_at,
+      sort: searchParams.order,
+    }
+  )
+
+  const customer_groups = customerGroups?.filter((cg) =>
+    customer.groups?.some((g) => g.id === cg.customer_group_id)
+  )
 
   const { mutateAsync: batchCustomerCustomerGroups } =
     useBatchCustomerCustomerGroups(customer.id)
@@ -70,7 +77,7 @@ export const CustomerGroupSection = ({
   const { table } = useDataTable({
     data: customer_groups ?? [],
     columns,
-    count,
+    count: customer_groups?.length ?? 0,
     getRowId: (row) => row.customer_group_id,
     enablePagination: true,
     enableRowSelection: true,
@@ -102,7 +109,7 @@ export const CustomerGroupSection = ({
     }
 
     await batchCustomerCustomerGroups(
-      { remove: customerGroupIds },
+      { remove: customerGroupIds, add: [] },
       {
         onSuccess: () => {
           toast.success(
@@ -139,7 +146,7 @@ export const CustomerGroupSection = ({
         columns={columns}
         pageSize={PAGE_SIZE}
         isLoading={isLoading}
-        count={count}
+        count={customer_groups?.length ?? 0}
         prefix={PREFIX}
         navigateTo={(row) => `/customer-groups/${row.id}`}
         filters={filters}

@@ -63,7 +63,10 @@ export const AddCampaignPromotionsForm = ({
   const { searchParams, raw } = usePromotionTableQuery({ pageSize: PAGE_SIZE })
   const { promotions: promotionsRaw, isPending: isLoading } = usePromotions({
     ...searchParams,
+    fields: "+status",
   })
+
+  console.log({ promotionsRaw })
 
   const promotions = promotionsRaw?.filter((item) => item !== null)
   const count = promotions?.length ?? 0

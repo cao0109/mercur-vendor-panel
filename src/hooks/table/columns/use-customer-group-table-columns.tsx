@@ -18,16 +18,22 @@ export const useCustomerGroupTableColumns = () => {
       columnHelper.accessor("name", {
         header: () => <TextHeader text={t("fields.name")} />,
         cell: ({ row }) => {
-          return <TextCell text={row.original?.customer_group?.name || "-"} />
+          return (
+            <TextCell
+              text={
+                row.original?.customer_group?.name || row.original?.name || "-"
+              }
+            />
+          )
         },
       }),
-      columnHelper.accessor("customers", {
-        header: () => <TextHeader text={t("customers.domain")} />,
-        cell: ({ row }) => {
-          const count = row.original?.customer_group?.customers.length ?? 0
-          return <TextCell text={`${count}`} />
-        },
-      }),
+      // columnHelper.accessor("customers", {
+      //   header: () => <TextHeader text={t("customers.domain")} />,
+      //   cell: ({ row }) => {
+      //     const count = row.original?.customer_group?.customers.length ?? 0
+      //     return <TextCell text={`${count}`} />
+      //   },
+      // }),
     ],
     [t]
   )

@@ -1,6 +1,6 @@
 import { HttpTypes } from "@medusajs/types"
 
-type CustomerGroupData = {
+export type CustomerGroupData = {
   customer_group_id: string
   customer_group: HttpTypes.AdminCustomerGroup
 }
