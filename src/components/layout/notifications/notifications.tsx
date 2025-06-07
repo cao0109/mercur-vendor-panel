@@ -10,7 +10,7 @@ import { TFunction } from "i18next"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { notificationQueryKeys, useNotifications } from "../../../hooks/api"
-import { sdk } from "../../../lib/client"
+import { fetchQuery } from "../../../lib/client"
 import { FilePreview } from "../../common/file-preview"
 import { InfiniteList } from "../../common/infinite-list"
 
@@ -88,7 +88,12 @@ export const Notifications = () => {
           >
             responseKey="notifications"
             queryKey={notificationQueryKeys.all}
-            queryFn={(params) => sdk.admin.notification.list(params)}
+            queryFn={(params) =>
+              fetchQuery("/vendor/notifications", {
+                method: "GET",
+                query: params as Record<string, string | number>,
+              })
+            }
             queryOptions={{ enabled: open }}
             renderEmpty={() => <NotificationsEmptyState t={t} />}
             renderItem={(notification) => {
@@ -108,6 +113,26 @@ export const Notifications = () => {
       </Drawer.Content>
     </Drawer>
   )
+}
+
+const NOTIFICATION_TEMPLATES = {
+  seller_product_collection_request_accepted_notification:
+    "Your product collection request has been accepted",
+  seller_product_collection_request_rejected_notification:
+    "Your product collection request has been rejected",
+  seller_new_order_notification: "You have a new order",
+  seller_product_category_request_accepted_notification:
+    "Your product category request has been accepted",
+  seller_product_category_request_rejected_notification:
+    "Your product category request has been rejected",
+  seller_product_tag_request_accepted_notification:
+    "Your product tag request has been accepted",
+  seller_product_tag_request_rejected_notification:
+    "Your product tag request has been rejected",
+  seller_product_type_request_accepted_notification:
+    "Your product type request has been accepted",
+  seller_product_type_request_rejected_notification:
+    "Your product type request has been rejected",
 }
 
 const Notification = ({
@@ -158,12 +183,18 @@ const Notification = ({
                 )}
               </div>
             </div>
-            {!!data.description && (
+            {!!NOTIFICATION_TEMPLATES[
+              notification.template as keyof typeof NOTIFICATION_TEMPLATES
+            ] && (
               <Text
                 className="text-ui-fg-subtle whitespace-pre-line"
                 size="small"
               >
-                {data.description}
+                {
+                  NOTIFICATION_TEMPLATES[
+                    notification.template as keyof typeof NOTIFICATION_TEMPLATES
+                  ]
+                }
               </Text>
             )}
           </div>
@@ -199,28 +230,28 @@ const NotificationsEmptyState = ({ t }: { t: TFunction }) => {
 
 const useUnreadNotifications = () => {
   const [hasUnread, setHasUnread] = useState(false)
-  // const { notifications } = useNotifications(
-  //   { limit: 1, offset: 0, fields: "created_at" },
-  //   { refetchInterval: 60_000 }
-  // )
-  // const lastNotification = notifications?.[0]
+  const { notifications } = useNotifications(
+    { limit: 1, offset: 0, fields: "created_at" },
+    { refetchInterval: 60_000 }
+  )
+  const lastNotification = notifications?.[0]
 
-  // useEffect(() => {
-  //   if (!lastNotification) {
-  //     return
-  //   }
+  useEffect(() => {
+    if (!lastNotification) {
+      return
+    }
 
-  //   const lastNotificationAsTimestamp = Date.parse(lastNotification.created_at)
+    const lastNotificationAsTimestamp = Date.parse(lastNotification.created_at)
 
-  //   const lastReadDatetime = localStorage.getItem(LAST_READ_NOTIFICATION_KEY)
-  //   const lastReadAsTimestamp = lastReadDatetime
-  //     ? Date.parse(lastReadDatetime)
-  //     : 0
+    const lastReadDatetime = localStorage.getItem(LAST_READ_NOTIFICATION_KEY)
+    const lastReadAsTimestamp = lastReadDatetime
+      ? Date.parse(lastReadDatetime)
+      : 0
 
-  //   if (lastNotificationAsTimestamp > lastReadAsTimestamp) {
-  //     setHasUnread(true)
-  //   }
-  // }, [lastNotification])
+    if (lastNotificationAsTimestamp > lastReadAsTimestamp) {
+      setHasUnread(true)
+    }
+  }, [lastNotification])
 
   return [hasUnread, setHasUnread] as const
 }

@@ -6,6 +6,7 @@ import { SidebarProvider } from "../../../providers/sidebar-provider"
 
 export const ProtectedRoute = () => {
   const { seller, isPending, error } = useMe()
+  const isSuspended = seller?.store_status === "SUSPENDED"
 
   const location = useLocation()
   if (isPending) {
@@ -29,6 +30,11 @@ export const ProtectedRoute = () => {
   return (
     <SidebarProvider>
       <SearchProvider>
+        {isSuspended && (
+          <div className="w-full bg-red-600 text-white p-1 text-center text-sm">
+            Your store is <b>suspended</b>. Please contact support.
+          </div>
+        )}
         <Outlet />
       </SearchProvider>
     </SidebarProvider>

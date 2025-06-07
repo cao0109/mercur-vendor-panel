@@ -81,7 +81,15 @@ const generateChartData = ({
   return res
 }
 
-export const DashboardCharts = () => {
+export const DashboardCharts = ({
+  notFulfilledOrders,
+  fulfilledOrders,
+  reviewsToReply,
+}: {
+  notFulfilledOrders: number
+  fulfilledOrders: number
+  reviewsToReply: any[]
+}) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [filters, setFilters] = useState(["customers", "orders"])
@@ -141,28 +149,37 @@ export const DashboardCharts = () => {
         </div>
         <div className="px-6 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           <Link to="/orders?order_status=not_fulfilled">
-            <Button variant="secondary" className="w-full justify-between py-4">
+            <Button
+              variant="secondary"
+              className="w-full justify-between py-4 h-full"
+            >
               <div className="flex gap-4 items-center">
-                <Badge>0</Badge>
+                <Badge>{notFulfilledOrders}</Badge>
                 Orders to be fulfilled
               </div>
               <TriangleRightMini color="grey" />
             </Button>
           </Link>
           <Link to="/orders?order_status=fulfilled">
-            <Button variant="secondary" className="w-full justify-between py-4">
+            <Button
+              variant="secondary"
+              className="w-full justify-between py-4 h-full"
+            >
               <div className="flex gap-4 items-center">
-                <Badge>0</Badge>
+                <Badge>{fulfilledOrders}</Badge>
                 Orders to be shipped
               </div>
               <TriangleRightMini color="grey" />
             </Button>
           </Link>
-          <Link to="/reviews">
-            <Button variant="secondary" className="w-full justify-between py-4">
+          <Link to="/reviews?seller_note=false">
+            <Button
+              variant="secondary"
+              className="w-full justify-between py-4 h-full"
+            >
               <div className="flex gap-4 items-center">
-                <Badge>0</Badge>
-                New reviews
+                <Badge>{reviewsToReply}</Badge>
+                Reviews to reply
               </div>
               <TriangleRightMini color="grey" />
             </Button>
@@ -170,7 +187,7 @@ export const DashboardCharts = () => {
           <Link to="/messages">
             <Button
               variant="secondary"
-              className="w-full justify-between py-4 h-full"
+              className="w-full justify-between py-4 h-full h-full"
             >
               <div className="flex gap-4 items-center">Messages</div>
               <TriangleRightMini color="grey" />

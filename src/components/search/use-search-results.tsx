@@ -601,10 +601,10 @@ const transformMap: TransformMap = {
   campaign: {
     dataKey: "campaigns",
     transform: (campaign: HttpTypes.AdminCampaign) => ({
-      id: campaign.id,
-      title: campaign.name,
-      to: `/campaigns/${campaign.id}`,
-      value: `campaign:${campaign.id}`,
+      id: campaign?.id,
+      title: campaign?.name,
+      to: `/campaigns/${campaign?.id}`,
+      value: `campaign:${campaign?.id}`,
     }),
   },
   priceList: {

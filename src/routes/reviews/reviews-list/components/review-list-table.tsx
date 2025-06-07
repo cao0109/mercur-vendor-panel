@@ -8,6 +8,7 @@ import { useDataTable } from "../../../../hooks/use-data-table"
 import { useReviewTableColumns } from "../../../../hooks/table/columns/use-review-table-columns"
 import { useReviewTableQuery } from "../../../../hooks/table/query/use-review-table-query"
 import { StarsRating } from "../../../../components/common/stars-rating/stars-rating"
+import { useSearchParams } from "react-router-dom"
 
 const PAGE_SIZE = 20
 
@@ -15,6 +16,10 @@ export const ReviewListTable = () => {
   const { searchParams, raw } = useReviewTableQuery({
     pageSize: PAGE_SIZE,
   })
+
+  const [params] = useSearchParams()
+  const sellerNote = params.get("seller_note") === "false"
+
   const { reviews, isLoading, isError, error } = useReviews(
     {
       fields: "*customer",
@@ -25,7 +30,10 @@ export const ReviewListTable = () => {
     }
   )
 
-  const filteredReviews = reviews?.filter((review: any) => review) || []
+  const filtered = reviews?.filter((review: any) => review) || []
+  const filteredReviews = sellerNote
+    ? filtered.filter((review: any) => !review.seller_note)
+    : filtered
 
   const count = filteredReviews.length
 
@@ -39,7 +47,7 @@ export const ReviewListTable = () => {
   const columns = useColumns()
 
   const { table } = useDataTable({
-    data: filteredReviews ?? [],
+    data: filteredReviews,
     columns,
     count,
     enablePagination: true,

@@ -25,6 +25,7 @@ export interface StoreVendor {
   city?: string
   country_code?: string
   tax_id?: string
+  store_status?: "ACTIVE" | "SUSPENDED" | "INACTIVE"
 }
 
 export interface TeamMemberProps {
