@@ -15,7 +15,6 @@ import {
   AdminPaymentCollection,
   AdminRegion,
   AdminReservation,
-  AdminReturn,
   PaymentStatus,
 } from "@medusajs/types"
 import {
@@ -23,12 +22,14 @@ import {
   clx,
   Container,
   Heading,
+  StatusBadge,
   Text,
   toast,
   usePrompt,
 } from "@medusajs/ui"
 
 import { ActionMenu } from "../../../../../components/common/action-menu"
+import { Thumbnail } from "../../../../../components/common/thumbnail"
 import { useOrderPreview } from "../../../../../hooks/api/orders"
 import { useMarkPaymentCollectionAsPaid } from "../../../../../hooks/api/payment-collections"
 import { useReservationItems } from "../../../../../hooks/api/reservations"
@@ -43,7 +44,6 @@ import { getTotalCaptured } from "../../../../../lib/payment"
 import { getReturnableQuantity } from "../../../../../lib/rma"
 import { CopyPaymentLink } from "../copy-payment-link/copy-payment-link"
 import ShippingInfoPopover from "./shipping-info-popover"
-import { Thumbnail } from "../../../../../components/common/thumbnail"
 
 type OrderSummarySectionProps = {
   order: AdminOrder
