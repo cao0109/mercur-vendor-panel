@@ -1,18 +1,18 @@
 import {
   Buildings,
+  ChatBubbleLeftRight,
   ChevronDownMini,
   CogSixTooth,
+  Component,
   CurrencyDollar,
+  ListCheckbox,
   MagnifyingGlass,
   MinusMini,
   ReceiptPercent,
   ShoppingCart,
+  Star,
   Tag,
   Users,
-  Component,
-  Star,
-  ListCheckbox,
-  ChatBubbleLeftRight,
 } from "@medusajs/icons"
 import { Avatar, Divider, Text, clx } from "@medusajs/ui"
 import { Collapsible as RadixCollapsible } from "radix-ui"
@@ -27,7 +27,6 @@ import { useMe } from "../../../hooks/api"
 
 import { useSearch } from "../../../providers/search-provider"
 import { UserMenu } from "../user-menu"
-import { StripeIcon } from "../../../assets/icons/Stripe"
 
 export const MainLayout = () => {
   return (
@@ -199,11 +198,11 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
 
 const useExtensionRoutes = (): Omit<INavItem, "pathname">[] => {
   return [
-    {
-      icon: <StripeIcon />,
-      label: "Stripe Connect",
-      to: "/stripe-connect",
-    },
+    // {
+    //   icon: <StripeIcon />,
+    //   label: "Stripe Connect",
+    //   to: "/stripe-connect",
+    // },
   ]
 }
 

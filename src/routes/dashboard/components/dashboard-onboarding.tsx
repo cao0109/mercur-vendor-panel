@@ -1,7 +1,7 @@
 import { Container, Heading, Text } from "@medusajs/ui"
-import { OnboardingRow } from "./onboarding-row"
-import { useUpdateOnboarding } from "../../../hooks/api"
 import { useEffect } from "react"
+import { useUpdateOnboarding } from "../../../hooks/api"
+import { OnboardingRow } from "./onboarding-row"
 
 type DashboardProps = {
   products: boolean
@@ -26,7 +26,7 @@ export const DashboardOnboarding = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <div>
-          <Heading>Welcome to Mercur marketplace</Heading>
+          <Heading>Welcome to Vendor Panel</Heading>
           <Text className="text-ui-fg-subtle" size="small">
             Please complete these steps so you can start selling on the
             marketplace

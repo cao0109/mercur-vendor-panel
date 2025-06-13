@@ -30,10 +30,6 @@
     "./root": "./",
     "./package.json": "./package.json"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://https://github.com/mercurjs/vendor-panel"
-  },
   "files": [
     "package.json",
     "src",

@@ -160,14 +160,14 @@ export const RouteMap: RouteObject[] = [
               },
             ],
           },
-          {
-            path: "/messages",
-            errorElement: <ErrorBoundary />,
-            handle: {
-              breadcrumb: () => "Messages",
-            },
-            lazy: () => import("../../routes/messages"),
-          },
+          // {
+          //   path: "/messages",
+          //   errorElement: <ErrorBoundary />,
+          //   handle: {
+          //     breadcrumb: () => "Messages",
+          //   },
+          //   lazy: () => import("../../routes/messages"),
+          // },
           {
             path: "/reviews",
             errorElement: <ErrorBoundary />,

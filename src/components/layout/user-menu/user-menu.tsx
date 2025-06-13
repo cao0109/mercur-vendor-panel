@@ -1,6 +1,7 @@
 import {
   CircleHalfSolid,
   EllipsisHorizontal,
+  GlobeEurope,
   Keyboard,
   OpenRectArrowOut,
   User as UserIcon,
@@ -24,9 +25,11 @@ import { Skeleton } from "../../common/skeleton"
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useLogout, useUserMe } from "../../../hooks/api"
+import { languages } from "../../../i18n/languages"
 import { queryClient } from "../../../lib/query-client"
 import { useGlobalShortcuts } from "../../../providers/keybind-provider/hooks"
 import { useTheme } from "../../../providers/theme-provider"
+import { i18n } from "../../utilities/i18n/i18n"
 
 export const UserMenu = () => {
   const { t } = useTranslation()
@@ -59,6 +62,7 @@ export const UserMenu = () => {
             {t("app.menus.user.shortcuts")}
           </DropdownMenu.Item>
           <ThemeToggle />
+          <LanguageToggle />
           <DropdownMenu.Separator />
           <Logout />
         </DropdownMenu.Content>
@@ -171,6 +175,38 @@ const ThemeToggle = () => {
           >
             {t("app.menus.user.theme.dark")}
           </DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+      </DropdownMenu.SubMenuContent>
+    </DropdownMenu.SubMenu>
+  )
+}
+
+const LanguageToggle = () => {
+  const { t, i18n: i18nInstance } = useTranslation()
+  const currentLang = i18nInstance.language
+
+  return (
+    <DropdownMenu.SubMenu>
+      <DropdownMenu.SubMenuTrigger className="rounded-md">
+        <span className="mr-2">
+          <GlobeEurope className="text-ui-fg-subtle" />
+        </span>
+        {t("profile.fields.languageLabel")}
+      </DropdownMenu.SubMenuTrigger>
+      <DropdownMenu.SubMenuContent>
+        <DropdownMenu.RadioGroup value={currentLang}>
+          {languages.map((lang) => (
+            <DropdownMenu.RadioItem
+              key={lang.code}
+              value={lang.code}
+              onClick={(e) => {
+                e.preventDefault()
+                i18n.changeLanguage(lang.code)
+              }}
+            >
+              {lang.display_name}
+            </DropdownMenu.RadioItem>
+          ))}
         </DropdownMenu.RadioGroup>
       </DropdownMenu.SubMenuContent>
     </DropdownMenu.SubMenu>
