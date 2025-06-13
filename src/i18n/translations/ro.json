@@ -2250,7 +2250,7 @@
       "header": "Editați profilul",
       "languageHint": "Limba pe care doriți să o utilizați în tabloul de bord administrativ. ",
       "languagePlaceholder": "Selectați limba",
-      "usageInsightsHint": "Distribuiți informații despre utilizare și ajutați-ne să îmbunătățim Medusa.  <0>documentare</0>."
+      "usageInsightsHint": "Distribuiți informații despre utilizare și ajutați-ne să îmbunătățim WChain.  <0>documentare</0>."
     },
     "toast": {
       "edit": "Modificările profilurilor au fost salvate"
@@ -2494,7 +2494,7 @@
       "createPublishableHeader": "Creați cheia API publicabilă",
       "createPublishableHint": "Creați o nouă cheie API publicabilă pentru a limita sfera solicitărilor la anumite canale de vânzare.",
       "createSecretHeader": "Creați cheia API secretă",
-      "createSecretHint": "Creați o nouă cheie API secretă pentru a accesa API-ul Medusa ca utilizator administrator autentificat.",
+      "createSecretHint": "Creați o nouă cheie API secretă pentru a accesa API-ul WChain ca utilizator administrator autentificat.",
       "secretKeyCreatedHeader": "Cheie secretă creată",
       "secretKeyCreatedHint": "Noua ta cheie secretă a fost generată. ",
       "copySecretTokenSuccess": "Cheia secretă a fost copiată în clipboard.",
@@ -2591,11 +2591,11 @@
   },
   "login": {
     "forgotPassword": "Aţi uitat parola?  <0>Resetați</0>",
-    "title": "Bun venit la Medusa",
+    "title": "Bun venit la WChain",
     "hint": "Conectați-vă pentru a accesa zona de cont"
   },
   "invite": {
-    "title": "Bun venit la Medusa",
+    "title": "Bun venit la WChain",
     "hint": "Creează-ți contul mai jos",
     "backToLogin": "Înapoi la autentificare",
     "createAccount": "Creează cont",
@@ -2603,8 +2603,8 @@
     "emailTooltip": "E-mailul dvs. nu poate fi schimbat. ",
     "invalidInvite": "Invitația este nevalidă sau a expirat.",
     "successTitle": "Contul dvs. a fost înregistrat",
-    "successHint": "Începeți imediat cu Medusa Admin.",
-    "successAction": "Porniți Medusa Admin",
+    "successHint": "Începeți imediat cu WChain Admin.",
+    "successAction": "Porniți WChain Admin",
     "invalidTokenTitle": "Indicatorul dvs. de invitație este nevalid",
     "invalidTokenHint": "Încercați să solicitați un nou link de invitație.",
     "passwordMismatch": "Parolele nu se potrivesc",
@@ -2637,7 +2637,7 @@
   },
   "workflowExecutions": {
     "domain": "Fluxuri de lucru",
-    "subtitle": "Vizualizați și urmăriți execuțiile fluxului de lucru în aplicația dvs. Medusa.",
+    "subtitle": "Vizualizați și urmăriți execuțiile fluxului de lucru în aplicația dvs. WChain.",
     "transactionIdLabel": "ID tranzacție",
     "workflowIdLabel": "ID flux de lucru",
     "progressLabel": "Progres",
@@ -2728,7 +2728,7 @@
       "description": "Nu aveți notificări momentan, dar odată ce o faceți vor locui aici."
     },
     "accessibility": {
-      "description": "notificările despre activitățile Medusa vor fi listate aici."
+      "description": "notificările despre activitățile WChain vor fi listate aici."
     }
   },
   "errors": {

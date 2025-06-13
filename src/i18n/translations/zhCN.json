@@ -2634,7 +2634,7 @@
   },
   "workflowExecutions": {
     "domain": "工作流",
-    "subtitle": "查看和跟踪您的 Medusa 应用程序中的工作流执行情况。",
+    "subtitle": "查看和跟踪您的 WChain Vendor Panel 应用程序中的工作流执行情况。",
     "transactionIdLabel": "交易 ID",
     "workflowIdLabel": "工作流 ID",
     "progressLabel": "进度",
@@ -2725,7 +2725,7 @@
       "description": "您目前没有任何通知,但一旦有通知它们将显示在这里。"
     },
     "accessibility": {
-      "description": "关于 Medusa 活动的通知将在此处列出。"
+      "description": "关于 WChain Vendor Panel 活动的通知将在此处列出。"
     }
   },
   "errors": {

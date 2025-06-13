@@ -1296,7 +1296,7 @@
       "title": "İade Oluştur",
       "sendNotificationHint": "Oluşturulan iade hakkında müşterilere bilgi verin.",
       "systemPayment": "Sistem ödemesi",
-      "systemPaymentDesc": "Ödemelerinizden biri bir sistem ödemesidir. Bu tür ödemeler için işlemler Medusa tarafından yönetilmez.",
+      "systemPaymentDesc": "Ödemelerinizden biri bir sistem ödemesidir. Bu tür ödemeler için işlemler WChain tarafından yönetilmez.",
       "error": {
         "amountToLarge": "Orijinal sipariş tutarından daha fazlasını iade edemezsiniz.",
         "amountNegative": "İade tutarı pozitif bir sayı olmalıdır.",
@@ -2272,7 +2272,7 @@
       "header": "Profili Düzenle",
       "languageHint": "Yönetim panelinde kullanmak istediğiniz dili seçin. Bu, mağazanızın dilini değiştirmez.",
       "languagePlaceholder": "Dili seçin",
-      "usageInsightsHint": "Kullanım istatistiklerini paylaşarak Medusa'nın iyileştirilmesine yardımcı olun. Topladığımız bilgiler ve nasıl kullandığımız hakkında daha fazla bilgiye <0>dokümantasyonda</0> ulaşabilirsiniz."
+      "usageInsightsHint": "Kullanım istatistiklerini paylaşarak WChain'nın iyileştirilmesine yardımcı olun. Topladığımız bilgiler ve nasıl kullandığımız hakkında daha fazla bilgiye <0>dokümantasyonda</0> ulaşabilirsiniz."
     },
     "toast": {
       "edit": "Profil değişiklikleri kaydedildi"
@@ -2518,7 +2518,7 @@
       "createPublishableHeader": "Yayınlanabilir API Anahtarı Oluştur",
       "createPublishableHint": "Belirli satış kanallarına yönelik taleplerin kapsamını sınırlamak için yeni bir yayınlanabilir API anahtarı oluşturun.",
       "createSecretHeader": "Gizli API Anahtarı Oluştur",
-      "createSecretHint": "Doğrulanmış bir yönetici kullanıcısı olarak Medusa API'ye erişmek için yeni bir gizli API anahtarı oluşturun.",
+      "createSecretHint": "Doğrulanmış bir yönetici kullanıcısı olarak WChain API'ye erişmek için yeni bir gizli API anahtarı oluşturun.",
       "secretKeyCreatedHeader": "Gizli Anahtar Oluşturuldu",
       "secretKeyCreatedHint": "Yeni gizli anahtarınız oluşturuldu. Şimdi kopyalayın ve güvenli bir şekilde saklayın. Bu anahtar yalnızca bir kez görüntülenecektir.",
       "copySecretTokenSuccess": "Gizli anahtar panoya kopyalandı.",
@@ -2615,11 +2615,11 @@
   },
   "login": {
     "forgotPassword": "Şifrenizi mi unuttunuz? - <0>Sıfırla</0>",
-    "title": "Medusa'ya Hoş Geldiniz",
+    "title": "WChain'ya Hoş Geldiniz",
     "hint": "Hesap alanına erişmek için oturum açın"
   },
   "invite": {
-    "title": "Medusa'ya Hoş Geldiniz",
+    "title": "WChain'ya Hoş Geldiniz",
     "hint": "Aşağıda hesabınızı oluşturun",
     "backToLogin": "Girişe geri dön",
     "createAccount": "Hesap oluştur",
@@ -2627,8 +2627,8 @@
     "emailTooltip": "E-postanız değiştirilemez. Başka bir e-posta kullanmak istiyorsanız, yeni bir davet gönderilmelidir.",
     "invalidInvite": "Davet geçersiz veya süresi dolmuş.",
     "successTitle": "Hesabınız kaydedildi",
-    "successHint": "Hemen Medusa Yönetici ile başlayın.",
-    "successAction": "Medusa Yöneticiye Başla",
+    "successHint": "Hemen WChain Yönetici ile başlayın.",
+    "successAction": "WChain Yöneticiye Başla",
     "invalidTokenTitle": "Davet tokeniniz geçersiz",
     "invalidTokenHint": "Yeni bir davet bağlantısı talep etmeyi deneyin.",
     "passwordMismatch": "Şifreler uyuşmuyor",
@@ -2661,7 +2661,7 @@
   },
   "workflowExecutions": {
     "domain": "İş Akışları",
-    "subtitle": "Medusa uygulamanızdaki iş akışı yürütmelerini görüntüleyin ve takip edin.",
+    "subtitle": "WChain uygulamanızdaki iş akışı yürütmelerini görüntüleyin ve takip edin.",
     "transactionIdLabel": "İşlem Kimliği",
     "workflowIdLabel": "İş Akışı Kimliği",
     "progressLabel": "İlerleme",
@@ -2752,7 +2752,7 @@
       "description": "Şu anda herhangi bir bildiriminiz yok, ancak olduğunda burada görünecekler."
     },
     "accessibility": {
-      "description": "Medusa aktiviteleri hakkında bildirimler burada listelenecek."
+      "description": "WChain aktiviteleri hakkında bildirimler burada listelenecek."
     }
   },
   "errors": {
