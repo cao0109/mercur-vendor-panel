@@ -1,9 +1,9 @@
 import { Avatar, Container, Heading, Text } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 
-import { StoreVendor } from "../../../../../types/user"
-import { ActionMenu } from "../../../../../components/common/action-menu"
 import { Pencil } from "@medusajs/icons"
+import { ActionMenu } from "../../../../../components/common/action-menu"
+import { StoreVendor } from "../../../../../types/user"
 
 export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
   const { t } = useTranslation()
@@ -36,8 +36,8 @@ export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
           <Avatar
             size="small"
             variant="rounded"
-            src={seller.photo || "/logo.svg"}
-            fallback={"/logo.svg"}
+            src={seller.photo || "/logo.png"}
+            fallback={"/logo.png"}
           />
         </div>
       </div>

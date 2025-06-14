@@ -74,8 +74,8 @@ const Header = () => {
           <Avatar
             size="small"
             variant="rounded"
-            src={seller?.photo || "/logo.svg"}
-            fallback={"/logo.svg"}
+            src={seller?.photo || "/logo.png"}
+            fallback={"/logo.png"}
           />
         </div>
       ) : (
