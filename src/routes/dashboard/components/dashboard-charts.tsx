@@ -1,14 +1,5 @@
 import { CalendarMini, TriangleRightMini } from "@medusajs/icons"
 import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts"
-import {
   Badge,
   Button,
   Container,
@@ -17,12 +8,21 @@ import {
   Popover,
   Text,
 } from "@medusajs/ui"
+import { addDays, differenceInDays, format, subDays } from "date-fns"
+import { useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts"
+import { Calendar } from "../../../components/common/calendar/calendar"
 import { useStatistics } from "../../../hooks/api"
 import { ChartSkeleton } from "./chart-skeleton"
-import { useState } from "react"
-import { addDays, differenceInDays, format, subDays } from "date-fns"
-import { Calendar } from "../../../components/common/calendar/calendar"
 
 const colorPicker = (line: string) => {
   switch (line) {
@@ -184,7 +184,7 @@ export const DashboardCharts = ({
               <TriangleRightMini color="grey" />
             </Button>
           </Link>
-          <Link to="/messages">
+          {/* <Link to="/messages">
             <Button
               variant="secondary"
               className="w-full justify-between py-4 h-full h-full"
@@ -192,7 +192,7 @@ export const DashboardCharts = ({
               <div className="flex gap-4 items-center">Messages</div>
               <TriangleRightMini color="grey" />
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </Container>
       <Container className="divide-y p-0 mt-2">

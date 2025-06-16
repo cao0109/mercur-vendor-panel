@@ -1,6 +1,5 @@
 import {
   Buildings,
-  ChatBubbleLeftRight,
   ChevronDownMini,
   CogSixTooth,
   Component,
@@ -183,11 +182,11 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
       label: "Reviews",
       to: "/reviews",
     },
-    {
-      icon: <ChatBubbleLeftRight />,
-      label: "Messages",
-      to: "/messages",
-    },
+    // {
+    //   icon: <ChatBubbleLeftRight />,
+    //   label: "Messages",
+    //   to: "/messages",
+    // },
     {
       icon: <ListCheckbox />,
       label: "Requests",
