@@ -36,7 +36,7 @@ export const ProductListTable = () => {
   const { searchParams, raw } = useProductTableQuery({
     pageSize: PAGE_SIZE,
   })
-  const { products, count, isLoading, isError, error } = useProducts(
+  const { products, dataCount, isLoading, isError, error } = useProducts(
     {
       limit: searchParams.limit,
       offset: searchParams.offset,
@@ -63,7 +63,7 @@ export const ProductListTable = () => {
   const { table } = useDataTable({
     data: (products ?? []) as HttpTypes.AdminProduct[],
     columns,
-    count,
+    count: dataCount,
     enablePagination: true,
     pageSize: PAGE_SIZE,
     getRowId: (row) => row?.id || "",
@@ -92,7 +92,7 @@ export const ProductListTable = () => {
       <_DataTable
         table={table}
         columns={columns}
-        count={count}
+        count={dataCount}
         pageSize={PAGE_SIZE}
         filters={filters}
         search

@@ -476,6 +476,7 @@ export const useProducts = (
     ...data,
     products: products?.slice(0, filter?.limit) || [],
     count: products?.length || 0,
+    dataCount: data?.count || 0,
     ...rest,
   }
 }
