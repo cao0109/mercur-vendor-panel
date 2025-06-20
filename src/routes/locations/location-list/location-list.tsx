@@ -12,6 +12,8 @@ import { TwoColumnPage } from "../../../components/layout/pages"
 import { useDashboardExtension } from "../../../extensions"
 import { LocationListHeader } from "./components/location-list-header"
 import { SidebarLink } from "../../../components/common/sidebar-link/sidebar-link"
+import { LocalizedTablePagination } from "../../../components/localization/localized-table-pagination"
+import usePagination from "../../../hooks/use-pagination"
 
 export function LocationList() {
   const initialData = useLoaderData() as Awaited<
@@ -34,6 +36,17 @@ export function LocationList() {
   if (isError) {
     throw error
   }
+  const {
+    currentOrders,
+    pageCount,
+    pageIndex,
+    pageSize,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    count,
+  } = usePagination(stockLocations)
 
   return (
     <TwoColumnPage
@@ -47,10 +60,20 @@ export function LocationList() {
       <TwoColumnPage.Main>
         <LocationListHeader />
         <div className="flex flex-col gap-3 lg:col-span-2">
-          {stockLocations.map((location) => (
+          {currentOrders.map((location) => (
             <LocationListItem key={location.id} location={location} />
           ))}
         </div>
+        <LocalizedTablePagination
+          canNextPage={canNextPage}
+          canPreviousPage={canPreviousPage}
+          count={count}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          pageCount={pageCount}
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+        />
       </TwoColumnPage.Main>
       <TwoColumnPage.Sidebar>
         <LinksSection />

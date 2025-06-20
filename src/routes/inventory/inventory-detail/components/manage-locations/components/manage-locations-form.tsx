@@ -12,6 +12,8 @@ import { useBatchInventoryItemLocationLevels } from "../../../../../../hooks/api
 import { useMemo } from "react"
 import { KeyboundForm } from "../../../../../../components/utilities/keybound-form"
 import { LocationItem } from "./location-item"
+import { LocalizedTablePagination } from "../../../../../../components/localization/localized-table-pagination"
+import usePagination from "../../../../../../hooks/use-pagination"
 
 type EditInventoryItemAttributeFormProps = {
   item: AdminInventoryItem
@@ -114,6 +116,18 @@ export const ManageLocationsForm = ({
     )
   })
 
+  const {
+    currentOrders,
+    pageCount,
+    pageIndex,
+    pageSize,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    count,
+  } = usePagination(locationFields)
+
   return (
     <RouteDrawer.Form form={form}>
       <KeyboundForm
@@ -157,21 +171,34 @@ export const ManageLocationsForm = ({
               </Text>
             </div>
           </div>
-          {locationFields.map((location, idx) => {
+          {currentOrders.map((location) => {
             return (
               <LocationItem
                 selected={location.selected}
                 location={location as any}
-                onSelect={() =>
-                  updateField(idx, {
+                onSelect={() => {
+                  const ind = locationFields.findIndex(
+                    (l) => l.id === location.id
+                  )
+                  updateField(ind, {
                     ...location,
                     selected: !location.selected,
                   })
-                }
+                }}
                 key={location.id}
               />
             )
           })}
+          <LocalizedTablePagination
+            canNextPage={canNextPage}
+            canPreviousPage={canPreviousPage}
+            count={count}
+            nextPage={nextPage}
+            previousPage={previousPage}
+            pageCount={pageCount}
+            pageIndex={pageIndex}
+            pageSize={pageSize}
+          />
         </RouteDrawer.Body>
         <RouteDrawer.Footer>
           <div className="flex items-center justify-end gap-x-2">
