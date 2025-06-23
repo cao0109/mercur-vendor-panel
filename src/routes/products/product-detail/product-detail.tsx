@@ -11,6 +11,7 @@ import { ProductOrganizationSection } from "./components/product-organization-se
 import { ProductVariantSection } from "./components/product-variant-section"
 
 import { useDashboardExtension } from "../../../extensions"
+import { ProductAdditionalAttributesSection } from "./components/product-additional-attribute-section/ProductAdditionalAttributesSection"
 // import { ProductShippingProfileSection } from './components/product-shipping-profile-section';
 
 export const ProductDetail = () => {
@@ -54,6 +55,7 @@ export const ProductDetail = () => {
         {/* <ProductShippingProfileSection product={product} /> */}
         <ProductOrganizationSection product={product} />
         <ProductAttributeSection product={product} />
+        {/* <ProductAdditionalAttributesSection product={product as any} /> */}
       </TwoColumnPage.Sidebar>
     </TwoColumnPage>
   )

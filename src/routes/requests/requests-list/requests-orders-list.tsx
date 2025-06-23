@@ -1,7 +1,7 @@
 import { Container, Heading, Text } from "@medusajs/ui"
 import { SingleColumnPage } from "../../../components/layout/pages"
 import { useDashboardExtension } from "../../../extensions"
-import { RequestListTable } from "./components/request-list-table"
+import { RequestReturnListTable } from "./components/request-return-list-table"
 
 export const RequestOrdersList = () => {
   const { getWidgets } = useDashboardExtension()
@@ -23,7 +23,7 @@ export const RequestOrdersList = () => {
           </div>
         </div>
         <div className="px-6 py-4">
-          <RequestListTable request_type="orders" />
+          <RequestReturnListTable />
         </div>
       </Container>
     </SingleColumnPage>

@@ -124,6 +124,12 @@ export const RouteMap: RouteObject[] = [
                     Component: RequestReviewsList,
                   }
                 },
+                children: [
+                  {
+                    path: ":id/edit",
+                    lazy: () => import("../../routes/reviews/review-report"),
+                  },
+                ],
               },
               {
                 path: "orders",
@@ -139,6 +145,15 @@ export const RouteMap: RouteObject[] = [
                     Component: RequestOrdersList,
                   }
                 },
+                children: [
+                  {
+                    path: ":id/review",
+                    lazy: async () =>
+                      await import(
+                        "../../routes/requests/request-order-return"
+                      ),
+                  },
+                ],
               },
               {
                 path: ":id",
@@ -257,6 +272,13 @@ export const RouteMap: RouteObject[] = [
                     path: "",
                     lazy: () => import("../../routes/products/product-detail"),
                     children: [
+                      {
+                        path: "additional-attributes",
+                        lazy: () =>
+                          import(
+                            "../../routes/products/product-additional-attributes"
+                          ),
+                      },
                       {
                         path: "edit",
                         lazy: () =>
