@@ -10,15 +10,15 @@ import {
 import { fetchQuery, importProductsQuery, sdk } from "../../lib/client"
 import { queryClient } from "../../lib/query-client"
 import { queryKeysFactory } from "../../lib/query-key-factory"
-import { inventoryItemsQueryKeys } from "./inventory.tsx"
+import productsImagesFormatter from "../../utils/products-images-formatter"
 import {
   checkCategoryMatch,
   checkCollectionMatch,
+  checkStatusMatch,
   checkTagMatch,
   checkTypeMatch,
-  checkStatusMatch,
 } from "./helpers/productFilters"
-import productsImagesFormatter from "../../utils/products-images-formatter"
+import { inventoryItemsQueryKeys } from "./inventory.tsx"
 
 const PRODUCTS_QUERY_KEY = "products" as const
 export const productsQueryKeys = queryKeysFactory(PRODUCTS_QUERY_KEY)
@@ -402,7 +402,7 @@ export const useProducts = (
         method: "GET",
         query: query as Record<string, string | number>,
       }),
-    queryKey: productsQueryKeys.list(),
+    queryKey: productsQueryKeys.list(query),
     ...options,
   })
 
