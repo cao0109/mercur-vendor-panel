@@ -18,6 +18,7 @@ import {
   checkTypeMatch,
   checkStatusMatch,
 } from "./helpers/productFilters"
+import productsImagesFormatter from "../../utils/products-images-formatter"
 
 const PRODUCTS_QUERY_KEY = "products" as const
 export const productsQueryKeys = queryKeysFactory(PRODUCTS_QUERY_KEY)
@@ -367,36 +368,11 @@ export const useProduct = (
     ...options,
   })
 
-  return { ...data, ...rest }
-}
-
-type SortField = "title" | "created_at" | "updated_at"
-type SortDirection = "asc" | "desc"
-
-const sortProducts = (
-  products: HttpTypes.AdminProduct[],
-  sortField: SortField,
-  direction: SortDirection
-) => {
-  return [...products].sort((a, b) => {
-    const aValue = a[sortField]
-    const bValue = b[sortField]
-
-    if (sortField === "title") {
-      const titleA = (aValue || "").toString()
-      const titleB = (bValue || "").toString()
-      return direction === "asc"
-        ? titleA.localeCompare(titleB)
-        : titleB.localeCompare(titleA)
-    }
-
-    // For dates
-    const dateA = new Date((aValue as string) || new Date())
-    const dateB = new Date((bValue as string) || new Date())
-    return direction === "asc"
-      ? dateA.getTime() - dateB.getTime()
-      : dateB.getTime() - dateA.getTime()
-  })
+  return {
+    ...data,
+    product: productsImagesFormatter(data?.product),
+    ...rest,
+  }
 }
 
 export const useProducts = (
@@ -426,7 +402,7 @@ export const useProducts = (
         method: "GET",
         query: query as Record<string, string | number>,
       }),
-    queryKey: productsQueryKeys.list(query),
+    queryKey: productsQueryKeys.list(),
     ...options,
   })
 
@@ -486,7 +462,7 @@ export const useProducts = (
 
   return {
     ...data,
-    products: products?.slice(0, filter?.limit) || [],
+    products: productsImagesFormatter(products?.slice(0, filter?.limit)) || [],
     count: products?.length || 0,
     dataCount: data?.count || 0,
     ...rest,
@@ -528,7 +504,8 @@ export const useUpdateProduct = (
       const { product } = await fetchQuery(`/vendor/products/${id}`, {
         method: "GET",
         query: {
-          fields: "-status,-options,-variants,-type,-collection",
+          fields:
+            "-status,-options,-variants,-type,-collection,-attribute_values",
         },
       })
 

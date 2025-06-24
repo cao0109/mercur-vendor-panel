@@ -13,7 +13,7 @@ import {
   Tag,
   Users,
 } from "@medusajs/icons"
-import { Avatar, Divider, Text, clx } from "@medusajs/ui"
+import { Divider, Text, clx } from "@medusajs/ui"
 import { Collapsible as RadixCollapsible } from "radix-ui"
 import { useTranslation } from "react-i18next"
 
@@ -26,6 +26,7 @@ import { useMe } from "../../../hooks/api"
 
 import { useSearch } from "../../../providers/search-provider"
 import { UserMenu } from "../user-menu"
+import { ImageAvatar } from "../../common/image-avatar"
 
 export const MainLayout = () => {
   return (
@@ -69,13 +70,8 @@ const Header = () => {
   return (
     <div className="w-full p-3 p-0.5 pr-2 bg-ui-bg-subtle grid w-full grid-cols-[24px_1fr_15px] items-center gap-x-3">
       {fallback ? (
-        <div className="w-6 h-6">
-          <Avatar
-            size="small"
-            variant="rounded"
-            src={seller?.photo || "/logo.png"}
-            fallback={"/logo.png"}
-          />
+        <div className="w-7 h-7">
+          <ImageAvatar src={seller?.photo || "/logo.svg"} size={7} rounded />
         </div>
       ) : (
         <Skeleton className="h-6 w-6 rounded-md" />
