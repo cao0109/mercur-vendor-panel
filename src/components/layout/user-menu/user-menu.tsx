@@ -106,7 +106,7 @@ const UserBadge = () => {
       >
         <div className="flex size-7 items-center justify-center">
           {fallback ? (
-            <ImageAvatar src={avatar || "/logo.svg"} size={7} rounded />
+            <ImageAvatar src={avatar || "/logo.png"} size={7} rounded />
           ) : (
             <Skeleton className="h-6 w-6 rounded-full" />
           )}

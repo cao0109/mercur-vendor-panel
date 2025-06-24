@@ -14,6 +14,7 @@ import {
 } from "../../../../../extensions"
 import { useCreateProduct } from "../../../../../hooks/api/products"
 import { uploadFilesQuery } from "../../../../../lib/client"
+import { generateHandle } from "../../../../../utils/handle-generator"
 import {
   PRODUCT_CREATE_FORM_DEFAULTS,
   ProductCreateSchema,
@@ -100,6 +101,11 @@ export const ProductCreateForm = ({
 
     const media = values.media || []
     const payload = { ...values, media: undefined }
+
+    // 如果 handle 为空，根据标题生成
+    if (!payload.handle) {
+      payload.handle = await generateHandle(payload.title)
+    }
 
     let uploadedMedia: (HttpTypes.AdminFile & {
       isThumbnail: boolean
