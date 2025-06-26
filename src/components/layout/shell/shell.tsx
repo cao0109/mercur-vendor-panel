@@ -206,7 +206,7 @@ const Topbar = () => {
         <Breadcrumbs />
       </div>
       <div className="flex items-center justify-end gap-x-3">
-        <Link to="https://docs.wchain.cloud">
+        <Link to="https://docs.wchain.cloud" target="_blank">
           <Button variant="secondary" size="small">
             <DocumentText />
             {t("app.nav.docs", { defaultValue: "Docs" })}
