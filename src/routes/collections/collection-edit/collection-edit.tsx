@@ -2,13 +2,13 @@ import { Heading } from "@medusajs/ui"
 import { useParams } from "react-router-dom"
 import { RouteDrawer } from "../../../components/modals"
 import { EditCollectionForm } from "./components/edit-collection-form"
-import { useRequest } from "../../../hooks/api"
+import { useCollection } from "../../../hooks/api"
 
 export const CollectionEdit = () => {
   const { id } = useParams()
-  const { request, isPending, isError, error } = useRequest(id!)
+  const { product_collection, isPending, isError, error } = useCollection(id!)
 
-  const ready = !isPending && !!request
+  const ready = !isPending && !!product_collection
 
   if (isError) {
     throw error
@@ -19,7 +19,7 @@ export const CollectionEdit = () => {
         <Heading>Edit Product Collection Request</Heading>
       </RouteDrawer.Header>
       {ready && (
-        <EditCollectionForm collection={request.data} requestId={id!} />
+        <EditCollectionForm collection={product_collection} requestId={id!} />
       )}
     </RouteDrawer>
   )

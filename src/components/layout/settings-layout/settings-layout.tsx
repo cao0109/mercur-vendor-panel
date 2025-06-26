@@ -29,7 +29,7 @@ const useSettingRoutes = (): INavItem[] => {
         to: "/settings/store",
       },
       {
-        label: "Team",
+        label: t("users.domain"),
         to: "/settings/users",
       },
       {
