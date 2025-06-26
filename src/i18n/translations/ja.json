@@ -258,7 +258,8 @@
         "general": "一般",
         "developer": "開発者",
         "myAccount": "マイアカウント"
-      }
+      },
+      "docs": "操作ドキュメント"
     }
   },
   "dataGrid": {

@@ -258,7 +258,8 @@
         "general": "General",
         "developer": "Développeur",
         "myAccount": "Mon compte"
-      }
+      },
+      "docs": "Documentation"
     }
   },
   "dataGrid": {

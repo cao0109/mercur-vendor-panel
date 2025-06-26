@@ -998,9 +998,12 @@
               },
               "required": ["header", "general", "developer", "myAccount"],
               "additionalProperties": false
+            },
+            "docs": {
+              "type": "string"
             }
           },
-          "required": ["accessibility", "common", "main", "settings"],
+          "required": ["accessibility", "common", "main", "settings", "docs"],
           "additionalProperties": false
         }
       },

@@ -1,5 +1,10 @@
-import { SidebarLeft, TriangleRightMini, XMark } from "@medusajs/icons"
-import { IconButton, clx } from "@medusajs/ui"
+import {
+  DocumentText,
+  SidebarLeft,
+  TriangleRightMini,
+  XMark,
+} from "@medusajs/icons"
+import { Button, IconButton, clx } from "@medusajs/ui"
 import { AnimatePresence } from "motion/react"
 import { Dialog as RadixDialog } from "radix-ui"
 import { PropsWithChildren, ReactNode, useEffect, useState } from "react"
@@ -192,6 +197,8 @@ const ToggleSidebar = () => {
 }
 
 const Topbar = () => {
+  const { t } = useTranslation()
+
   return (
     <div className="grid w-full grid-cols-2 border-b p-3">
       <div className="flex items-center gap-x-1.5">
@@ -199,6 +206,12 @@ const Topbar = () => {
         <Breadcrumbs />
       </div>
       <div className="flex items-center justify-end gap-x-3">
+        <Link to="https://docs.wchain.cloud">
+          <Button variant="secondary" size="small">
+            <DocumentText />
+            {t("app.nav.docs", { defaultValue: "Docs" })}
+          </Button>
+        </Link>
         <Notifications />
       </div>
     </div>

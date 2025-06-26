@@ -258,7 +258,8 @@
         "general": "通用",
         "developer": "开发者",
         "myAccount": "我的账户"
-      }
+      },
+      "docs": "操作文档"
     }
   },
   "dataGrid": {
