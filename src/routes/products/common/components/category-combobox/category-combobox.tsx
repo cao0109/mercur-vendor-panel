@@ -32,6 +32,7 @@ interface CategoryComboboxProps
   > {
   value: string[]
   onChange: (value: string[]) => void
+  enableOpen?: boolean
 }
 
 type Level = {
@@ -69,7 +70,7 @@ export const CategoryCombobox = forwardRef<
         include_descendants_tree: !searchValue ? true : false,
       },
       {
-        enabled: open,
+        enabled: props.enableOpen || open,
       }
     )
 
