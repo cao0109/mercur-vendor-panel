@@ -9,6 +9,7 @@ import { ProductMediaSection } from "./components/product-media-section"
 import { ProductOptionSection } from "./components/product-option-section"
 import { ProductOrganizationSection } from "./components/product-organization-section"
 import { ProductVariantSection } from "./components/product-variant-section"
+import { ProductRichTextSection } from "./components/product-rich-text-section"
 
 import { useDashboardExtension } from "../../../extensions"
 import { ProductAdditionalAttributesSection } from "./components/product-additional-attribute-section/ProductAdditionalAttributesSection"
@@ -50,6 +51,7 @@ export const ProductDetail = () => {
         <ProductMediaSection product={product} />
         <ProductOptionSection product={product} />
         <ProductVariantSection product={product} />
+        <ProductRichTextSection product={product} />
       </TwoColumnPage.Main>
       <TwoColumnPage.Sidebar>
         {/* <ProductShippingProfileSection product={product} /> */}

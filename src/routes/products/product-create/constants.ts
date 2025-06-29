@@ -87,6 +87,7 @@ export const ProductCreateSchema = z
     enable_variants: z.boolean(),
     variants: z.array(ProductCreateVariantSchema).min(1),
     media: z.array(MediaSchema).optional(),
+    metadata: z.record(z.string(), z.any()).optional(),
   })
   .superRefine((data, ctx) => {
     if (data.variants.every((v) => !v.should_create)) {
@@ -160,4 +161,5 @@ export const PRODUCT_CREATE_FORM_DEFAULTS: Partial<
   type_id: "",
   weight: "",
   width: "",
+  metadata: {},
 }

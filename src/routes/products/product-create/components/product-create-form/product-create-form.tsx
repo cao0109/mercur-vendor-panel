@@ -23,12 +23,17 @@ import { ProductCreateDetailsForm } from "../product-create-details-form"
 import { ProductCreateInventoryKitForm } from "../product-create-inventory-kit-form"
 import { ProductCreateOrganizeForm } from "../product-create-organize-form"
 import { ProductCreateVariantsForm } from "../product-create-variants-form"
+import {
+  ProductCreateRichTextForm,
+  base64ToBlob,
+} from "../product-create-rich-text-form"
 
 enum Tab {
   DETAILS = "details",
   ORGANIZE = "organize",
   VARIANTS = "variants",
   INVENTORY = "inventory",
+  RICHTEXT = "rich_text",
 }
 
 type TabState = Record<Tab, ProgressStatus>
@@ -51,6 +56,7 @@ export const ProductCreateForm = ({
     [Tab.ORGANIZE]: "not-started",
     [Tab.VARIANTS]: "not-started",
     [Tab.INVENTORY]: "not-started",
+    [Tab.RICHTEXT]: "not-started",
   })
 
   const { t } = useTranslation()
@@ -102,9 +108,41 @@ export const ProductCreateForm = ({
     const media = values.media || []
     const payload = { ...values, media: undefined }
 
+    console.log("Submitting product create form", payload)
+
     // 如果 handle 为空，根据标题生成
     if (!payload.handle) {
       payload.handle = await generateHandle(payload.title)
+    }
+
+    // 处理富文本编辑器内容
+    if (payload.metadata?.details) {
+      const content = payload.metadata?.details
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(content, "text/html")
+      const images = doc.querySelectorAll("img")
+      for (const img of images) {
+        const src = img.getAttribute("src")
+        if (!src) {
+          continue
+        }
+        if (src.startsWith("data:image")) {
+          console.error("Invalid Base64 string:", src)
+          const blob = base64ToBlob(src, "image/png")
+          console.log("Uploading image", blob)
+          const fileObject = {
+            id: crypto.randomUUID(),
+            url: URL.createObjectURL(blob),
+            file: blob,
+          }
+          const response = await uploadFilesQuery([fileObject])
+
+          console.log("Image upload response", response.files[0].url)
+          img.setAttribute("src", response.files[0].url)
+          img.setAttribute("data-key", response.files[0].id)
+        }
+      }
+      payload.metadata.details = doc.body.innerHTML
     }
 
     let uploadedMedia: (HttpTypes.AdminFile & {
@@ -112,9 +150,11 @@ export const ProductCreateForm = ({
     })[] = []
     try {
       if (media.length) {
+        console.log("Uploading media files", media)
         const thumbnailReq = media.filter((m) => m.isThumbnail)
+        console.log("Thumbnail media files", thumbnailReq)
         const otherMediaReq = media.filter((m) => !m.isThumbnail)
-
+        console.log("Other media files", otherMediaReq)
         const fileReqs = []
         if (thumbnailReq?.length) {
           fileReqs.push(
@@ -213,8 +253,12 @@ export const ProductCreateForm = ({
       setTab(Tab.VARIANTS)
     }
 
+    // if (currentTab === Tab.VARIANTS) {
+    //   setTab(Tab.INVENTORY)
+    // }
+
     if (currentTab === Tab.VARIANTS) {
-      setTab(Tab.INVENTORY)
+      setTab(Tab.RICHTEXT)
     }
   }
 
@@ -238,6 +282,13 @@ export const ProductCreateForm = ({
       currentState[Tab.VARIANTS] = "completed"
       currentState[Tab.INVENTORY] = "in-progress"
     }
+    if (tab === Tab.RICHTEXT) {
+      currentState[Tab.DETAILS] = "completed"
+      currentState[Tab.ORGANIZE] = "completed"
+      currentState[Tab.VARIANTS] = "completed"
+      currentState[Tab.INVENTORY] = "completed"
+      currentState[Tab.RICHTEXT] = "in-progress"
+    }
 
     setTabState({ ...currentState })
     // eslint-disable-next-line react-hooks/exhaustive-deps -- we only want this effect to run when the tab changes
@@ -259,7 +310,7 @@ export const ProductCreateForm = ({
             e.preventDefault()
 
             if (e.metaKey || e.ctrlKey) {
-              if (tab !== Tab.VARIANTS) {
+              if (tab !== Tab.RICHTEXT) {
                 e.preventDefault()
                 e.stopPropagation()
                 onNext(tab)
@@ -320,6 +371,13 @@ export const ProductCreateForm = ({
                     {t("products.create.tabs.inventory")}
                   </ProgressTabs.Trigger>
                 )}
+                <ProgressTabs.Trigger
+                  status={tabState[Tab.RICHTEXT]}
+                  value={Tab.RICHTEXT}
+                  className="max-w-[200px] truncate"
+                >
+                  {t("products.create.tabs.richText")}
+                </ProgressTabs.Trigger>
               </ProgressTabs.List>
             </div>
           </RouteFocusModal.Header>
@@ -355,6 +413,12 @@ export const ProductCreateForm = ({
                 <ProductCreateInventoryKitForm form={form} />
               </ProgressTabs.Content>
             )}
+            <ProgressTabs.Content
+              className="size-full overflow-y-auto"
+              value={Tab.RICHTEXT}
+            >
+              <ProductCreateRichTextForm form={form} />
+            </ProgressTabs.Content>
           </RouteFocusModal.Body>
         </ProgressTabs>
         <RouteFocusModal.Footer>
@@ -401,10 +465,7 @@ const PrimaryButton = ({
 }: PrimaryButtonProps) => {
   const { t } = useTranslation()
 
-  if (
-    (tab === Tab.VARIANTS && !showInventoryTab) ||
-    (tab === Tab.INVENTORY && showInventoryTab)
-  ) {
+  if (tab === Tab.RICHTEXT) {
     return (
       <Button
         data-name="publish-button"

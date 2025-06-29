@@ -409,10 +409,11 @@
       "description": "创建新产品。",
       "header": "常规",
       "tabs": {
-        "details": "详情",
+        "details": "基础",
         "organize": "组织",
         "variants": "变体",
-        "inventory": "库存套件"
+        "inventory": "库存套件",
+        "richText": "详情"
       },
       "errors": {
         "variants": "请至少选择一个变体。",
@@ -2580,7 +2581,10 @@
         "placeholder": "wrong_size",
         "tooltip": "值应该是退货原因的唯一标识符。"
       },
-      "label": { "label": "标签", "placeholder": "错误尺寸" },
+      "label": {
+        "label": "标签",
+        "placeholder": "错误尺寸"
+      },
       "description": {
         "label": "描述",
         "placeholder": "客户收到错误尺寸"
