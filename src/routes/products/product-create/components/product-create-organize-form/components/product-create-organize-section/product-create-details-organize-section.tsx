@@ -7,8 +7,8 @@ import { SwitchBox } from "../../../../../../../components/common/switch-box"
 import { Combobox } from "../../../../../../../components/inputs/combobox"
 import { useComboboxData } from "../../../../../../../hooks/use-combobox-data"
 import { fetchQuery } from "../../../../../../../lib/client"
+import { CategoryComboboxMultiple } from "../../../../../common/components/category-combobox/category-combobox-multiple"
 import { ProductCreateSchemaType } from "../../../../types"
-import { CategoryCombobox } from "../../../../../common/components/category-combobox"
 
 type ProductCreateOrganizationSectionProps = {
   form: UseFormReturn<ProductCreateSchemaType>
@@ -130,7 +130,8 @@ export const ProductCreateOrganizationSection = ({
                   {t("products.fields.categories.label")}
                 </Form.Label>
                 <Form.Control>
-                  <CategoryCombobox {...field} />
+                  {/* <CategoryCombobox {...field} /> */}
+                  <CategoryComboboxMultiple {...field} /> 
                   {/* <CategorySelect  /> */}
                 </Form.Control>
                 <Form.ErrorMessage />

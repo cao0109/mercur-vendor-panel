@@ -15,7 +15,7 @@ import {
 import { useUpdateProduct } from "../../../../../hooks/api/products"
 import { useComboboxData } from "../../../../../hooks/use-combobox-data"
 import { fetchQuery } from "../../../../../lib/client"
-import { CategoryCombobox } from "../../../common/components/category-combobox"
+import { CategoryComboboxMultiple } from "../../../common/components/category-combobox/category-combobox-multiple"
 
 type ProductOrganizationFormProps = {
   product: HttpTypes.AdminProduct
@@ -194,7 +194,8 @@ export const ProductOrganizationForm = ({
                       {t("products.fields.categories.label")}
                     </Form.Label>
                     <Form.Control>
-                      <CategoryCombobox {...field} enableOpen={true} />
+                      <CategoryComboboxMultiple  {...field} enableOpen={true} />
+                      {/* <CategoryCombobox {...field} enableOpen={true} /> */}
                       {/* <Combobox
                         {...field}
                         multiple={false}
