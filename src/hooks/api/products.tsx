@@ -508,10 +508,9 @@ export const useUpdateProduct = (
             "-status,-options,-variants,-type,-collection,-attribute_values",
         },
       })
-
       await delete product.id
       await delete product.rating
-      await delete payload.status
+      // await delete payload.status
 
       return fetchQuery(`/vendor/products/${id}`, {
         method: "POST",
