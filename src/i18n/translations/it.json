@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Il valore deve essere un numero intero.",
-    "mustBePositive": "Il valore deve essere un numero positivo."
+    "mustBePositive": "Il valore deve essere un numero positivo.",
+    "maxSelected": "Seleziona massimo {{value}} elementi"
   },
   "actions": {
     "save": "Salva",

@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "值必须是整数。",
-    "mustBePositive": "值必须是正数。"
+    "mustBePositive": "值必须是正数。",
+    "maxSelected": "最多选择{{value}}个"
   },
   "actions": {
     "save": "保存",

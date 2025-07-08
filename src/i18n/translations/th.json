@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "ค่าต้องเป็นตัวเลขจำนวนเต็ม",
-    "mustBePositive": "ค่าต้องเป็นตัวเลขที่เป็นบวก"
+    "mustBePositive": "ค่าต้องเป็นตัวเลขที่เป็นบวก",
+    "maxSelected": "เลือกได้สูงสุด {{value}} รายการ"
   },
   "actions": {
     "save": "บันทึก",

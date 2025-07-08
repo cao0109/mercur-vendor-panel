@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Hodnota musí být celé číslo.",
-    "mustBePositive": "Hodnota musí být kladné číslo."
+    "mustBePositive": "Hodnota musí být kladné číslo.",
+    "maxSelected": "Vyberte maximálně {{value}} položek"
   },
   "actions": {
     "save": "Uložit",

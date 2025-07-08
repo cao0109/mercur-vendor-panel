@@ -5,7 +5,7 @@ import {
   TrianglesMini,
 } from "@medusajs/icons"
 import { AdminProductCategoryResponse } from "@medusajs/types"
-import { Divider, Text, clx } from "@medusajs/ui"
+import { Alert, Divider, Text, clx } from "@medusajs/ui"
 import { Popover as RadixPopover } from "radix-ui"
 import {
   CSSProperties,
@@ -63,7 +63,7 @@ export const CategoryComboboxMultiple = forwardRef<
 
   const [open, setOpen] = useState(false)
   const [tags, setTags] = useState<Tag[]>([]) // 新增：存储已选类别的标签信息
-
+  const [showAlert, setShowAlert] = useState(false)
   const { i18n, t } = useTranslation()
 
   const [level, setLevel] = useState<Level[]>([])
@@ -170,7 +170,13 @@ export const CategoryComboboxMultiple = forwardRef<
     let newValues = isSelected 
       ? value.filter(id => id !== option.value) 
       : [...value, option.value]
-    
+    if (newValues.length > 10) {
+      setShowAlert(true)
+      setTimeout(() => {
+        setShowAlert(false)
+      }, 3000)
+      return;
+    }
     onChange(newValues)
     
     // 不关闭下拉框，保持多选状态
@@ -278,7 +284,13 @@ export const CategoryComboboxMultiple = forwardRef<
   }
 
   return (
-    <RadixPopover.Root open={open} onOpenChange={handleOpenChange}>
+    <div style={{position:'relative'}}>
+       {showAlert && (
+      <Alert variant="error" dismissible style={{position:'absolute', top: '0px', left: '30%', zIndex:999}}>
+         <div>{t("validation.maxSelected", { value:10})}</div>
+      </Alert>
+      )}
+      <RadixPopover.Root open={open} onOpenChange={handleOpenChange}>
       <RadixPopover.Anchor
         asChild
         onClick={() => {
@@ -310,8 +322,8 @@ export const CategoryComboboxMultiple = forwardRef<
             } as CSSProperties
           }
         >
-          {showSelected && (
-            <div className="pointer-events-none flex" style={{display: 'flex',flexWrap: 'wrap'}}>
+          {(
+            <div className=" flex" style={{display: 'flex',flexWrap: 'wrap'}}>
               {tags.map((tag, index) => (
                 <div 
                   key={index} 
@@ -324,7 +336,7 @@ export const CategoryComboboxMultiple = forwardRef<
                       e.stopPropagation()
                       // 移除已选标签
                       const newValues = value.filter(id => id !== tag.id)
-                      onChange(newValues)
+                      onChange([...newValues])
                     }}
                     className="ml-1 text-ui-fg-accent hover:text-ui-fg-accent-hover"
                   >
@@ -505,6 +517,7 @@ export const CategoryComboboxMultiple = forwardRef<
         </div>
       </RadixPopover.Content>
     </RadixPopover.Root>
+    </div>
   )
 })
 

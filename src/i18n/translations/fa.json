@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "مقدار باید یک عدد صحیح باشد.",
-    "mustBePositive": "مقدار باید یک عدد مثبت باشد."
+    "mustBePositive": "مقدار باید یک عدد مثبت باشد.",
+    "maxSelected": "حداکثر {{value}} مورد انتخاب کنید"
   },
   "actions": {
     "save": "ذخیره",

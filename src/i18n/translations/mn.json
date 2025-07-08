@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Утга нь бүтэн тоо байх ёстой.",
-    "mustBePositive": "Утга нь эерэг тоо байх ёстой."
+    "mustBePositive": "Утга нь эерэг тоо байх ёстой.",
+    "maxSelected": "Хамгийн ихдээ {{value}} 个 сонгох"
   },
   "actions": {
     "save": "Хадгалах",
