@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Der Wert muss eine ganze Zahl sein.",
-    "mustBePositive": "Der Wert muss eine positive Zahl sein."
+    "mustBePositive": "Der Wert muss eine positive Zahl sein.",
+    "maxSelected": "Maximal {{value}} auswählen"
   },
   "actions": {
     "save": "Speichern",

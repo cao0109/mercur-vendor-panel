@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "値は数値でなければなりません。",
-    "mustBePositive": "値は正の数値でなければなりません。"
+    "mustBePositive": "値は正の数値でなければなりません。",
+    "maxSelected": "最大で {{value}} 個を選択"
   },
   "actions": {
     "save": "保存",

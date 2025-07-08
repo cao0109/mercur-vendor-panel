@@ -382,6 +382,9 @@
         },
         "mustBePositive": {
           "type": "string"
+        },
+        "maxSelected": {
+          "type": "string"
         }
       },
       "required": [

@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Wartość musi być liczbą całkowitą.",
-    "mustBePositive": "Wartość musi być liczbą dodatnią."
+    "mustBePositive": "Wartość musi być liczbą dodatnią.",
+    "maxSelected": "Wybierz maksymalnie {{value}} elementów"
   },
   "actions": {
     "save": "Zapisz",

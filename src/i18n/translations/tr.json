@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Değer tam sayı olmalıdır.",
-    "mustBePositive": "Değer pozitif bir sayı olmalıdır."
+    "mustBePositive": "Değer pozitif bir sayı olmalıdır.",
+    "maxSelected": "En fazla {{value}} tane seç"
   },
   "actions": {
     "save": "Kaydet",

@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "Valoarea trebuie să fie un număr întreg.",
-    "mustBePositive": "Valoarea trebuie să fie un număr pozitiv."
+    "mustBePositive": "Valoarea trebuie să fie un număr pozitiv.",
+    "maxSelected": "Selectați maximum {{value}} elemente"
   },
   "actions": {
     "save": "Salva",

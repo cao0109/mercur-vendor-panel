@@ -93,7 +93,8 @@
   },
   "validation": {
     "mustBeInt": "يجب أن تكون القيمة عددًا صحيحًا.",
-    "mustBePositive": "يجب أن تكون القيمة عددًا موجبًا."
+    "mustBePositive": "يجب أن تكون القيمة عددًا موجبًا.",
+    "maxSelected": "حد أقصى {{value}} اختر"
   },
   "actions": {
     "save": "حفظ",
