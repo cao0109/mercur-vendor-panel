@@ -2595,7 +2595,8 @@
   "login": {
     "forgotPassword": "忘记密码？ - <0>重置</0>",
     "title": "欢迎使用WChain",
-    "hint": "登录以访问账户区域"
+    "hint": "登录以访问账户区域",
+    "notSellerYet": "还不是供应商？ - <0>创建账户</0>"
   },
   "invite": {
     "title": "欢迎使用WChain",

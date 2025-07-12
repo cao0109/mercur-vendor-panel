@@ -2590,7 +2590,8 @@
   "login": {
     "forgotPassword": "Zapomněli jste heslo? - <0>Obnovit</0>",
     "title": "Vítejte v Meduse",
-    "hint": "Přihlaste se pro přístup do oblasti účtu"
+    "hint": "Přihlaste se pro přístup do oblasti účtu",
+    "notSellerYet": "Nejste prodejcem? - <0>Zaregistrujte se</0>"
   },
   "invite": {
     "title": "Vítejte v Meduse",
