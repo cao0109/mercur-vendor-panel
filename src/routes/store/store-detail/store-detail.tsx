@@ -7,8 +7,9 @@ import { storeLoader } from "./loader.ts"
 import { SingleColumnPageSkeleton } from "../../../components/common/skeleton/skeleton.tsx"
 import { SingleColumnPage } from "../../../components/layout/pages/index.ts"
 import { useDashboardExtension } from "../../../extensions/index.ts"
-import { CompanySection } from "./components/company-section/company-section.tsx"
+// import { CompanySection } from "./components/company-section/company-section.tsx"
 import { useMe } from "../../../hooks/api/users.tsx"
+import { SellerInfo } from "./components/company-section/seller-info.tsx"
 
 export const StoreDetail = () => {
   const initialData = useLoaderData() as Awaited<ReturnType<typeof storeLoader>>
@@ -39,7 +40,7 @@ export const StoreDetail = () => {
       hasOutlet
     >
       <StoreGeneralSection seller={seller} />
-      <CompanySection seller={seller} />
+      <SellerInfo metadata={seller.metadata}></SellerInfo>
     </SingleColumnPage>
   )
 }

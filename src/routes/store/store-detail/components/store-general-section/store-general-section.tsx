@@ -56,7 +56,7 @@ export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
           {t("fields.phone")}
         </Text>
         <Text size="small" leading="compact">
-          {seller.phone}
+          {seller.phone || seller.metadata?.basic?.contactPhone}
         </Text>
       </div>
       <div className="text-ui-fg-subtle grid grid-cols-2 px-6 py-4">

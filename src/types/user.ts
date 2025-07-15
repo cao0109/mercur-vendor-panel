@@ -26,6 +26,7 @@ export interface StoreVendor {
   country_code?: string
   tax_id?: string
   store_status?: "ACTIVE" | "SUSPENDED" | "INACTIVE"
+  metadata?: any
 }
 
 export interface TeamMemberProps {
@@ -37,4 +38,5 @@ export interface TeamMemberProps {
   bio?: string
   phone?: string
   role: string
+  seller?: any
 }
