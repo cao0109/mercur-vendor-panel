@@ -15,7 +15,7 @@ export const ProductVariantEdit = () => {
     isError: isProductError,
     error: productError,
   } = useProduct(id!, {
-    fields: "*variants",
+    fields: "*variants,*variants.inventory_items",
   })
 
   const variant = product?.variants?.find(
