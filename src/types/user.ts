@@ -37,4 +37,5 @@ export interface TeamMemberProps {
   bio?: string
   phone?: string
   role: string
+  seller?: any
 }

@@ -4,6 +4,7 @@ import { ProfileGeneralSection } from "./components/profile-general-section"
 import { SingleColumnPageSkeleton } from "../../../components/common/skeleton"
 import { SingleColumnPage } from "../../../components/layout/pages"
 import { useDashboardExtension } from "../../../extensions"
+import { SellerInfo } from "./components/profile-general-section/seller-info"
 
 export const ProfileDetail = () => {
   const { member, isPending: isLoading, isError, error } = useUserMe()
@@ -25,6 +26,7 @@ export const ProfileDetail = () => {
       }}
     >
       <ProfileGeneralSection user={member} />
+      {member?.seller?.metadata && <SellerInfo metadata={member.seller.metadata} email={member.email!}></SellerInfo>}
     </SingleColumnPage>
   )
 }

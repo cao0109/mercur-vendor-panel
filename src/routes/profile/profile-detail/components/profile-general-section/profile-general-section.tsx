@@ -13,7 +13,7 @@ type ProfileGeneralSectionProps = {
 export const ProfileGeneralSection = ({ user }: ProfileGeneralSectionProps) => {
   const { t } = useTranslation()
 
-  const { name, email, photo, phone, bio } = user
+  const { name, email, photo, phone, bio, seller } = user
 
   return (
     <Container className="divide-y p-0">
@@ -65,7 +65,7 @@ export const ProfileGeneralSection = ({ user }: ProfileGeneralSectionProps) => {
           Phone
         </Text>
         <Text size="small" leading="compact">
-          {phone}
+          {phone || seller?.metadata?.basic?.contactPhone}
         </Text>
       </div>
       <div className="grid grid-cols-2 items-center px-6 py-4">
