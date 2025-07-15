@@ -10,6 +10,10 @@ import AvatarBox from "../../components/common/logo-box/avatar-box"
 import { useDashboardExtension } from "../../extensions"
 import { useSignInWithEmailPass } from "../../hooks/api"
 import { isFetchError } from "../../lib/is-fetch-error"
+import { MEDUSA_STOREFRONT_URL } from "../../lib/storefront"
+
+// Add debug log
+console.log("Storefront URL:", MEDUSA_STOREFRONT_URL)
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -177,9 +181,10 @@ export const Login = () => {
             <Trans
               i18nKey="login.notSellerYet"
               components={[
-                <Link
-                  to="/register"
+                <a
+                  href={`${MEDUSA_STOREFRONT_URL}/sellers/apply/supplier`}
                   className="text-ui-fg-interactive transition-fg hover:text-ui-fg-interactive-hover focus-visible:text-ui-fg-interactive-hover font-medium outline-none"
+                  target="_blank"
                 />,
               ]}
             />
