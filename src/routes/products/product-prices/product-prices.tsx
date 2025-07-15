@@ -7,7 +7,9 @@ import { PricingEdit } from "./pricing-edit"
 export const ProductPrices = () => {
   const { id, variant_id } = useParams()
 
-  const { product, isLoading, isError, error } = useProduct(id!)
+  const { product, isLoading, isError, error } = useProduct(id!, {
+    fields: "*variants.inventory_items",
+  })
 
   if (isError) {
     throw error

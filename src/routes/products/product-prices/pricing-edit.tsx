@@ -9,8 +9,7 @@ import * as zod from "zod"
 import { RouteFocusModal, useRouteModal } from "../../../components/modals"
 import { KeyboundForm } from "../../../components/utilities/keybound-form"
 import {
-  useUpdateProductVariant,
-  useUpdateProductVariantsBatch,
+  useUpdateProductVariant
 } from "../../../hooks/api/products"
 import { useRegions } from "../../../hooks/api/regions"
 import { castNumber } from "../../../lib/cast-number"
@@ -126,7 +125,7 @@ export const PricingEdit = ({
     delete data["created_at"]
     delete data["updated_at"]
     delete data["deleted_at"]
-
+    delete data["inventory_items"]
     await mutateAsync(data, {
       onSuccess: () => {
         handleSuccess("..")
