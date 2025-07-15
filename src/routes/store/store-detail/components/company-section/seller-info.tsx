@@ -14,11 +14,9 @@ const exportExperienceMap = {
   '10+': '10年以上'
 }
 export function SellerInfo({
-  metadata,
-  email
+  metadata
 }: {
   metadata: any
-  email: string
 }) {
   return (
     <>
@@ -117,7 +115,7 @@ export function SellerInfo({
               </Text>
             </div>
             <Divider />
-            <div className="px-8 py-4 flex">
+            {/* <div className="px-8 py-4 flex">
               <Text className="font-medium text-ui-fg-subtle w-1/2">
                 联系电话
               </Text>
@@ -125,7 +123,7 @@ export function SellerInfo({
                 {metadata?.basic?.contactPhone || '-'}
               </Text>
             </div>
-            <Divider />
+            <Divider /> */}
             <div className="px-8 py-4 flex">
               <Text className="font-medium text-ui-fg-subtle w-1/2">职位</Text>
               <Text className="w-1/2">
