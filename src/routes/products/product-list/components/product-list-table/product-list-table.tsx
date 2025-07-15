@@ -8,7 +8,6 @@ import {
   Link,
   Outlet,
   useLoaderData,
-  // useLocation,
 } from "react-router-dom"
 
 import { HttpTypes } from "@medusajs/types"
@@ -40,7 +39,7 @@ export const ProductListTable = () => {
     {
       limit: searchParams.limit,
       offset: searchParams.offset,
-      fields: "+thumbnail,*categories,+status",
+      fields: "+thumbnail,*categories,+status, +updated_at, +created_at",
     },
     {
       initialData,
