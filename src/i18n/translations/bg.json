@@ -260,6 +260,11 @@
         "developer": "Разработчик",
         "myAccount": "Моят акаунт"
       }
+    },
+    "table": {
+      "jumpTo": "Отиди до",
+      "confirm": "Потвърди",
+      "page": "страница"
     }
   },
   "dataGrid": {

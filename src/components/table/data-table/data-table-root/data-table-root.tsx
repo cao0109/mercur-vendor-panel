@@ -6,16 +6,16 @@ import {
   flexRender,
 } from "@tanstack/react-table"
 import {
-  ComponentPropsWithoutRef,
   Fragment,
   UIEvent,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { NoResults } from "../../../common/empty-table-content"
+import { Pagination } from "../data-table-pagination"
 
 type BulkCommand = {
   label: string
@@ -60,6 +60,8 @@ export interface DataTableRootProps<TData> {
    * The layout of the table
    */
   layout?: "fill" | "fit"
+
+  showJumpTo?: boolean
 }
 
 /**
@@ -82,6 +84,7 @@ export const DataTableRoot = <TData,>({
   pagination,
   navigateTo,
   commands,
+  showJumpTo = false,
   count = 0,
   noResults = false,
   noHeader = false,
@@ -319,11 +322,13 @@ export const DataTableRoot = <TData,>({
         )}
       </div>
       {pagination && (
-        <div className={clx({ "border-t": layout === "fill" })}>
+        <div className={clx({ "border-t": layout === "fill" })} style={{position:'relative'}}>
           <Pagination
+            showJumpTo = {showJumpTo}
             canNextPage={table.getCanNextPage()}
             canPreviousPage={table.getCanPreviousPage()}
             nextPage={table.nextPage}
+            onPageChange={(page) => table.setPageIndex(page)}
             previousPage={table.previousPage}
             count={count}
             pageIndex={pageIndex}
@@ -360,27 +365,3 @@ export const DataTableRoot = <TData,>({
   )
 }
 
-type PaginationProps = Omit<
-  ComponentPropsWithoutRef<typeof Table.Pagination>,
-  "translations"
->
-
-const Pagination = (props: PaginationProps) => {
-  const { t } = useTranslation()
-
-  const translations = {
-    of: t("general.of"),
-    results: t("general.results"),
-    pages: t("general.pages"),
-    prev: t("general.prev"),
-    next: t("general.next"),
-  }
-
-  return (
-    <Table.Pagination
-      className="flex-shrink-0"
-      {...props}
-      translations={translations}
-    />
-  )
-}

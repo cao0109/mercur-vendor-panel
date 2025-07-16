@@ -1066,6 +1066,26 @@
             "docs"
           ],
           "additionalProperties": false
+        },
+        "table": {
+          "type": "object",
+          "properties": {
+            "jumpTo": {
+              "type": "string"
+            },
+            "confirm": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "jumpTo",
+            "confirm",
+            "page"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [

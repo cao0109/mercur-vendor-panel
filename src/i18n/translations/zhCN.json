@@ -261,6 +261,11 @@
         "myAccount": "我的账户"
       },
       "docs": "操作文档"
+    },
+    "table": {
+      "jumpTo":"跳至",
+      "confirm":"确认",
+      "page":"页"
     }
   },
   "dataGrid": {
