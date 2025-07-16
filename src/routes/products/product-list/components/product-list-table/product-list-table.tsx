@@ -92,6 +92,7 @@ export const ProductListTable = () => {
         table={table}
         columns={columns}
         count={dataCount}
+        showJumpTo
         pageSize={PAGE_SIZE}
         filters={filters}
         search

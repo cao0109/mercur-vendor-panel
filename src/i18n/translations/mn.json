@@ -260,6 +260,11 @@
         "developer": "Хөгжүүлэгч",
         "myAccount": "Миний данс"
       }
+    },
+    "table": {
+      "jumpTo": "Очихлох",
+      "confirm": "Баталгаажуулах",
+      "page": "хуудас"
     }
   },
   "dataGrid": {

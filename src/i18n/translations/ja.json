@@ -261,6 +261,11 @@
         "myAccount": "マイアカウント"
       },
       "docs": "操作ドキュメント"
+    },
+    "table": {
+      "jumpTo": "ジャンプ先",
+      "confirm": "確認",
+      "page": "ページ"
     }
   },
   "dataGrid": {

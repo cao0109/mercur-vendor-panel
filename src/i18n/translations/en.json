@@ -261,6 +261,11 @@
         "myAccount": "My Account"
       },
       "docs": "User Guide"
+    },
+    "table": {
+      "jumpTo":"Jump to",
+      "confirm":"Confirm",
+      "page":"Page"
     }
   },
   "dataGrid": {

@@ -260,6 +260,11 @@
         "developer": "توسعه‌دهنده",
         "myAccount": "حساب من"
       }
+    },
+    "table": {
+      "jumpTo": "رفتن به",
+      "confirm": "تایید",
+      "page": "صفحه"
     }
   },
   "dataGrid": {

@@ -260,6 +260,11 @@
         "developer": "Dezvoltator",
         "myAccount": "Contul meu"
       }
+    },
+    "table": {
+      "jumpTo": "Du-te la",
+      "confirm": "Confirmă",
+      "page": "pagină"
     }
   },
   "dataGrid": {

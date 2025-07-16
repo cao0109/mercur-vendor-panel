@@ -259,6 +259,11 @@
         "developer": "Desenvolvedor",
         "myAccount": "Minha Conta"
       }
+    },
+    "table": {
+      "jumpTo": "Ir para",
+      "confirm": "Confirmar",
+      "page": "página"
     }
   },
   "dataGrid": {

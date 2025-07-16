@@ -260,6 +260,11 @@
         "developer": "Програмер",
         "myAccount": "Моја сметка"
       }
+    },
+    "table": {
+      "jumpTo": "Оди до",
+      "confirm": "Потврди",
+      "page": "страница"
     }
   },
   "dataGrid": {

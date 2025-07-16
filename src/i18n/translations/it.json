@@ -260,6 +260,11 @@
         "developer": "Sviluppatore",
         "myAccount": "Il mio account"
       }
+    },
+    "table": {
+      "jumpTo": "Vai a",
+      "confirm": "Conferma",
+      "page": "pagina"
     }
   },
   "dataGrid": {

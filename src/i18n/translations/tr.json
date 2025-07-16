@@ -261,6 +261,11 @@
         "myAccount": "Hesabım"
       },
       "docs": "Kullanım Kılavuzu"
+    },
+    "table": {
+      "jumpTo": "ไปที่",
+      "confirm": "ยืนยัน",
+      "page": "หน้า"
     }
   },
   "dataGrid": {
