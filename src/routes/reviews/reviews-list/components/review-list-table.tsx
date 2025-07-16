@@ -2,17 +2,19 @@ import { Container, Heading, Text } from "@medusajs/ui"
 import { keepPreviousData } from "@tanstack/react-query"
 import { useMemo } from "react"
 
-import { useReviews } from "../../../../hooks/api/review"
+import { useTranslation } from "react-i18next"
+import { useSearchParams } from "react-router-dom"
+import { StarsRating } from "../../../../components/common/stars-rating/stars-rating"
 import { _DataTable } from "../../../../components/table/data-table"
-import { useDataTable } from "../../../../hooks/use-data-table"
+import { useReviews } from "../../../../hooks/api/review"
 import { useReviewTableColumns } from "../../../../hooks/table/columns/use-review-table-columns"
 import { useReviewTableQuery } from "../../../../hooks/table/query/use-review-table-query"
-import { StarsRating } from "../../../../components/common/stars-rating/stars-rating"
-import { useSearchParams } from "react-router-dom"
+import { useDataTable } from "../../../../hooks/use-data-table"
 
 const PAGE_SIZE = 20
 
 export const ReviewListTable = () => {
+  const { t } = useTranslation()
   const { searchParams, raw } = useReviewTableQuery({
     pageSize: PAGE_SIZE,
   })
@@ -66,9 +68,9 @@ export const ReviewListTable = () => {
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <div>
-          <Heading>Reviews</Heading>
+          <Heading>{t("reviews.domain")}</Heading>
           <Text className="text-ui-fg-subtle" size="small">
-            Manage your reviews
+            {t("reviews.manageYourReviews")}
           </Text>
         </div>
         <div>
@@ -97,7 +99,7 @@ export const ReviewListTable = () => {
         // search
         queryObject={raw}
         noRecords={{
-          message: "Your reviews will show up here.",
+          message: t("reviews.showTips")
         }}
       />
     </Container>

@@ -22,11 +22,11 @@ import {
 import { ProductCreateDetailsForm } from "../product-create-details-form"
 import { ProductCreateInventoryKitForm } from "../product-create-inventory-kit-form"
 import { ProductCreateOrganizeForm } from "../product-create-organize-form"
-import { ProductCreateVariantsForm } from "../product-create-variants-form"
 import {
   ProductCreateRichTextForm,
   base64ToBlob,
 } from "../product-create-rich-text-form"
+import { ProductCreateVariantsForm } from "../product-create-variants-form"
 
 enum Tab {
   DETAILS = "details",
@@ -435,7 +435,7 @@ export const ProductCreateForm = ({
               isLoading={isPending}
               className="whitespace-nowrap"
             >
-              Draft
+               {t("fields.draft")}
             </Button>
             <PrimaryButton
               tab={tab}

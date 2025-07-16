@@ -1,21 +1,22 @@
-import { useForm } from "react-hook-form"
-import { Form } from "../../../../components/common/form"
-import { RouteDrawer, useRouteModal } from "../../../../components/modals"
-import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button, Heading, Select, Textarea, toast } from "@medusajs/ui"
+import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
+import { z } from "zod"
+import { Form } from "../../../../components/common/form"
+import { RouteDrawer, useRouteModal } from "../../../../components/modals"
 import { useCreateVendorRequest, useUpdateRequest } from "../../../../hooks/api"
-
+const { t } = useTranslation()
 const reasonList = [
-  "The review comment is not true",
-  "The review comment is insulting",
-  "The review comment is offensive or vulgar",
-  "Other",
+  t("reviews.theReviewCommentIsNotTrue"),
+  t("reviews.theReviewCommentIsInsulting"),
+  t("reviews.theReviewCommentIsOffensive"),
+  t("reviews.order"),
 ]
 
 const ReviewReplySchema = z.object({
-  reason: z.string().min(1, { message: "Please select a reason" }),
+  reason: z.string().min(1, { message: t("reviews.pleaseSelectReason")}),
   comment: z.string().optional(),
 })
 
@@ -63,8 +64,8 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
         },
         {
           onSuccess: () => {
-            toast.success("Request is updated", {
-              description: "Please wait for a response from the moderator.",
+            toast.success(t("reviews.requestIsUpdated"), {
+              description:t("reviews.pleaseWaitForAResponse"),
             })
             handleSuccess(`/requests/reviews`)
           },
@@ -83,8 +84,8 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
         },
         {
           onSuccess: () => {
-            toast.success("Review is reported", {
-              description: "Please wait for a response from the moderator.",
+            toast.success(t("reviews.reviewIsReported"), {
+              description:t("reviews.pleaseWaitModerator"),
             })
             handleSuccess(`/reviews/${id}`)
           },
@@ -100,12 +101,12 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
     <RouteDrawer>
       <RouteDrawer.Header>
         <RouteDrawer.Title asChild>
-          <Heading>{isEditing ? "Edit Request" : "Report Review"}</Heading>
+          <Heading>{isEditing ? t("reviews.editRequest") : t("reviews.reportReview") }</Heading>
         </RouteDrawer.Title>
         <RouteDrawer.Description>
           {isEditing
-            ? "Edit the request to report the review from customer."
-            : "Report review from customer."}
+            ?  t("reviews.editTheRequestToReport")
+            : t("reviews.reportReviewFromCustomer")}
         </RouteDrawer.Description>
       </RouteDrawer.Header>
       <RouteDrawer.Form form={form}>
@@ -116,7 +117,7 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
             render={({ field: { ref, onChange, ...field } }) => {
               return (
                 <Form.Item className="mt-4">
-                  <Form.Label>Reason</Form.Label>
+                  <Form.Label>{t("reviews.reasons")}</Form.Label>
                   <Form.Control>
                     <Select {...field} onValueChange={onChange}>
                       <Select.Trigger ref={ref}>
@@ -162,7 +163,7 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
           className="px-6"
           isLoading={isPending || isUpdating}
         >
-          {isEditing ? "Update Request" : "Report review"}
+          {isEditing ? t("reviews.reasons") : t("reviews.reportReview") }
         </Button>
       </RouteDrawer.Footer>
     </RouteDrawer>

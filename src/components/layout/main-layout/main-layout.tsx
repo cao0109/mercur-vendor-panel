@@ -25,8 +25,8 @@ import { useLocation } from "react-router-dom"
 import { useMe } from "../../../hooks/api"
 
 import { useSearch } from "../../../providers/search-provider"
-import { UserMenu } from "../user-menu"
 import { ImageAvatar } from "../../common/image-avatar"
+import { UserMenu } from "../user-menu"
 
 export const MainLayout = () => {
   return (
@@ -100,7 +100,7 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
   return [
     {
       icon: <Component />,
-      label: "Dashboard",
+      label: t("dashboard.domain"),
       to: "/dashboard",
     },
     {
@@ -175,7 +175,7 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
     },
     {
       icon: <Star />,
-      label: "Reviews",
+      label:  t("reviews.domain"),
       to: "/reviews",
     },
     // {
@@ -185,7 +185,7 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
     // },
     {
       icon: <ListCheckbox />,
-      label: "Requests",
+      label: t("requests.domain"),
       to: "/requests",
     },
   ]

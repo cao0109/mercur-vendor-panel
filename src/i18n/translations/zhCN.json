@@ -451,7 +451,10 @@
         "productOptions": {
           "label": "产品选项",
           "hint": "定义产品的选项,例如颜色、尺寸等。"
-        }
+        },
+        "defaultOption": "默认选项",
+        "defaultVariant": "默认变体",
+        "defaultOptionValue": "默认选项值"
       },
       "successToast": "产品 {{title}} 创建成功。"
     },
@@ -561,6 +564,10 @@
       "discountable": {
         "label": "可打折",
         "hint": "取消选中时,折扣将不会应用于此产品"
+      },
+      "shipping_profile": {
+        "label": "配送方案",
+        "hint": "将商品关联到某个配送方案"
       },
       "type": {
         "label": "类型"
@@ -687,6 +694,20 @@
       "tooltips": {
         "alreadyManaged": "此库存项目已可在 {{title}} 下编辑。",
         "alreadyManagedWithSku": "此库存项目已可在 {{title}} ({{sku}}) 下编辑。"
+      }
+    },
+    "shippingProfile": {
+      "header": "配送配置",
+      "edit": {
+        "header": "配送配置",
+        "toasts": {
+          "success": "{{title}}的配送方案已更新成功。"
+        }
+      },
+      "create": {
+        "errors": {
+          "required": "配送方案为必填项"
+        }
       }
     },
     "toasts": {
@@ -1257,6 +1278,8 @@
     "fulfillment": {
       "cancelWarning": "您即将取消履行。此操作无法撤消。",
       "markAsDeliveredWarning": "您即将将履行标记为已送达。此操作无法撤消。",
+      "differentOptionSelected": "所选配送方式与客户选择的配送方式不一致。",
+      "disabledItemTooltip": "您选择的配送方式不支持该商品的配送",
       "unfulfilledItems": "未履行商品",
       "statusLabel": "履行状态",
       "statusTitle": "履行状态",
@@ -1269,6 +1292,7 @@
       "available": "可用",
       "inStock": "有库存",
       "markAsShipped": "标记为已发货",
+      "markAsPickedUp": "标记为已取货",
       "markAsDelivered": "标记为已送达",
       "itemsToFulfillDesc": "选择要履行的商品和数量",
       "locationDescription": "选择您想要从哪个位置履行商品。",
@@ -1277,7 +1301,9 @@
       "error": {
         "wrongQuantity": "只有一件商品可供履行",
         "wrongQuantity_other": "数量应该在 1 和 {{number}} 之间",
-        "noItems": "没有要履行的商品。"
+        "noItems": "没有要履行的商品。",
+        "noShippingOption": "配送方式为必填项",
+        "noLocation": "地址为必填项"
       },
       "status": {
         "notFulfilled": "未履行",
@@ -1296,7 +1322,8 @@
         "created": "履行创建成功",
         "canceled": "履行已成功取消",
         "fulfillmentShipped": "无法取消已发货的履行",
-        "fulfillmentDelivered": "履行已成功标记为已送达"
+        "fulfillmentDelivered": "履行已成功标记为已送达",
+        "fulfillmentPickedUp": "履约已成功标记为已取货"
       },
       "trackingLabel": "追踪",
       "shippingFromLabel": "发货地",
@@ -1499,11 +1526,17 @@
     },
     "salesChannels": {
       "header": "销售渠道",
+      "hint": "管理与此地点关联的销售渠道",
       "label": "已连接的销售渠道",
       "connectedTo": "已连接 {{total}} 个销售渠道中的 {{count}} 个",
       "noChannels": "该位置未连接任何销售渠道。",
       "action": "连接销售渠道",
       "successToast": "销售渠道更新成功。"
+    },
+    "pickupOptions": {
+      "edit": {
+        "header": "编辑自提选项"
+      }
     },
     "shippingOptions": {
       "create": {
@@ -1512,6 +1545,12 @@
           "hint": "创建新的配送选项以定义如何从此位置发货产品。",
           "label": "配送选项",
           "successToast": "配送选项 {{name}} 创建成功。"
+        },
+        "pickup": {
+          "header": "为{{zone}}创建自提选项",
+          "hint": "创建新的自提选项，定义如何从该地点提取商品。",
+          "label": "自提选项",
+          "successToast": "自提选项{{name}}已成功创建。"
         },
         "returns": {
           "header": "为 {{zone}} 创建退货选项",
@@ -1576,6 +1615,8 @@
         "count": {
           "shipping_one": "{{count}} 个配送选项",
           "shipping_other": "{{count}} 个配送选项",
+          "pickup_one": "{{count}} pickup option",
+          "pickup_other": "{{count}} pickup options",
           "returns_one": "{{count}} 个退货选项",
           "returns_other": "{{count}} 个退货选项"
         },
@@ -2247,6 +2288,81 @@
       }
     }
   },
+  "dashboard": {
+    "domain": "控制台",
+    "welcome": "欢迎来到商家面板",
+    "pleaseCompleteSteps": "请完成以下步骤，以便在店铺上开始销售",
+    "completeInformation": "完善店铺信息",
+    "setupLocationsShipping": "设置地点及配送",
+    "addProductsStartSelling": "添加商品并开始销售",
+    "manage": "管理",
+    "setup": "设置",
+    "add": "添加"
+  },
+  "stripeConnects": {
+    "domain": "Stripe 账户关联"
+  },
+  "reviews": {
+    "domain": "评价管理",
+    "manageYourReviews": "管理您的评价",
+    "showTips": "您的评价将显示在这里。",
+    "customer": "客户",
+    "name": "姓名",
+    "stars": "星级",
+    "reply": "回复",
+    "added": "添加时间",
+    "order": "订单",
+    "editReply": "编辑回复",
+    "editYourReplyToCustomer": "编辑您对客户评价的回复。",
+    "replyToCustomerReview": "回复客户评价。",
+    "comment": "评论",
+    "deleteReply": "删除回复",
+    "save": "保存",
+    "loading": "加载中",
+    "reviews": "评价",
+    "theReviewCommentIsNotTrue": "该评价内容不真实",
+    "theReviewCommentIsInsulting": "该评价存在侮辱性内容",
+    "theReviewCommentIsOffensive": "该评价存在冒犯性或低俗内容",
+    "other": "其他",
+    "requestIsUpdated": "申请已更新",
+    "pleaseWaitForAResponse": "请等待审核人员的回复。",
+    "editRequest": "编辑申请",
+    "reportReview": "举报评价",
+    "editTheRequestToReport": "编辑用于举报客户评价的申请。",
+    "reportReviewFromCustomer": "举报客户评价。",
+    "updateRequest": "更新申请",
+    "replyBeenDeleted": "回复已删除",
+    "replyBeenSend": "回复已发送",
+    "pleaseSelectReason": "请选择原因",
+    "reviewIsReported": "评价已举报",
+    "pleaseWaitModerator": "请等待审核人员回复。",
+    "reasons": "原因"
+  },
+  "requests": {
+    "domain": "申请管理",
+    "checkStatus": "查看您的申请状态并新增申请",
+    "collectionsRequests": "商品合集申请",
+    "requestsCollections": "申请商品合集",
+    "categoriesRequests": "分类申请",
+    "requestsCategories": "申请分类",
+    "reviewsRequests": "评价相关申请",
+    "requestsReviews": "评价取消申请",
+    "ordersRequests": "订单申请",
+    "requestsOrders": "订单取消申请",
+    "addCollection": "您申请新增商品合集",
+    "addCategories": "您申请新增分类",
+    "cancelOrder": "您申请取消订单",
+    "cancelReview": "您申请取消评价",
+    "title": "标题",
+    "handle": "标识",
+    "date": "日期",
+    "status": "状态",
+    "review": "评价",
+    "reason": "原因",
+    "order": "订单",
+    "customer": "客户",
+    "customerEmail": "客户邮箱"
+  },
   "profile": {
     "domain": "个人资料",
     "manageYourProfileDetails": "管理您的个人资料详细信息。",
@@ -2307,6 +2423,8 @@
     "editStore": "编辑商店",
     "defaultCurrency": "默认货币",
     "defaultRegion": "默认地区",
+    "defaultSalesChannel": "默认销售渠道",
+    "defaultLocation": "默认地点",
     "swapLinkTemplate": "交换链接模板",
     "paymentLinkTemplate": "支付链接模板",
     "inviteLinkTemplate": "邀请链接模板",
@@ -2453,6 +2571,16 @@
   "salesChannels": {
     "domain": "销售渠道",
     "subtitle": "管理在线和离线销售渠道。",
+    "list": {
+      "empty": {
+        "heading": "未找到销售渠道",
+        "description": "创建销售渠道后，将会显示在此处。"
+      },
+      "filtered": {
+        "heading": "无搜索结果",
+        "description": "没有销售渠道符合当前筛选条件。"
+      }
+    },
     "createSalesChannel": "创建销售渠道",
     "createSalesChannelHint": "创建新的销售渠道以销售您的产品。",
     "enabledHint": "指定销售渠道是否启用。",
@@ -2761,7 +2889,9 @@
     "added": "已添加",
     "removed": "已移除",
     "from": "从",
-    "to": "至"
+    "to": "至",
+    "beaware": "请注意",
+    "loading": "加载中"
   },
   "fields": {
     "amount": "金额",
@@ -2778,6 +2908,7 @@
     "inventoryItem": "库存商品",
     "requiredQuantity": "所需数量",
     "description": "描述",
+    "image": "头像",
     "email": "电子邮件",
     "password": "密码",
     "repeatPassword": "重复密码",

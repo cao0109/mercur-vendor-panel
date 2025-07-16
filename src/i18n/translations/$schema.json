@@ -1835,6 +1835,15 @@
                     "hint"
                   ],
                   "additionalProperties": false
+                },
+                "defaultOption": {
+                  "type": "string"
+                },
+                "defaultVariant": {
+                  "type": "string"
+                },
+                "defaultOptionValue": {
+                  "type": "string"
                 }
               },
               "required": [
@@ -1844,7 +1853,10 @@
                 "optionTitle",
                 "optionValues",
                 "productVariants",
-                "productOptions"
+                "productOptions",
+                "defaultOption",
+                "defaultVariant",
+                "defaultOptionValue"
               ],
               "additionalProperties": false
             },
@@ -9559,6 +9571,237 @@
       ],
       "additionalProperties": false
     },
+    "dashboard": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "welcome": {
+          "type": "string"
+        },
+        "pleaseCompleteSteps": {
+          "type": "string"
+        },
+        "completeInformation": {
+          "type": "string"
+        },
+        "setupLocationsShipping": {
+          "type": "string"
+        },
+        "addProductsStartSelling": {
+          "type": "string"
+        },
+        "manage": {
+          "type": "string"
+        },
+        "setup": {
+          "type": "string"
+        },
+        "add": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "domain",
+        "welcome",
+        "pleaseCompleteSteps",
+        "completeInformation",
+        "setupLocationsShipping",
+        "addProductsStartSelling",
+        "manage",
+        "setup",
+        "add"
+      ],
+      "additionalProperties": false
+    },
+    "stripeConnects": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "additionalProperties": false
+    },
+    "reviews": {
+      "type": "object",
+      "properties": {
+        "domain": { "type": "string" },
+        "manageYourReviews": { "type": "string" },
+        "showTips": { "type": "string" },
+        "customer": { "type": "string" },
+        "name": { "type": "string" },
+        "stars": { "type": "string" },
+        "reply": { "type": "string" },
+        "added": { "type": "string" },
+        "order": { "type": "string" },
+        "editReply": { "type": "string" },
+        "editYourReplyToCustomer": { "type": "string" },
+        "replyToCustomerReview": { "type": "string" },
+        "comment": { "type": "string" },
+        "deleteReply": { "type": "string" },
+        "save": { "type": "string" },
+        "loading": { "type": "string" },
+        "reviews": { "type": "string" },
+        "theReviewCommentIsNotTrue": { "type": "string" },
+        "theReviewCommentIsInsulting": { "type": "string" },
+        "theReviewCommentIsOffensive": { "type": "string" },
+        "other": { "type": "string" },
+        "requestIsUpdated": { "type": "string" },
+        "pleaseWaitForAResponse": { "type": "string" },
+        "editRequest": { "type": "string" },
+        "reportReview": { "type": "string" },
+        "editTheRequestToReport": { "type": "string" },
+        "reportReviewFromCustomer": { "type": "string" },
+        "updateRequest": { "type": "string" },
+        "replyBeenDeleted":{ "type": "string" },
+        "replyBeenSend": { "type": "string" },
+        "pleaseSelectReason": { "type": "string" },
+        "reviewIsReported": { "type": "string" },
+        "pleaseWaitModerator": { "type": "string" },
+        "reasons": { "type": "string" }
+      },
+      "required": [
+        "domain",
+        "manageYourReviews",
+        "showTips",
+        "customer",
+        "name",
+        "stars",
+        "reply",
+        "added",
+        "order",
+        "editReply",
+        "editYourReplyToCustomer",
+        "replyToCustomerReview",
+        "comment",
+        "deleteReply",
+        "save",
+        "loading",
+        "reviews",
+        "theReviewCommentIsNotTrue",
+        "theReviewCommentIsInsulting",
+        "theReviewCommentIsOffensive",
+        "other",
+        "requestIsUpdated",
+        "pleaseWaitForAResponse",
+        "editRequest",
+        "reportReview",
+        "editTheRequestToReport",
+        "reportReviewFromCustomer",
+        "updateRequest",
+        "replyBeenDeleted",
+        "replyBeenSend",
+        "pleaseSelectReason",
+        "reviewIsReported",
+        "pleaseWaitModerator",
+        "reasons"
+      ],
+      "additionalProperties": false
+    },
+    "requests": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "checkStatus": {
+          "type": "string"
+        },
+        "collectionsRequests": {
+          "type": "string"
+        },
+        "requestsCollections": {
+          "type": "string"
+        },
+        "categoriesRequests": {
+          "type": "string"
+        },
+        "requestsCategories": {
+          "type": "string"
+        },
+        "reviewsRequests": {
+          "type": "string"
+        },
+        "requestsReviews": {
+          "type": "string"
+        },
+        "ordersRequests": {
+          "type": "string"
+        },
+        "requestsOrders": {
+          "type": "string"
+        },
+        "addCollection":{
+          "type": "string"
+        },
+        "addCategories":{
+          "type": "string"
+        },
+        "cancelOrder":{
+          "type": "string"
+        },
+        "cancelReview":{
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "handle":{
+          "type": "string"
+        },
+        "date":{
+          "type": "string"
+        },
+        "status":{
+          "type": "string"
+        },
+        "review":{
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "order":{
+          "type": "string"
+        },
+        "customer":{
+          "type": "string"
+        },
+        "customerEmail":{
+          "type": "string"
+        }
+      },
+      "required": [
+        "domain",
+        "checkStatus",
+        "collectionsRequests",
+        "requestsCollections",
+        "categoriesRequests",
+        "requestsCategories",
+        "reviewsRequests",
+        "ordersRequests",
+        "requestsOrders",
+        "addCollection",
+        "addCategories",
+        "cancelOrder",
+        "cancelReview",
+        "title",
+        "handle",
+        "date",
+        "status",
+        "review",
+        "reason",
+        "order",
+        "customer",
+        "customerEmail"
+      ],
+      "additionalProperties": false
+    },
     "profile": {
       "type": "object",
       "properties": {
@@ -11809,6 +12052,9 @@
         "description": {
           "type": "string"
         },
+        "image": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -12251,6 +12497,7 @@
         "inventoryItem",
         "requiredQuantity",
         "description",
+        "image",
         "email",
         "password",
         "repeatPassword",

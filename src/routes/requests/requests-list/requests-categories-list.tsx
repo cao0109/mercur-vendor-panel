@@ -1,12 +1,13 @@
 import { Button, Container, Heading, Text } from "@medusajs/ui"
+import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 import { SingleColumnPage } from "../../../components/layout/pages"
 import { useDashboardExtension } from "../../../extensions"
 import { RequestListTable } from "./components/request-list-table"
-import { Link } from "react-router-dom"
 
 export const RequestsCategoriesList = () => {
   const { getWidgets } = useDashboardExtension()
-
+  const { t } = useTranslation()
   return (
     <SingleColumnPage
       widgets={{
@@ -17,13 +18,13 @@ export const RequestsCategoriesList = () => {
       <Container className="divided-y p-0">
         <div className="flex items-center justify-between px-6 py-4">
           <div>
-            <Heading>Categories Requests</Heading>
+            <Heading>{t("requests.categoriesRequests")}</Heading>
             <Text className="text-ui-fg-subtle" size="small">
-              Your requests to add a new category
+            {t("requests.addCategories")}
             </Text>
           </div>
           <Button variant="secondary" asChild>
-            <Link to="create">Request Category</Link>
+            <Link to="create">{t("requests.requestsCategories")}</Link>
           </Button>
         </div>
         <div className="px-6 py-4">

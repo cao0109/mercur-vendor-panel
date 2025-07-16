@@ -1,5 +1,6 @@
 import { Container, Heading, Text } from "@medusajs/ui"
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { useUpdateOnboarding } from "../../../hooks/api"
 import { OnboardingRow } from "./onboarding-row"
 
@@ -17,7 +18,7 @@ export const DashboardOnboarding = ({
   // stripe_connect,
 }: DashboardProps) => {
   const { mutateAsync } = useUpdateOnboarding()
-
+  const { t } = useTranslation()
   useEffect(() => {
     mutateAsync()
   }, [])
@@ -26,19 +27,18 @@ export const DashboardOnboarding = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <div>
-          <Heading>Welcome to Vendor Panel</Heading>
+          <Heading>{t("dashboard.welcome")}</Heading>
           <Text className="text-ui-fg-subtle" size="small">
-            Please complete these steps so you can start selling on the
-            marketplace
+        {  t("dashboard.pleaseCompleteSteps")}
           </Text>
         </div>
       </div>
       <div className="px-6 py-4">
         <OnboardingRow
-          label="Complete the store information"
+          label={t("dashboard.completeInformation")}
           state={store_information}
           link="/settings/store"
-          buttonLabel="Manage"
+          buttonLabel={t("dashboard.manage")}
         />
         {/* <OnboardingRow
           label='Setup Stripe Connect account'
@@ -47,16 +47,16 @@ export const DashboardOnboarding = ({
           buttonLabel='Setup'
         /> */}
         <OnboardingRow
-          label="Setup Locations & Shipping"
+          label={t("dashboard.setupLocationsShipping")}
           state={locations_shipping}
           link="/settings/locations"
-          buttonLabel="Setup"
+          buttonLabel={t("dashboard.setup")}
         />
         <OnboardingRow
-          label="Add products and start selling"
+          label={t("dashboard.addProductsStartSelling")}
           state={products}
           link="/products/create"
-          buttonLabel="Add"
+          buttonLabel={t("dashboard.add")}
         />
       </div>
     </Container>

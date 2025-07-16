@@ -2,8 +2,8 @@ import { Container, Heading, Text } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 
 import { Pencil } from "@medusajs/icons"
-import { ImageAvatar } from "../../../../../components/common/image-avatar"
 import { ActionMenu } from "../../../../../components/common/action-menu"
+import { ImageAvatar } from "../../../../../components/common/image-avatar"
 import { StoreVendor } from "../../../../../types/user"
 
 export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
@@ -31,7 +31,8 @@ export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
       </div>
       <div className="text-ui-fg-subtle grid grid-cols-2 px-6 py-4 items-center">
         <Text size="small" leading="compact" weight="plus">
-          Image
+          
+          {t("fields.image")}
         </Text>
         <ImageAvatar src={seller.photo || "/logo.png"} size={8} rounded />
       </div>
@@ -61,7 +62,7 @@ export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
       </div>
       <div className="text-ui-fg-subtle grid grid-cols-2 px-6 py-4">
         <Text size="small" leading="compact" weight="plus">
-          Description
+          {t("fields.description")}
         </Text>
         <Text size="small" leading="compact">
           {seller.description || "-"}

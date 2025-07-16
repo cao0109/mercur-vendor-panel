@@ -268,7 +268,7 @@ export const ProductCreateVariantsSection = ({
   const createDefaultOptionAndVariant = () => {
     form.setValue("options", [
       {
-        title: "Default option",
+        title: t("products.create.variants.defaultOption"),
         values: ["Default option value"],
       },
     ])
@@ -276,11 +276,11 @@ export const ProductCreateVariantsSection = ({
       "variants",
       decorateVariantsWithDefaultValues([
         {
-          title: "Default variant",
+          title: t("products.create.variants.defaultVariant"),
           should_create: true,
           variant_rank: 0,
           options: {
-            "Default option": "Default option value",
+            "Default option": t("products.create.variants.defaultOptionValue")
           },
           inventory: [{ inventory_item_id: "", required_quantity: "" }],
           is_default: true,

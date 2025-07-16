@@ -28,7 +28,7 @@ export const RouteMap: RouteObject[] = [
           {
             path: "stripe-connect",
             handle: {
-              breadcrumb: () => "Stripe Connects",
+              breadcrumb: () => t("stripeConnects.domain"),
             },
             errorElement: <ErrorBoundary />,
             lazy: () => import("../../routes/stripe-connect"),
@@ -42,7 +42,7 @@ export const RouteMap: RouteObject[] = [
             path: "/requests",
             errorElement: <ErrorBoundary />,
             handle: {
-              breadcrumb: () => "Requests",
+              breadcrumb: () => t("requests.domain"),
             },
             children: [
               {
@@ -60,7 +60,7 @@ export const RouteMap: RouteObject[] = [
               {
                 path: "categories",
                 handle: {
-                  breadcrumb: () => "Categories requests",
+                  breadcrumb: () => t("requests.categoriesRequests"),
                 },
                 lazy: async () => {
                   const { RequestsCategoriesList } = await import(
@@ -86,7 +86,7 @@ export const RouteMap: RouteObject[] = [
               {
                 path: "collections",
                 handle: {
-                  breadcrumb: () => "Collection requests",
+                  breadcrumb: () => t("requests.collectionsRequests"),
                 },
                 lazy: async () => {
                   const { RequestsCollectionsList } = await import(
@@ -113,7 +113,7 @@ export const RouteMap: RouteObject[] = [
               {
                 path: "reviews",
                 handle: {
-                  breadcrumb: () => "Reviews requests",
+                  breadcrumb: () => t("requests.reviewsRequests"),
                 },
                 lazy: async () => {
                   const { RequestReviewsList } = await import(
@@ -134,7 +134,7 @@ export const RouteMap: RouteObject[] = [
               {
                 path: "orders",
                 handle: {
-                  breadcrumb: () => "Orders requests",
+                  breadcrumb: () => t("requests.ordersRequests"),
                 },
                 lazy: async () => {
                   const { RequestOrdersList } = await import(
@@ -187,7 +187,7 @@ export const RouteMap: RouteObject[] = [
             path: "/reviews",
             errorElement: <ErrorBoundary />,
             handle: {
-              breadcrumb: () => "Reviews",
+              breadcrumb: () => t("reviews.domain"),
             },
             children: [
               {
