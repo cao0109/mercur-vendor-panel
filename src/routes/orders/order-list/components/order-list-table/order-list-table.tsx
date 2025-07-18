@@ -25,6 +25,7 @@ export const OrderListTable = () => {
       limit: searchParams.limit,
       offset: searchParams.offset,
       fields: "*customer,+payment_status,*split_order_payment",
+      order: "-created_at"
     },
     undefined,
     {
