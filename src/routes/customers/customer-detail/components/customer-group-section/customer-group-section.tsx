@@ -96,8 +96,8 @@ export const CustomerGroupSection = ({
       title: t("general.areYouSure"),
       description: t("customers.groups.removeMany", {
         groups: customer_groups
-          ?.filter((g) => customerGroupIds.includes(g.id))
-          .map((g) => g.name)
+          ?.filter((g) => customerGroupIds.includes(g.customer_group.id))
+          .map((g) => g.customer_group.name)
           .join(","),
       }),
       confirmText: t("actions.remove"),
@@ -220,7 +220,7 @@ const CustomerGroupRowActions = ({
             {
               label: t("actions.edit"),
               icon: <PencilSquare />,
-              to: `/customer-groups/${group.id}/edit`,
+              to: `/customer-groups/${group.customer_group_id}/edit`,
             },
             {
               label: t("actions.remove"),

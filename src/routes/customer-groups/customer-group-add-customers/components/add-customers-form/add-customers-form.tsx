@@ -108,7 +108,7 @@ export const AddCustomersForm = ({
     await mutateAsync(data.customer_ids, {
       onSuccess: () => {
         toast.success(
-          t("customerGroups.customers.add.successToast", {
+          t("customerGroups.customers.add.successToast_other", {
             count: data.customer_ids.length,
           })
         )
