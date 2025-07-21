@@ -60,10 +60,10 @@ export const CustomerGroupCustomerSection = ({
     const keys = Object.keys(rowSelection)
 
     const res = await prompt({
-      title: t("customerGroups.customers.remove.title", {
+      title: t("customerGroups.customers.remove.title_other", {
         count: keys.length,
       }),
-      description: t("customerGroups.customers.remove.description", {
+      description: t("customerGroups.customers.remove.description_other", {
         count: keys.length,
       }),
       confirmText: t("actions.continue"),
