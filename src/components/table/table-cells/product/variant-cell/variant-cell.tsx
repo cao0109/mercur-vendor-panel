@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 
-import { PlaceholderCell } from "../../common/placeholder-cell"
 import { HttpTypes } from "@medusajs/types"
+import { PlaceholderCell } from "../../common/placeholder-cell"
 
 type VariantCellProps = {
   variants?: HttpTypes.AdminProductVariant[] | null
@@ -17,7 +17,7 @@ export const VariantCell = ({ variants }: VariantCellProps) => {
   return (
     <div className="flex h-full w-full items-center overflow-hidden">
       <span className="truncate">
-        {t("products.variantCount", { count: variants.length })}
+        {t("products.variantCount_one", { count: variants.length })}
       </span>
     </div>
   )

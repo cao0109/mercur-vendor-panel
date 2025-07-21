@@ -2,13 +2,13 @@ import { Buildings, Component, PencilSquare, Trash } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import {
   Badge,
-  clx,
   Container,
+  DataTableAction,
+  Tooltip,
+  clx,
   createDataTableColumnHelper,
   createDataTableCommandHelper,
   createDataTableFilterHelper,
-  DataTableAction,
-  Tooltip,
   usePrompt,
 } from "@medusajs/ui"
 import { useCallback, useMemo } from "react"
@@ -19,9 +19,9 @@ import { useNavigate } from "react-router-dom"
 import { DataTable } from "../../../../../components/data-table"
 import { useDataTableDateColumns } from "../../../../../components/data-table/helpers/general/use-data-table-date-columns"
 import { useDataTableDateFilters } from "../../../../../components/data-table/helpers/general/use-data-table-date-filters"
+import { useInventoryItemLevels } from "../../../../../hooks/api"
 import { useDeleteVariantLazy } from "../../../../../hooks/api/products"
 import { PRODUCT_VARIANT_IDS_KEY } from "../../../common/constants"
-import { useInventoryItemLevels } from "../../../../../hooks/api"
 
 type ProductVariantSectionProps = {
   product: HttpTypes.AdminProduct
@@ -245,7 +245,7 @@ const useColumns = (product: HttpTypes.AdminProduct) => {
         ? t("products.variant.tableItemAvailable", {
             availableCount: quantity,
           })
-        : t("products.variant.tableItem", {
+        : t("products.variant.tableItem_one", {
             availableCount: quantity,
             locationCount,
             count: locationCount,
