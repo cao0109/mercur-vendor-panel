@@ -65,7 +65,6 @@ export const PricingEdit = ({
       variants: variants?.map((variant: any) => ({
         title: variant.title,
         prices: variant.prices.reduce((acc: any, price: any) => {
-          console.log('price.rules```````````````````', price)
           if (price.rules?.region_id) {
             acc[price.rules.region_id] = price.amount
           } else {
