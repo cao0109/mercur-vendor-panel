@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom"
+import { useLoaderData, useParams, useSearchParams } from "react-router-dom"
 
 import { TwoColumnPageSkeleton } from "../../../components/common/skeleton"
 import { TwoColumnPage } from "../../../components/layout/pages"
@@ -16,7 +16,8 @@ import { INVENTORY_DETAIL_FIELDS } from "./constants"
 
 export const InventoryDetail = () => {
   const { id } = useParams()
-  const [editable, setEditable] = useState(true);
+  const [searchParams] = useSearchParams();
+  const [editable, setEditable] = useState(searchParams.get("editable") !== "false");
   const initialData = useLoaderData() as Awaited<
     ReturnType<typeof inventoryItemLoader>
   >
@@ -38,8 +39,6 @@ export const InventoryDetail = () => {
   useEffect(() => {
     if (id && product) {
       setEditable(product.status !== 'proposed');
-    } else {
-      setEditable(true);
     }
   }, [product]);
   
