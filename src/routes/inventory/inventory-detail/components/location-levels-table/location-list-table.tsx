@@ -8,8 +8,10 @@ const PAGE_SIZE = 20
 
 export const ItemLocationListTable = ({
   inventory_item_id,
+  editable = true
 }: {
   inventory_item_id: string
+  editable?:boolean
 }) => {
   const { searchParams, raw } = useLocationLevelTableQuery({
     pageSize: PAGE_SIZE,
@@ -23,7 +25,7 @@ export const ItemLocationListTable = ({
     }
   )
 
-  const columns = useLocationListTableColumns()
+  const columns = useLocationListTableColumns(editable)
 
   const filteredLocationLevels = location_levels?.filter(
     (level) => level.stock_locations.length > 0

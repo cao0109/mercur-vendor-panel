@@ -9,10 +9,11 @@ import { SectionRow } from "../../../../../components/common/section"
 import { useDeleteVariant } from "../../../../../hooks/api/products"
 
 type VariantGeneralSectionProps = {
-  variant: HttpTypes.AdminProductVariant
+  variant: HttpTypes.AdminProductVariant,
+  editable?: boolean
 }
 
-export function VariantGeneralSection({ variant }: VariantGeneralSectionProps) {
+export function VariantGeneralSection({ variant, editable = true }: VariantGeneralSectionProps) {
   const { t } = useTranslation()
   const prompt = usePrompt()
   const navigate = useNavigate()
@@ -59,7 +60,7 @@ export function VariantGeneralSection({ variant }: VariantGeneralSectionProps) {
           </span>
         </div>
         <div className="flex items-center gap-x-4">
-          <ActionMenu
+        {editable ? <ActionMenu
             groups={[
               {
                 actions: [
@@ -80,7 +81,7 @@ export function VariantGeneralSection({ variant }: VariantGeneralSectionProps) {
                 ],
               },
             ]}
-          />
+          /> : <></>}
         </div>
       </div>
 

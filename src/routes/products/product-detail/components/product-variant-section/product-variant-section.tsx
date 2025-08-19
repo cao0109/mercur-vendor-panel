@@ -24,17 +24,19 @@ import { useDeleteVariantLazy } from "../../../../../hooks/api/products"
 import { PRODUCT_VARIANT_IDS_KEY } from "../../../common/constants"
 
 type ProductVariantSectionProps = {
-  product: HttpTypes.AdminProduct
+  product: HttpTypes.AdminProduct,
+  editable?: boolean
 }
 
 const PAGE_SIZE = 10
 
 export const ProductVariantSection = ({
   product,
+  editable
 }: ProductVariantSectionProps) => {
   const { t } = useTranslation()
 
-  const columns = useColumns(product)
+  const columns = useColumns(product, editable)
   const filters = useFilters()
   const commands = useCommands()
 
@@ -52,7 +54,7 @@ export const ProductVariantSection = ({
         getRowId={(row) => row.id}
         pageSize={PAGE_SIZE}
         heading={t("products.variants.header")}
-        rowHref={(row) => `variants/${row.id}`}
+        rowHref={(row) => `variants/${row.id}?editable=${editable}`}
         emptyState={{
           empty: {
             heading: t("products.variants.empty.heading"),
@@ -63,10 +65,10 @@ export const ProductVariantSection = ({
             description: t("products.variants.filtered.description"),
           },
         }}
-        action={{
+        action={editable ? {
           label: t("actions.create"),
           to: `variants/create`,
-        }}
+        }: undefined}
         commands={commands}
       />
     </Container>
@@ -76,7 +78,7 @@ export const ProductVariantSection = ({
 const columnHelper =
   createDataTableColumnHelper<HttpTypes.AdminProductVariant>()
 
-const useColumns = (product: HttpTypes.AdminProduct) => {
+const useColumns = (product: HttpTypes.AdminProduct, editable?: boolean) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { mutateAsync } = useDeleteVariantLazy(product.id)
@@ -257,8 +259,7 @@ const useColumns = (product: HttpTypes.AdminProduct) => {
   )
 
   return useMemo(() => {
-    return [
-      columnHelper.accessor("title", {
+    const baseColumns = [  columnHelper.accessor("title", {
         header: t("fields.title"),
         enableSorting: true,
         sortAscLabel: t("filters.sorting.alphabeticallyAsc"),
@@ -293,12 +294,19 @@ const useColumns = (product: HttpTypes.AdminProduct) => {
           )
         },
         maxSize: 250,
-      }),
-      columnHelper.action({
-        actions: getActions,
-      }),
+      })
     ]
-  }, [t, optionColumns, dateColumns, getActions, getInventory])
+
+    if (editable) {
+      baseColumns.push(
+        columnHelper.action({
+          actions: getActions,
+        })
+      )
+    }
+
+    return baseColumns
+  }, [t, optionColumns, dateColumns, getActions, getInventory, editable])
 }
 
 const filterHelper =

@@ -1,11 +1,11 @@
 import { CheckCircleMiniSolid } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import { Container, Heading, StatusBadge, toast } from "@medusajs/ui"
-import { useExtendableForm } from "../../../../../extensions/forms/hooks"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import "react-quill/dist/quill.snow.css"
+import { useNavigate } from "react-router-dom"
 import * as zod from "zod"
+import { useExtendableForm } from "../../../../../extensions/forms/hooks"
 
 import { useRef } from "react"
 
@@ -41,11 +41,13 @@ const productStatusColor = (status: string) => {
 }
 
 type ProductGeneralSectionProps = {
-  product: HttpTypes.AdminProduct
+  product: HttpTypes.AdminProduct,
+  editable?: boolean
 }
 
 export const ProductRichTextSection = ({
   product,
+  editable = true
 }: ProductGeneralSectionProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -179,7 +181,7 @@ export const ProductRichTextSection = ({
           <StatusBadge color={productStatusColor(product.status)}>
             {t(`products.productStatus.${product.status}`)}
           </StatusBadge>
-          <ActionMenu
+         { editable ? <ActionMenu
             groups={[
               {
                 actions: [
@@ -191,7 +193,7 @@ export const ProductRichTextSection = ({
                 ],
               },
             ]}
-          />
+          />:<></>}
         </div>
       </div>
       <ReactQuill

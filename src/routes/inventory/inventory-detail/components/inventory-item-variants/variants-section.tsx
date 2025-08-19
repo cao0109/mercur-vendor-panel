@@ -7,11 +7,13 @@ import { ProductVariantDTO } from "@medusajs/types"
 import { Thumbnail } from "../../../../../components/common/thumbnail"
 
 type InventoryItemVariantsSectionProps = {
-  variants: ProductVariantDTO[]
+  variants: ProductVariantDTO[],
+  editable?: boolean
 }
 
 export const InventoryItemVariantsSection = ({
   variants,
+  editable = true
 }: InventoryItemVariantsSectionProps) => {
   const { t } = useTranslation()
 
@@ -28,7 +30,7 @@ export const InventoryItemVariantsSection = ({
       <div className="txt-small flex flex-col gap-2 px-2 pb-2">
         {variants.map((variant) => {
           const link = variant.product
-            ? `/products/${variant.product.id}/variants/${variant.id}`
+            ? `/products/${variant.product.id}/variants/${variant.id}?editable=${editable}`
             : null
 
           const Inner = (

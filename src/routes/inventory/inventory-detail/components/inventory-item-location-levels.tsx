@@ -5,10 +5,12 @@ import { Link } from "react-router-dom"
 import { ItemLocationListTable } from "./location-levels-table/location-list-table"
 
 type InventoryItemLocationLevelsSectionProps = {
-  inventoryItem: HttpTypes.AdminInventoryItemResponse["inventory_item"]
+  inventoryItem: HttpTypes.AdminInventoryItemResponse["inventory_item"],
+  editable?: boolean
 }
 export const InventoryItemLocationLevelsSection = ({
   inventoryItem,
+  editable = true
 }: InventoryItemLocationLevelsSectionProps) => {
   const { t } = useTranslation()
 
@@ -16,11 +18,11 @@ export const InventoryItemLocationLevelsSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading>{t("inventory.locationLevels")}</Heading>
-        <Button size="small" variant="secondary" asChild>
+       {editable ? <Button size="small" variant="secondary" asChild>
           <Link to="locations">{t("inventory.manageLocations")}</Link>
-        </Button>
+        </Button>: <></>}
       </div>
-      <ItemLocationListTable inventory_item_id={inventoryItem.id} />
+      <ItemLocationListTable inventory_item_id={inventoryItem.id} editable={editable}/>
     </Container>
   )
 }

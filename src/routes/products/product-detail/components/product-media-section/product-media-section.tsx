@@ -1,4 +1,5 @@
 import { PencilSquare, ThumbnailBadge } from "@medusajs/icons"
+import { HttpTypes } from "@medusajs/types"
 import {
   Button,
   Checkbox,
@@ -15,13 +16,13 @@ import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { ActionMenu } from "../../../../../components/common/action-menu"
 import { useUpdateProduct } from "../../../../../hooks/api/products"
-import { HttpTypes } from "@medusajs/types"
 
 type ProductMedisaSectionProps = {
-  product: HttpTypes.AdminProduct
+  product: HttpTypes.AdminProduct,
+  editable?: boolean
 }
 
-export const ProductMediaSection = ({ product }: ProductMedisaSectionProps) => {
+export const ProductMediaSection = ({ product, editable = true }: ProductMedisaSectionProps) => {
   const { t } = useTranslation()
   const prompt = usePrompt()
   const [selection, setSelection] = useState<Record<string, boolean>>({})
@@ -85,7 +86,7 @@ export const ProductMediaSection = ({ product }: ProductMedisaSectionProps) => {
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.media.label")}</Heading>
-        <ActionMenu
+        {editable ? <ActionMenu
           groups={[
             {
               actions: [
@@ -97,7 +98,7 @@ export const ProductMediaSection = ({ product }: ProductMedisaSectionProps) => {
               ],
             },
           ]}
-        />
+        />: <></>}
       </div>
       {media.length > 0 ? (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-4 px-6 py-4">
@@ -155,11 +156,11 @@ export const ProductMediaSection = ({ product }: ProductMedisaSectionProps) => {
               {t("products.media.emptyState.description")}
             </Text>
           </div>
-          <Button size="small" variant="secondary" asChild>
+          {editable ? <Button size="small" variant="secondary" asChild>
             <Link to="media?view=edit">
               {t("products.media.emptyState.action")}
             </Link>
-          </Button>
+          </Button> : <></>}
         </div>
       )}
       <CommandBar open={!!Object.keys(selection).length}>

@@ -1,16 +1,18 @@
-import { Container, Heading } from "@medusajs/ui"
-import { HttpTypes } from "@medusajs/types"
 import { PencilSquare } from "@medusajs/icons"
+import { HttpTypes } from "@medusajs/types"
+import { Container, Heading } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 
 import { ActionMenu } from "../../../../components/common/action-menu"
 import { SectionRow } from "../../../../components/common/section"
 
 type InventoryItemGeneralSectionProps = {
-  inventoryItem: HttpTypes.AdminInventoryItemResponse["inventory_item"]
+  inventoryItem: HttpTypes.AdminInventoryItemResponse["inventory_item"],
+  editable?: boolean
 }
 export const InventoryItemGeneralSection = ({
   inventoryItem,
+  editable = true
 }: InventoryItemGeneralSectionProps) => {
   const { t } = useTranslation()
 
@@ -32,7 +34,7 @@ export const InventoryItemGeneralSection = ({
         <Heading>
           {inventoryItem.title ?? inventoryItem.sku} {t("fields.details")}
         </Heading>
-        <ActionMenu
+        {editable ? <ActionMenu
           groups={[
             {
               actions: [
@@ -44,7 +46,7 @@ export const InventoryItemGeneralSection = ({
               ],
             },
           ]}
-        />
+        /> : <></>}
       </div>
       <SectionRow title={t("fields.sku")} value={inventoryItem.sku ?? "-"} />
       <SectionRow

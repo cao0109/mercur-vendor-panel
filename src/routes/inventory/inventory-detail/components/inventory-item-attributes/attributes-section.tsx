@@ -1,18 +1,20 @@
 import { Container, Heading } from "@medusajs/ui"
 
-import { ActionMenu } from "../../../../../components/common/action-menu"
-import { InventoryTypes } from "@medusajs/types"
 import { PencilSquare } from "@medusajs/icons"
+import { InventoryTypes } from "@medusajs/types"
+import { useTranslation } from "react-i18next"
+import { ActionMenu } from "../../../../../components/common/action-menu"
 import { SectionRow } from "../../../../../components/common/section"
 import { getFormattedCountry } from "../../../../../lib/addresses"
-import { useTranslation } from "react-i18next"
 
 type InventoryItemAttributeSectionProps = {
-  inventoryItem: InventoryTypes.InventoryItemDTO
+  inventoryItem: InventoryTypes.InventoryItemDTO,
+  editable?: boolean
 }
 
 export const InventoryItemAttributeSection = ({
   inventoryItem,
+  editable = true
 }: InventoryItemAttributeSectionProps) => {
   const { t } = useTranslation()
 
@@ -20,7 +22,7 @@ export const InventoryItemAttributeSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.attributes")}</Heading>
-        <ActionMenu
+        {editable ? <ActionMenu
           groups={[
             {
               actions: [
@@ -32,7 +34,7 @@ export const InventoryItemAttributeSection = ({
               ],
             },
           ]}
-        />
+        />: <></>}
       </div>
       <SectionRow title={t("fields.height")} value={inventoryItem.height} />
       <SectionRow title={t("fields.width")} value={inventoryItem.width} />

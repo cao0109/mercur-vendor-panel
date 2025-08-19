@@ -8,11 +8,10 @@ import { ProductGeneralSection } from "./components/product-general-section"
 import { ProductMediaSection } from "./components/product-media-section"
 import { ProductOptionSection } from "./components/product-option-section"
 import { ProductOrganizationSection } from "./components/product-organization-section"
-import { ProductVariantSection } from "./components/product-variant-section"
 import { ProductRichTextSection } from "./components/product-rich-text-section"
+import { ProductVariantSection } from "./components/product-variant-section"
 
 import { useDashboardExtension } from "../../../extensions"
-import { ProductAdditionalAttributesSection } from "./components/product-additional-attribute-section/ProductAdditionalAttributesSection"
 // import { ProductShippingProfileSection } from './components/product-shipping-profile-section';
 
 export const ProductDetail = () => {
@@ -35,6 +34,7 @@ export const ProductDetail = () => {
   if (isError) {
     throw error
   }
+  const editable = product.status !== "proposed"
 
   return (
     <TwoColumnPage
@@ -47,16 +47,16 @@ export const ProductDetail = () => {
       data={product}
     >
       <TwoColumnPage.Main>
-        <ProductGeneralSection product={product} />
-        <ProductMediaSection product={product} />
-        <ProductOptionSection product={product} />
-        <ProductVariantSection product={product} />
-        <ProductRichTextSection product={product} />
+        <ProductGeneralSection product={product} editable={editable} />
+        <ProductMediaSection product={product} editable={editable}/>
+        <ProductOptionSection product={product} editable={editable}/>
+        <ProductVariantSection product={product} editable={editable}/>
+        <ProductRichTextSection product={product} editable={editable}/>
       </TwoColumnPage.Main>
       <TwoColumnPage.Sidebar>
         {/* <ProductShippingProfileSection product={product} /> */}
-        <ProductOrganizationSection product={product} />
-        <ProductAttributeSection product={product} />
+        <ProductOrganizationSection product={product}  editable={editable}/>
+        <ProductAttributeSection product={product}  editable={editable} />
         {/* <ProductAdditionalAttributesSection product={product as any} /> */}
       </TwoColumnPage.Sidebar>
     </TwoColumnPage>

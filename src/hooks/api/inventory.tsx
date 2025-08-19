@@ -308,3 +308,31 @@ export const useBatchInventoryItemsLocationLevels = (
     ...options,
   })
 }
+
+
+export const useBatchInventoryItemProduct = (
+  id: string,
+  query?: Record<string, any>,
+  options?: Omit<
+    UseQueryOptions<
+      HttpTypes.AdminProductResponse,
+      FetchError,
+      HttpTypes.AdminProductResponse & {
+        product: any
+      },
+      QueryKey
+    >,
+    "queryKey" | "queryFn"
+  >
+) => {
+  const { data, ...rest } = useQuery({
+    queryFn: () =>
+      fetchQuery(`/vendor/inventory-items/${id}/product`, {
+        method: "GET",
+        query: query as { [key: string]: string | number },
+      }),
+    queryKey: inventoryItemsQueryKeys.detail(id, query),
+    ...options,
+  })
+  return { ...data, ...rest }
+}

@@ -2,7 +2,7 @@ import { useLoaderData, useParams } from "react-router-dom"
 
 import { TwoColumnPageSkeleton } from "../../../components/common/skeleton"
 import { TwoColumnPage } from "../../../components/layout/pages"
-import { useInventoryItem } from "../../../hooks/api/inventory"
+import { useBatchInventoryItemProduct, useInventoryItem } from "../../../hooks/api/inventory"
 import { InventoryItemAttributeSection } from "./components/inventory-item-attributes/attributes-section"
 import { InventoryItemGeneralSection } from "./components/inventory-item-general-section"
 import { InventoryItemLocationLevelsSection } from "./components/inventory-item-location-levels"
@@ -10,16 +10,17 @@ import { InventoryItemReservationsSection } from "./components/inventory-item-re
 import { InventoryItemVariantsSection } from "./components/inventory-item-variants/variants-section"
 import { inventoryItemLoader } from "./loader"
 
+import { useEffect, useState } from "react"
 import { useDashboardExtension } from "../../../extensions"
 import { INVENTORY_DETAIL_FIELDS } from "./constants"
 
 export const InventoryDetail = () => {
   const { id } = useParams()
-
+  const [editable, setEditable] = useState(true);
   const initialData = useLoaderData() as Awaited<
     ReturnType<typeof inventoryItemLoader>
   >
-
+  const { product } = useBatchInventoryItemProduct(id!);
   const {
     inventory_item,
     isPending: isLoading,
@@ -34,7 +35,14 @@ export const InventoryDetail = () => {
       initialData,
     }
   )
-
+  useEffect(() => {
+    if (id && product) {
+      setEditable(product.status !== 'proposed');
+    } else {
+      setEditable(true);
+    }
+  }, [product]);
+  
   const { getWidgets } = useDashboardExtension()
 
   if (isLoading || !inventory_item) {
@@ -63,15 +71,16 @@ export const InventoryDetail = () => {
       data={inventory_item}
     >
       <TwoColumnPage.Main>
-        <InventoryItemGeneralSection inventoryItem={inventory_item} />
-        <InventoryItemLocationLevelsSection inventoryItem={inventory_item} />
-        <InventoryItemReservationsSection inventoryItem={inventory_item} />
+        <InventoryItemGeneralSection inventoryItem={inventory_item}  editable={editable}/>
+        <InventoryItemLocationLevelsSection inventoryItem={inventory_item} editable={editable}/>
+        <InventoryItemReservationsSection inventoryItem={inventory_item}/>
       </TwoColumnPage.Main>
       <TwoColumnPage.Sidebar>
         <InventoryItemVariantsSection
           variants={(inventory_item as any).variants}
+          editable={editable}
         />
-        <InventoryItemAttributeSection inventoryItem={inventory_item as any} />
+        <InventoryItemAttributeSection inventoryItem={inventory_item as any} editable={editable}/>
       </TwoColumnPage.Sidebar>
     </TwoColumnPage>
   )
