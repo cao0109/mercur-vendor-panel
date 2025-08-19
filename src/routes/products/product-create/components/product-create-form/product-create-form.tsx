@@ -39,6 +39,8 @@ enum Tab {
 type TabState = Record<Tab, ProgressStatus>
 
 const SAVE_DRAFT_BUTTON = "save-draft-button"
+const MAX_FILE_SIZE_MB = 5
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
 
 type ProductCreateFormProps = {
   defaultChannel?: HttpTypes.AdminSalesChannel
@@ -63,6 +65,7 @@ export const ProductCreateForm = ({
   const { handleSuccess } = useRouteModal()
   const { getFormConfigs } = useDashboardExtension()
   const configs = getFormConfigs("product", "create")
+  const [isCreateLoading, setIsCreateLoading] = useState(false);
 
   const form = useExtendableForm({
     defaultValues: {
@@ -98,6 +101,7 @@ export const ProductCreateForm = ({
   )
 
   const handleSubmit = form.handleSubmit(async (values, e) => {
+    setIsCreateLoading(true);
     let isDraftSubmission = false
 
     if (e?.nativeEvent instanceof SubmitEvent) {
@@ -130,6 +134,14 @@ export const ProductCreateForm = ({
           console.error("Invalid Base64 string:", src)
           const blob = base64ToBlob(src, "image/png")
           console.log("Uploading image", blob)
+          
+          // 检查文件大小是否超过5MB
+          if (blob.size > MAX_FILE_SIZE_BYTES) {
+            toast.warning(
+              `富文本中的图片大小超过${MAX_FILE_SIZE_MB}MB，可能会上传失败，请考虑压缩后再上传。`
+            )
+          }
+          
           const fileObject = {
             id: crypto.randomUUID(),
             url: URL.createObjectURL(blob),
@@ -150,6 +162,17 @@ export const ProductCreateForm = ({
     })[] = []
     try {
       if (media.length) {
+        // 检查单个文件大小是否超过5MB
+        const isMoreThanMaxSize = media.some((element) => {
+          return element.file && element.file.size > MAX_FILE_SIZE_BYTES
+        })
+
+        if(isMoreThanMaxSize) {
+          toast.warning(
+            `文件大小超过${MAX_FILE_SIZE_MB}MB，可能会上传失败，请考虑压缩后再上传。`
+          )
+        }
+
         console.log("Uploading media files", media)
         const thumbnailReq = media.filter((m) => m.isThumbnail)
         console.log("Thumbnail media files", thumbnailReq)
@@ -167,14 +190,70 @@ export const ProductCreateForm = ({
           )
         }
         if (otherMediaReq?.length) {
-          fileReqs.push(
-            uploadFilesQuery(otherMediaReq).then((r: any) =>
-              r.files.map((f: any) => ({
-                ...f,
-                isThumbnail: false,
-              }))
+          // 图片总大小大于5M实现分组上传
+          // 计算文件总大小
+          const totalSize = otherMediaReq.reduce((sum: number, file: any) => {
+            return sum + (file.file?.size || 0)
+          }, 0)
+          // 检查文件总大小是否超过5MB
+          if (totalSize > MAX_FILE_SIZE_BYTES) {
+            // 需要分组上传
+            const chunks: any[][] = []
+            let currentChunk: any[] = []
+            let currentChunkSize = 0
+
+            for (const file of otherMediaReq) {
+              const fileSize = file.file?.size || 0
+
+              // 如果当前文件大小超过单个分组限制，单独处理
+              if (fileSize > MAX_FILE_SIZE_BYTES) {
+                // 先将当前组添加到 chunks
+                if (currentChunk.length > 0) {
+                  chunks.push(currentChunk)
+                  currentChunk = []
+                  currentChunkSize = 0
+                }
+                // 大文件单独成组
+                chunks.push([file])
+              } else if (currentChunkSize + fileSize > MAX_FILE_SIZE_BYTES) {
+                // 当前组已满，添加到 chunks 并创建新组
+                chunks.push(currentChunk)
+                currentChunk = [file]
+                currentChunkSize = fileSize
+              } else {
+                // 添加到当前组
+                currentChunk.push(file)
+                currentChunkSize += fileSize
+              }
+            }
+
+            // 添加最后一个组
+            if (currentChunk.length > 0) {
+              chunks.push(currentChunk)
+            }
+
+            // 为每个组创建上传请求
+            chunks.forEach((chunk) => {
+              fileReqs.push(
+                uploadFilesQuery(chunk).then((r: any) =>
+                  r.files.map((f: any) => ({
+                    ...f,
+                    isThumbnail: false,
+                  }))
+                )
+              )
+            })
+          } else {
+            // 不需要分组，直接上传
+            fileReqs.push(
+              uploadFilesQuery(otherMediaReq).then((r: any) =>
+                r.files.map((f: any) => ({
+                  ...f,
+                  isThumbnail: false,
+                }))
+              )
             )
-          )
+          }
         }
 
         uploadedMedia = (await Promise.all(fileReqs)).flat()
@@ -236,6 +315,7 @@ export const ProductCreateForm = ({
         },
       }
     )
+    setIsCreateLoading(false);
   })
 
   const onNext = async (currentTab: Tab) => {
@@ -432,15 +512,15 @@ export const ProductCreateForm = ({
               data-name={SAVE_DRAFT_BUTTON}
               size="small"
               type="submit"
-              isLoading={isPending}
+              isLoading={isPending || isCreateLoading}
               className="whitespace-nowrap"
             >
-               {t("fields.draft")}
+              {t("fields.draft")}
             </Button>
             <PrimaryButton
               tab={tab}
               next={onNext}
-              isLoading={isPending}
+              isLoading={isPending || isCreateLoading}
               showInventoryTab={showInventoryTab}
             />
           </div>
