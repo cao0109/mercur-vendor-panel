@@ -10,10 +10,10 @@ import { RouteDrawer, useRouteModal } from "../../../../../../components/modals"
 import { useBatchInventoryItemLocationLevels } from "../../../../../../hooks/api/inventory"
 
 import { useMemo } from "react"
-import { KeyboundForm } from "../../../../../../components/utilities/keybound-form"
-import { LocationItem } from "./location-item"
 import { LocalizedTablePagination } from "../../../../../../components/localization/localized-table-pagination"
+import { KeyboundForm } from "../../../../../../components/utilities/keybound-form"
 import usePagination from "../../../../../../hooks/use-pagination"
+import { LocationItem } from "./location-item"
 
 type EditInventoryItemAttributeFormProps = {
   item: AdminInventoryItem
@@ -49,7 +49,7 @@ export const ManageLocationsForm = ({
 }: EditInventoryItemAttributeFormProps) => {
   const existingLocationLevels = useMemo(
     () => new Set(item.location_levels?.map((l) => l.location_id) ?? []),
-    item.location_levels
+    [item.location_levels]
   )
 
   const { t } = useTranslation()
@@ -73,6 +73,10 @@ export const ManageLocationsForm = ({
     const [selectedLocations, unselectedLocations] = locations.reduce(
       (acc, location) => {
         // If the location is not changed do nothing
+        if (!location.location_id) {
+          return acc
+        }
+
         if (
           (!location.selected &&
             !existingLocationLevels.has(location.location_id)) ||

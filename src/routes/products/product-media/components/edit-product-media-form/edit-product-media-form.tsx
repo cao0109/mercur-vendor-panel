@@ -51,6 +51,7 @@ type Media = z.infer<typeof MediaSchema>
 
 export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
   const [selection, setSelection] = useState<Record<string, true>>({})
+  const [isUploading, setIsUploading] = useState(false)
   const { t } = useTranslation()
   const { handleSuccess } = useRouteModal()
 
@@ -100,6 +101,7 @@ export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
   }
 
   const { mutateAsync, isPending } = useUpdateProduct(product.id!)
+  const isLoading = isPending || isUploading
 
   const handleSubmit = form.handleSubmit(async ({ media }) => {
     const filesToUpload = media
@@ -109,16 +111,19 @@ export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
     let uploaded: HttpTypes.AdminFile[] = []
 
     if (filesToUpload.length) {
-      const { files } = await uploadFilesQuery(filesToUpload)
-        // .then((res) => res.json())
-        .catch(() => {
-          form.setError("media", {
-            type: "invalid_file",
-            message: t("products.media.failedToUpload"),
-          })
-          return { files: [] }
+      setIsUploading(true)
+      try {
+        const { files } = await uploadFilesQuery(filesToUpload)
+        uploaded = files
+      } catch (error) {
+        form.setError("media", {
+          type: "invalid_file",
+          message: t("products.media.failedToUpload"),
         })
-      uploaded = files
+        setIsUploading(false)
+        return
+      }
+      setIsUploading(false)
     }
 
     const withUpdatedUrls = media.map((entry, i) => {
@@ -222,10 +227,10 @@ export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
         <RouteFocusModal.Body className="flex flex-col overflow-hidden">
           <div className="flex size-full flex-col-reverse lg:grid lg:grid-cols-[1fr_560px]">
             <DndContext
-              sensors={sensors}
-              onDragEnd={handleDragEnd}
-              onDragStart={handleDragStart}
-              onDragCancel={handleDragCancel}
+              sensors={isLoading ? [] : sensors}
+              onDragEnd={isLoading ? undefined : handleDragEnd}
+              onDragStart={isLoading ? undefined : handleDragStart}
+              onDragCancel={isLoading ? undefined : handleDragCancel}
             >
               <div className="bg-ui-bg-subtle size-full overflow-auto">
                 <div className="grid h-fit auto-rows-auto grid-cols-4 gap-6 p-6">
@@ -236,10 +241,13 @@ export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
                     {fields.map((m) => {
                       return (
                         <MediaGridItem
-                          onCheckedChange={handleCheckedChange(m.id!)}
+                          onCheckedChange={
+                            isLoading ? () => {} : handleCheckedChange(m.id!)
+                          }
                           checked={!!selection[m.id!]}
                           key={m.field_id}
                           media={m}
+                          disabled={isLoading}
                         />
                       )
                     })}
@@ -264,7 +272,7 @@ export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
             </div>
           </div>
         </RouteFocusModal.Body>
-        <CommandBar open={!!selectionCount}>
+        <CommandBar open={!!selectionCount && !isLoading}>
           <CommandBar.Bar>
             <CommandBar.Value>
               {t("general.countSelected", {
@@ -275,28 +283,35 @@ export const EditProductMediaForm = ({ product }: ProductMediaViewProps) => {
             {selectionCount === 1 && (
               <Fragment>
                 <CommandBar.Command
-                  action={handlePromoteToThumbnail}
+                  action={isLoading ? () => {} : handlePromoteToThumbnail}
                   label={t("products.media.makeThumbnail")}
                   shortcut="t"
+                  disabled={isLoading}
                 />
                 <CommandBar.Seperator />
               </Fragment>
             )}
             <CommandBar.Command
-              action={handleDelete}
+              action={isLoading ? () => {} : handleDelete}
               label={t("actions.delete")}
               shortcut="d"
+              disabled={isLoading}
             />
           </CommandBar.Bar>
         </CommandBar>
         <RouteFocusModal.Footer>
           <div className="flex items-center justify-end gap-x-2">
             <RouteFocusModal.Close asChild>
-              <Button variant="secondary" size="small">
+              <Button variant="secondary" size="small" disabled={isLoading}>
                 {t("actions.cancel")}
               </Button>
             </RouteFocusModal.Close>
-            <Button size="small" type="submit" isLoading={isPending}>
+            <Button
+              size="small"
+              type="submit"
+              isLoading={isLoading}
+              disabled={isLoading}
+            >
               {t("actions.save")}
             </Button>
           </div>
@@ -353,12 +368,14 @@ interface MediaGridItemProps {
   media: MediaView
   checked: boolean
   onCheckedChange: (value: boolean) => void
+  disabled?: boolean
 }
 
 const MediaGridItem = ({
   media,
   checked,
   onCheckedChange,
+  disabled = false,
 }: MediaGridItemProps) => {
   const { t } = useTranslation()
 
@@ -421,6 +438,7 @@ const MediaGridItem = ({
           }}
           checked={checked}
           onCheckedChange={handleToggle}
+          disabled={disabled}
         />
       </div>
       <img

@@ -39,41 +39,46 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
   const fields = getFormFields("product", "edit")
   const configs = getFormConfigs("product", "edit")
   const adminConfiguration = useConfiguration()
-  const productRequestEnabled = adminConfiguration?.configuration_rules?.product_request_enabled
-  console.log('adminConfiguration', productRequestEnabled)
-  const [statusOptions, setStatusOptions] = useState(["draft",
-  "published",
-  "proposed",
-  "rejected"])
+  const productRequestEnabled =
+    adminConfiguration?.configuration_rules?.product_request_enabled
+  console.log("adminConfiguration", productRequestEnabled)
+  const [statusOptions, setStatusOptions] = useState([
+    "draft",
+    "published",
+    "proposed",
+    "rejected",
+  ])
   const statusOptionsSetting = () => {
-    let statusOptions:string[] = [];
-    if (productRequestEnabled) { // 需要审核
-      switch(product.status) {
-        case 'draft':
-          statusOptions =  ['draft','proposed'];
-          break;
-        case 'proposed':
-          statusOptions =  ['proposed'];
-          break;
-        case 'rejected':
-            statusOptions =  ['draft','proposed', 'rejected'];
-            break;
-        case 'published':
-              statusOptions =  ['draft','published'];
-              break;
+    let statusOptions: string[] = []
+    if (productRequestEnabled) {
+      // 需要审核
+      switch (product.status) {
+        case "draft":
+          statusOptions = ["draft", "proposed"]
+          break
+        case "proposed":
+          statusOptions = ["proposed"]
+          break
+        case "rejected":
+          statusOptions = ["draft", "proposed", "rejected"]
+          break
+        case "published":
+          statusOptions = ["draft", "published"]
+          break
         default:
-          statusOptions =  ['draft','published'];
+          statusOptions = ["draft", "published"]
       }
-    } else { // 不需要审核
-      switch(product.status) {
-        case 'published':
-          statusOptions =  ['draft', 'published'];
-          break;
-        case 'draft':
-          statusOptions =  ['draft','published'];
-          break;
+    } else {
+      // 不需要审核
+      switch (product.status) {
+        case "published":
+          statusOptions = ["draft", "published"]
+          break
+        case "draft":
+          statusOptions = ["draft", "published"]
+          break
         default:
-          statusOptions =  ['draft',product.status,'published'];
+          statusOptions = ["draft", product.status, "published"]
       }
     }
     setStatusOptions(statusOptions)
@@ -123,9 +128,9 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
       }
     )
   })
- useEffect(() => {
-  statusOptionsSetting()
- }, [productRequestEnabled, product.status])
+  useEffect(() => {
+    statusOptionsSetting()
+  }, [productRequestEnabled, product.status])
 
   return (
     <RouteDrawer.Form form={form}>
@@ -152,7 +157,9 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
                             {statusOptions.map((status) => {
                               return (
                                 <Select.Item key={status} value={status}>
-                                  {t(`products.productStatus.${status}`)}
+                                  {t(`products.productStatus.${status}`, {
+                                    defaultValue: status,
+                                  })}
                                 </Select.Item>
                               )
                             })}

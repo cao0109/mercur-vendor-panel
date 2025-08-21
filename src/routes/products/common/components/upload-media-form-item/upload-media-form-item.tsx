@@ -7,12 +7,12 @@ import {
   FileUpload,
 } from "../../../../../components/common/file-upload"
 import { Form } from "../../../../../components/common/form"
+import { EditStoreSchema } from "../../../../store/store-edit/components/edit-store-form/edit-store-form"
 import { MediaSchema } from "../../../product-create/constants"
 import {
   EditProductMediaSchemaType,
   ProductCreateSchemaType,
 } from "../../../product-create/types"
-import { EditStoreSchema } from "../../../../store/store-edit/components/edit-store-form/edit-store-form"
 
 type Media = z.infer<typeof MediaSchema>
 
