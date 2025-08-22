@@ -23,6 +23,11 @@ export const inventoryItemLevelsQueryKeys = queryKeysFactory(
   INVENTORY_ITEM_LEVELS_QUERY_KEY
 )
 
+const INVENTORY_ITEMS_LEVELS_QUERY_KEY = "inventory_items_levels" as const
+export const inventoryItemsLevelsQueryKeys = queryKeysFactory(
+  INVENTORY_ITEMS_LEVELS_QUERY_KEY
+)
+
 export const useInventoryItems = (
   query?: HttpTypes.AdminInventoryItemParams,
   options?: Omit<
@@ -331,7 +336,7 @@ export const useBatchInventoryItemProduct = (
         method: "GET",
         query: query as { [key: string]: string | number },
       }),
-    queryKey: inventoryItemsQueryKeys.detail(id, query),
+    queryKey: inventoryItemsLevelsQueryKeys.detail(id, query),
     ...options,
   })
   return { ...data, ...rest }
