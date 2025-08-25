@@ -12397,6 +12397,12 @@
         "hsCode": {
           "type": "string"
         },
+        "midCodeTooltip": {
+          "type": "string"
+        },
+        "hsCodeTooltip": {
+          "type": "string"
+        },
         "ean": {
           "type": "string"
         },

@@ -593,16 +593,16 @@
         "label": "Material"
       },
       "width": {
-        "label": "Width"
+        "label": "Width(mm)"
       },
       "length": {
-        "label": "Length"
+        "label": "Length(mm)"
       },
       "height": {
-        "label": "Height"
+        "label": "Height(mm)"
       },
       "weight": {
-        "label": "Weight"
+        "label": "Weight(g)"
       },
       "options": {
         "label": "Product options",
@@ -3019,12 +3019,14 @@
     "expiryDate": "Expiry date",
     "price": "Price",
     "priceTemplate": "Price {{regionOrCurrency}}",
-    "height": "Height",
-    "width": "Width",
-    "length": "Length",
-    "weight": "Weight",
+    "height": "Height(mm)",
+    "width": "Width(mm)",
+    "length": "Length(mm)",
+    "weight": "Weight(g)",
     "midCode": "MID code",
     "hsCode": "HS code",
+    "midCodeTooltip": "(Manufacturer Identification Code) is a code that identifies the manufacturer of a product, typically associated with barcode systems. Used to track the production source of goods, commonly used in supply chain management and anti-counterfeiting.",
+    "hsCodeTooltip": "(Harmonized System Code) is an abbreviation for the Harmonized System of Commodity Classification and Coding, developed by the World Customs Organization (WCO). It is a standardized coding system used to classify commodities in international trade. Used for customs declaration, tariff calculation, trade statistics, and regulation. For example, determining tax rates and import/export restrictions for goods.",
     "ean": "EAN",
     "upc": "UPC",
     "inventoryQuantity": "Inventory quantity",

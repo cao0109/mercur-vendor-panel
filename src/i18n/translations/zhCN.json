@@ -593,16 +593,16 @@
         "label": "材料"
       },
       "width": {
-        "label": "宽度"
+        "label": "宽度(mm)"
       },
       "length": {
-        "label": "长度"
+        "label": "长度(mm)"
       },
       "height": {
-        "label": "高度"
+        "label": "高度(mm)"
       },
       "weight": {
-        "label": "重量"
+        "label": "重量(g)"
       },
       "options": {
         "label": "产品选项",
@@ -3017,12 +3017,14 @@
     "expiryDate": "过期日期",
     "price": "价格",
     "priceTemplate": "价格 {{regionOrCurrency}}",
-    "height": "高度",
-    "width": "宽度",
-    "length": "长度",
-    "weight": "重量",
+    "height": "高度(mm)",
+    "width": "宽度(mm)",
+    "length": "长度(mm)",
+    "weight": "重量(g)",
     "midCode": "MID 代码",
+    "midCodeTooltip": "（Manufacturer Identification Code）是标识商品生产商或制造商的编码，通常与条形码系统相关。用于追踪商品的生产来源，常用于供应链管理和防伪。",
     "hsCode": "HS 代码",
+    "hsCodeTooltip": "Harmonized System Code）是《国际商品统一分类和编码体系》（Harmonized System）的缩写，由世界海关组织（WCO）制定，用于国际贸易中对商品进行分类的标准化编码系统。用于海关申报、关税计算、贸易统计和监管。例如，确定商品的税率、进出口限制等。",
     "ean": "EAN",
     "upc": "UPC",
     "inventoryQuantity": "库存数量",

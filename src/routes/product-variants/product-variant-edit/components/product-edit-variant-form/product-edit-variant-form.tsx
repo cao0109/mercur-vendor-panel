@@ -15,7 +15,14 @@ import {
   transformNullableFormData,
   transformNullableFormNumber,
 } from "../../../../../lib/form-helpers"
-import { optionalInt } from "../../../../../lib/validation"
+import * as zod from "zod"
+
+const dimension = zod.union([zod.string(), zod.number()]).transform((value) => {
+  if (value === "") {
+    return null
+  }
+  return Number(value)
+})
 
 type ProductEditVariantFormProps = {
   product: HttpTypes.AdminProduct
@@ -31,13 +38,13 @@ const ProductEditVariantSchema = z.object({
   barcode: z.string().optional(),
   manage_inventory: z.boolean(),
   allow_backorder: z.boolean(),
-  weight: optionalInt,
-  height: optionalInt,
-  width: optionalInt,
-  length: optionalInt,
+  weight: dimension,
+  height: dimension,
+  width: dimension,
+  length: dimension,
   mid_code: z.string().optional(),
   hs_code: z.string().optional(),
-  origin_country: z.string().optional(),
+  origin_country: z.string().min(1),
   options: z.record(z.string()),
 })
 
@@ -64,10 +71,10 @@ export const ProductEditVariantForm = ({
       barcode: variant?.barcode || "",
       manage_inventory: true,
       allow_backorder: true,
-      weight: variant?.weight || "",
-      height: variant?.height || "",
-      width: variant?.width || "",
-      length: variant?.length || "",
+      weight: variant?.weight || null,
+      height: variant?.height || null,
+      width: variant?.width || null,
+      length: variant?.length || null,
       mid_code: variant?.mid_code || "",
       hs_code: variant?.hs_code || "",
       origin_country: variant?.origin_country || "",
@@ -99,10 +106,10 @@ export const ProductEditVariantForm = ({
     await mutateAsync(
       {
         // id: variant?.id!,
-        weight: transformNullableFormNumber(weight),
-        height: transformNullableFormNumber(height),
-        width: transformNullableFormNumber(width),
-        length: transformNullableFormNumber(length),
+        weight: weight || undefined,
+        height: height || undefined,
+        width: width || undefined,
+        length: length || undefined,
         title,
         allow_backorder,
         manage_inventory,
@@ -263,12 +270,26 @@ export const ProductEditVariantForm = ({
             <Form.Field
               control={form.control}
               name="weight"
-              render={({ field }) => {
+              render={({ field: { onChange, value, ...field } }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>{t("fields.weight")}</Form.Label>
+                    <Form.Label>{t("fields.weight")}</Form.Label>
                     <Form.Control>
-                      <Input type="number" {...field} />
+                      <Input
+                        type="number"
+                        min={0}
+                        value={value || ""}
+                        onChange={(e) => {
+                          const value = e.target.value
+
+                          if (value === "") {
+                            onChange(null)
+                          } else {
+                            onChange(Number(value))
+                          }
+                        }}
+                        {...field}
+                      />
                     </Form.Control>
                     <Form.ErrorMessage />
                   </Form.Item>
@@ -278,12 +299,26 @@ export const ProductEditVariantForm = ({
             <Form.Field
               control={form.control}
               name="width"
-              render={({ field }) => {
+              render={({ field: { onChange, value, ...field } }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>{t("fields.width")}</Form.Label>
+                    <Form.Label>{t("fields.width")}</Form.Label>
                     <Form.Control>
-                      <Input type="number" {...field} />
+                      <Input
+                        type="number"
+                        min={0}
+                        value={value || ""}
+                        onChange={(e) => {
+                          const value = e.target.value
+
+                          if (value === "") {
+                            onChange(null)
+                          } else {
+                            onChange(Number(value))
+                          }
+                        }}
+                        {...field}
+                      />
                     </Form.Control>
                     <Form.ErrorMessage />
                   </Form.Item>
@@ -293,12 +328,26 @@ export const ProductEditVariantForm = ({
             <Form.Field
               control={form.control}
               name="length"
-              render={({ field }) => {
+              render={({ field: { onChange, value, ...field } }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>{t("fields.length")}</Form.Label>
+                    <Form.Label>{t("fields.length")}</Form.Label>
                     <Form.Control>
-                      <Input type="number" {...field} />
+                      <Input
+                        type="number"
+                        min={0}
+                        value={value || ""}
+                        onChange={(e) => {
+                          const value = e.target.value
+
+                          if (value === "") {
+                            onChange(null)
+                          } else {
+                            onChange(Number(value))
+                          }
+                        }}
+                        {...field}
+                      />
                     </Form.Control>
                     <Form.ErrorMessage />
                   </Form.Item>
@@ -308,12 +357,26 @@ export const ProductEditVariantForm = ({
             <Form.Field
               control={form.control}
               name="height"
-              render={({ field }) => {
+              render={({ field: { onChange, value, ...field } }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>{t("fields.height")}</Form.Label>
+                    <Form.Label>{t("fields.height")}</Form.Label>
                     <Form.Control>
-                      <Input type="number" {...field} />
+                      <Input
+                        type="number"
+                        min={0}
+                        value={value || ""}
+                        onChange={(e) => {
+                          const value = e.target.value
+
+                          if (value === "") {
+                            onChange(null)
+                          } else {
+                            onChange(Number(value))
+                          }
+                        }}
+                        {...field}
+                      />
                     </Form.Control>
                     <Form.ErrorMessage />
                   </Form.Item>
@@ -326,7 +389,9 @@ export const ProductEditVariantForm = ({
               render={({ field }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>{t("fields.midCode")}</Form.Label>
+                    <Form.Label tooltip={t("fields.midCodeTooltip")} optional>
+                      {t("fields.midCode")}
+                    </Form.Label>
                     <Form.Control>
                       <Input {...field} />
                     </Form.Control>
@@ -341,7 +406,9 @@ export const ProductEditVariantForm = ({
               render={({ field }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>{t("fields.hsCode")}</Form.Label>
+                    <Form.Label tooltip={t("fields.hsCodeTooltip")} optional>
+                      {t("fields.hsCode")}
+                    </Form.Label>
                     <Form.Control>
                       <Input {...field} />
                     </Form.Control>
@@ -356,9 +423,7 @@ export const ProductEditVariantForm = ({
               render={({ field }) => {
                 return (
                   <Form.Item>
-                    <Form.Label optional>
-                      {t("fields.countryOfOrigin")}
-                    </Form.Label>
+                    <Form.Label>{t("fields.countryOfOrigin")}</Form.Label>
                     <Form.Control>
                       <CountrySelect {...field} />
                     </Form.Control>
