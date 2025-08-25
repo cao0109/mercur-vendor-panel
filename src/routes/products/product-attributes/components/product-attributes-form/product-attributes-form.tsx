@@ -25,8 +25,6 @@ const dimension = zod
     }
     return Number(value)
   })
-  .optional()
-  .nullable()
 
 const ProductAttributesSchema = zod.object({
   weight: dimension,

@@ -27,12 +27,14 @@ import {
   base64ToBlob,
 } from "../product-create-rich-text-form"
 import { ProductCreateVariantsForm } from "../product-create-variants-form"
+import { ProductCreateAttributesForm } from "../product-create-attributes-form/product-create-attributes-form"
 
 enum Tab {
   DETAILS = "details",
   ORGANIZE = "organize",
   VARIANTS = "variants",
   INVENTORY = "inventory",
+  ATTRIBUTES = "attributes",
   RICHTEXT = "rich_text",
 }
 
@@ -58,6 +60,7 @@ export const ProductCreateForm = ({
     [Tab.ORGANIZE]: "not-started",
     [Tab.VARIANTS]: "not-started",
     [Tab.INVENTORY]: "not-started",
+    [Tab.ATTRIBUTES]: "not-started",
     [Tab.RICHTEXT]: "not-started",
   })
 
@@ -65,7 +68,7 @@ export const ProductCreateForm = ({
   const { handleSuccess } = useRouteModal()
   const { getFormConfigs } = useDashboardExtension()
   const configs = getFormConfigs("product", "create")
-  const [isCreateLoading, setIsCreateLoading] = useState(false);
+  const [isCreateLoading, setIsCreateLoading] = useState(false)
 
   const form = useExtendableForm({
     defaultValues: {
@@ -101,7 +104,7 @@ export const ProductCreateForm = ({
   )
 
   const handleSubmit = form.handleSubmit(async (values, e) => {
-    setIsCreateLoading(true);
+    setIsCreateLoading(true)
     let isDraftSubmission = false
 
     if (e?.nativeEvent instanceof SubmitEvent) {
@@ -134,14 +137,14 @@ export const ProductCreateForm = ({
           console.error("Invalid Base64 string:", src)
           const blob = base64ToBlob(src, "image/png")
           console.log("Uploading image", blob)
-          
+
           // 检查文件大小是否超过5MB
           if (blob.size > MAX_FILE_SIZE_BYTES) {
             toast.warning(
               `富文本中的图片大小超过${MAX_FILE_SIZE_MB}MB，可能会上传失败，请考虑压缩后再上传。`
             )
           }
-          
+
           const fileObject = {
             id: crypto.randomUUID(),
             url: URL.createObjectURL(blob),
@@ -167,7 +170,7 @@ export const ProductCreateForm = ({
           return element.file && element.file.size > MAX_FILE_SIZE_BYTES
         })
 
-        if(isMoreThanMaxSize) {
+        if (isMoreThanMaxSize) {
           toast.warning(
             `文件大小超过${MAX_FILE_SIZE_MB}MB，可能会上传失败，请考虑压缩后再上传。`
           )
@@ -294,6 +297,13 @@ export const ProductCreateForm = ({
           is_default: undefined,
           inventory_kit: undefined,
           inventory: undefined,
+          weight: parseInt(payload.weight || "") || undefined,
+          length: parseInt(payload.length || "") || undefined,
+          height: parseInt(payload.height || "") || undefined,
+          width: parseInt(payload.width || "") || undefined,
+          origin_country: payload.origin_country || undefined,
+          hs_code: payload.hs_code || undefined,
+          mid_code: payload.mid_code || undefined,
           prices: Object.keys(variant.prices || {}).map((key) => ({
             currency_code: key,
             amount: parseFloat(variant.prices?.[key] as string),
@@ -315,11 +325,40 @@ export const ProductCreateForm = ({
         },
       }
     )
-    setIsCreateLoading(false);
+    setIsCreateLoading(false)
   })
 
+  // 根据不同标签页定义需要验证的字段
+  const getTabFields = (tab: Tab): any[] => {
+    switch (tab) {
+      case Tab.DETAILS:
+        return ["title", "description", "type_id", "status"]
+      case Tab.ORGANIZE:
+        return ["categories", "collection_id", "tags"]
+      case Tab.ATTRIBUTES:
+        return [
+          "width",
+          "height",
+          "length",
+          "weight",
+          "mid_code",
+          "hs_code",
+          "origin_country",
+        ]
+      case Tab.VARIANTS:
+        return ["variants"]
+      case Tab.INVENTORY:
+        return ["inventory_kit"]
+      case Tab.RICHTEXT:
+        return ["rich_text"]
+      default:
+        return []
+    }
+  }
+
   const onNext = async (currentTab: Tab) => {
-    const valid = await form.trigger()
+    const fields = getTabFields(currentTab)
+    const valid = await form.trigger(fields)
 
     if (!valid) {
       return
@@ -330,6 +369,10 @@ export const ProductCreateForm = ({
     }
 
     if (currentTab === Tab.ORGANIZE) {
+      setTab(Tab.ATTRIBUTES)
+    }
+
+    if (currentTab === Tab.ATTRIBUTES) {
       setTab(Tab.VARIANTS)
     }
 
@@ -351,20 +394,28 @@ export const ProductCreateForm = ({
       currentState[Tab.DETAILS] = "completed"
       currentState[Tab.ORGANIZE] = "in-progress"
     }
+    if (tab === Tab.ATTRIBUTES) {
+      currentState[Tab.DETAILS] = "completed"
+      currentState[Tab.ORGANIZE] = "completed"
+      currentState[Tab.ATTRIBUTES] = "in-progress"
+    }
     if (tab === Tab.VARIANTS) {
       currentState[Tab.DETAILS] = "completed"
       currentState[Tab.ORGANIZE] = "completed"
+      currentState[Tab.ATTRIBUTES] = "completed"
       currentState[Tab.VARIANTS] = "in-progress"
     }
     if (tab === Tab.INVENTORY) {
       currentState[Tab.DETAILS] = "completed"
       currentState[Tab.ORGANIZE] = "completed"
+      currentState[Tab.ATTRIBUTES] = "completed"
       currentState[Tab.VARIANTS] = "completed"
       currentState[Tab.INVENTORY] = "in-progress"
     }
     if (tab === Tab.RICHTEXT) {
       currentState[Tab.DETAILS] = "completed"
       currentState[Tab.ORGANIZE] = "completed"
+      currentState[Tab.ATTRIBUTES] = "completed"
       currentState[Tab.VARIANTS] = "completed"
       currentState[Tab.INVENTORY] = "completed"
       currentState[Tab.RICHTEXT] = "in-progress"
@@ -407,14 +458,16 @@ export const ProductCreateForm = ({
       >
         <ProgressTabs
           value={tab}
-          onValueChange={async (tab) => {
-            const valid = await form.trigger()
+          onValueChange={async (newTab) => {
+            // 只验证当前标签页的字段，而不是整个表单
+            const fields = getTabFields(tab)
+            const valid = await form.trigger(fields)
 
             if (!valid) {
               return
             }
 
-            setTab(tab as Tab)
+            setTab(newTab as Tab)
           }}
           className="flex h-full flex-col overflow-hidden"
         >
@@ -434,6 +487,13 @@ export const ProductCreateForm = ({
                   className="max-w-[200px] truncate"
                 >
                   {t("products.create.tabs.organize")}
+                </ProgressTabs.Trigger>
+                <ProgressTabs.Trigger
+                  status={tabState[Tab.ATTRIBUTES]}
+                  value={Tab.ATTRIBUTES}
+                  className="max-w-[200px] truncate"
+                >
+                  {t("products.create.tabs.attributes")}
                 </ProgressTabs.Trigger>
                 <ProgressTabs.Trigger
                   status={tabState[Tab.VARIANTS]}
@@ -473,6 +533,12 @@ export const ProductCreateForm = ({
               value={Tab.ORGANIZE}
             >
               <ProductCreateOrganizeForm form={form} />
+            </ProgressTabs.Content>
+            <ProgressTabs.Content
+              className="size-full overflow-y-auto"
+              value={Tab.ATTRIBUTES}
+            >
+              <ProductCreateAttributesForm form={form} />
             </ProgressTabs.Content>
             <ProgressTabs.Content
               className="size-full overflow-y-auto"

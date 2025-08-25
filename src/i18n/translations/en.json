@@ -415,11 +415,13 @@
       "description": "Create a new product.",
       "header": "General",
       "tabs": {
-        "details": "Details",
-        "organize": "Organize",
-        "variants": "Variants",
-        "inventory": "Inventory kits"
-      },
+      "details": "Details",
+      "organize": "Organize",
+      "variants": "Variants",
+      "inventory": "Inventory kits",
+      "attributes": "Attributes",
+      "richText": "Rich Text"
+    },
       "errors": {
         "variants": "Please select at least one variant.",
         "options": "Please create at least one option.",

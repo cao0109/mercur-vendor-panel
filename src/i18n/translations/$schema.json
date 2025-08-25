@@ -1697,6 +1697,9 @@
                 "organize": {
                   "type": "string"
                 },
+                "attributes": {
+                  "type": "string"
+                },
                 "variants": {
                   "type": "string"
                 },

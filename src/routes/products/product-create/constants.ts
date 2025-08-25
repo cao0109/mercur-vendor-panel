@@ -75,12 +75,12 @@ export const ProductCreateSchema = z
         })
       )
       .optional(),
-    origin_country: z.string().optional(),
+    origin_country: z.string().min(1),
     material: z.string().optional(),
-    width: z.string().optional(),
-    length: z.string().optional(),
-    height: z.string().optional(),
-    weight: z.string().optional(),
+    width: z.string().min(1),
+    length: z.string().min(1),
+    height: z.string().min(1),
+    weight: z.string().min(1),
     mid_code: z.string().optional(),
     hs_code: z.string().optional(),
     options: z.array(ProductCreateOptionSchema).min(1),

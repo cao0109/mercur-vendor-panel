@@ -19,13 +19,13 @@ type EditInventoryItemAttributeFormProps = {
 }
 
 const EditInventoryItemAttributesSchema = z.object({
-  height: z.number().positive().optional(),
-  width: z.number().positive().optional(),
-  length: z.number().positive().optional(),
-  weight: z.number().positive().optional(),
+  height: z.number().positive(),
+  width: z.number().positive(),
+  length: z.number().positive(),
+  weight: z.number().positive(),
   mid_code: z.string().optional(),
   hs_code: z.string().optional(),
-  origin_country: z.string().optional(),
+  origin_country: z.string(),
 })
 
 const getDefaultValues = (item: InventoryTypes.InventoryItemDTO) => {
