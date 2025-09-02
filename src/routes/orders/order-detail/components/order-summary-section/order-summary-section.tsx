@@ -21,6 +21,7 @@ import {
   Button,
   clx,
   Container,
+  Copy,
   Heading,
   StatusBadge,
   Text,
