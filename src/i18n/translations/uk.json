@@ -397,6 +397,7 @@
     "edit": {
       "header": "Редагувати продукт",
       "description": "Редагуйте деталі продукту.",
+      "subtitlePlaceholder": 	"Optionnel, max 150 caractères",
       "successToast": "Продукт {{title}} успішно оновлений."
     },
     "create": {

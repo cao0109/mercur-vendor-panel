@@ -408,6 +408,7 @@
     "edit": {
       "header": "Ürünü Düzenle",
       "description": "Ürün detaylarını düzenleyin.",
+      "subtitlePlaceholder":"Необов'язково, макс. 150 символів",
       "successToast": "Ürün {{title}} başarıyla güncellendi."
     },
     "create": {

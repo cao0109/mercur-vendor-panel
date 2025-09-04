@@ -80,7 +80,8 @@ export const ProductCreateGeneralSection = ({
                 {t("products.fields.description.label")}
               </Form.Label>
               <Form.Control>
-                <Textarea {...field} placeholder="A warm and cozy jacket" />
+                <Textarea {...field}  maxLength={150}
+                  placeholder={t("products.edit.subtitlePlaceholder")}/>
               </Form.Control>
             </Form.Item>
           )

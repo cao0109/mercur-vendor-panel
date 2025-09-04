@@ -24,7 +24,7 @@ type EditProductFormProps = {
 const EditProductSchema = zod.object({
   status: zod.enum(["draft", "published", "proposed", "rejected"]),
   title: zod.string().min(1),
-  subtitle: zod.string().optional(),
+  subtitle: zod.string().max(150).optional(),
   handle: zod.string().min(1),
   material: zod.string().optional(),
   description: zod.string().optional(),
@@ -257,7 +257,9 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
                         {t("fields.description")}
                       </Form.Label>
                       <Form.Control>
-                        <Textarea {...field} />
+                        <Textarea {...field}  maxLength={150}
+                         placeholder={t("products.edit.subtitlePlaceholder")}
+                         />
                       </Form.Control>
                       <Form.ErrorMessage />
                     </Form.Item>

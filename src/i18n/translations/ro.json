@@ -407,6 +407,7 @@
     "edit": {
       "header": "Editați produsul",
       "description": "Editați detaliile produsului.",
+      "subtitlePlaceholder": "Opțional, maxim 150 caractere",
       "successToast": "Produs {{title}} a fost actualizat cu succes."
     },
     "create": {

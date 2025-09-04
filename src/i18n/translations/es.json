@@ -395,6 +395,7 @@
     "edit": {
       "header": "Editar Producto",
       "description": "Edita los detalles del producto.",
+      "subtitlePlaceholder": "Opcional, máximo 150 caracteres",
       "successToast": "Producto {{title}} actualizado correctamente."
     },
     "create": {

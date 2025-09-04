@@ -396,6 +396,7 @@
     "edit": {
       "header": "แก้ไขสินค้า",
       "description": "แก้ไขรายละเอียดของสินค้า",
+      "subtitlePlaceholder":"ไม่บังคับ, สูงสุด 150 ตัวอักษร",
       "successToast": "สินค้า {{title}} ถูกอัปเดตสำเร็จ"
     },
     "create": {

@@ -397,6 +397,7 @@
     "edit": {
       "header": "商品を編集",
       "description": "商品の詳細を編集します。",
+      "subtitlePlaceholder": "任意選択、最大150文字",
       "successToast": "商品「{{title}}」が正常に更新されました。"
     },
     "create": {

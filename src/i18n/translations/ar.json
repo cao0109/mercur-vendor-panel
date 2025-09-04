@@ -425,6 +425,7 @@
     "edit": {
       "header": "تحرير المنتج",
       "description": "تحرير تفاصيل المنتج.",
+      "subtitlePlaceholder": "اختياري، أقصى عدد 150 حرف",
       "successToast": "تم تحديث المنتج {{title}} بنجاح."
     },
     "create": {

@@ -402,6 +402,7 @@
     "edit": {
       "header": "Upravit produkt",
       "description": "Upravit detaily produktu.",
+      "subtitlePlaceholder": "Volitelné, max 150 znaků",
       "successToast": "Produkt {{title}} byl úspěšně aktualizován."
     },
     "create": {

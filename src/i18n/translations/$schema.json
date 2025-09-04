@@ -1665,6 +1665,9 @@
             "description": {
               "type": "string"
             },
+            "subtitlePlaceholder": {
+              "type": "string"
+            },
             "successToast": {
               "type": "string"
             }

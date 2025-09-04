@@ -408,6 +408,7 @@
     "edit": {
       "header": "编辑产品",
       "description": "编辑产品详情。",
+      "subtitlePlaceholder": "可选，最多150字",
       "successToast": "产品 {{title}} 更新成功。"
     },
     "create": {
@@ -566,6 +567,7 @@
         "label": "可打折",
         "hint": "取消选中时,折扣将不会应用于此产品"
       },
+
       "shipping_profile": {
         "label": "配送方案",
         "hint": "将商品关联到某个配送方案"
