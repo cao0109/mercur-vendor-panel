@@ -397,7 +397,7 @@
     "edit": {
       "header": "Редагувати продукт",
       "description": "Редагуйте деталі продукту.",
-      "subtitlePlaceholder": 	"Optionnel, max 150 caractères",
+      "subtitlePlaceholder": "Optionnel, max 150 caractères",
       "successToast": "Продукт {{title}} успішно оновлений."
     },
     "create": {
@@ -439,7 +439,8 @@
         },
         "productOptions": {
           "label": "Опції продукту",
-          "hint": "Визначте опції для продукту, наприклад, колір, розмір тощо."
+          "hint": "Визначте опції для продукту, наприклад, колір, розмір тощо.",
+          "maxOptionsReached": "Можна додати тільки 3 опції"
         }
       },
       "successToast": "Продукт {{title}} успішно створено."

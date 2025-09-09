@@ -280,7 +280,7 @@ export const ProductCreateVariantsSection = ({
           should_create: true,
           variant_rank: 0,
           options: {
-            "Default option": t("products.create.variants.defaultOptionValue")
+            "Default option": t("products.create.variants.defaultOptionValue"),
           },
           inventory: [{ inventory_item_id: "", required_quantity: "" }],
           is_default: true,
@@ -336,16 +336,26 @@ export const ProductCreateVariantsSection = ({
                           size="small"
                           variant="secondary"
                           type="button"
+                          disabled={watchedOptions.length >= 3}
                           onClick={() => {
-                            options.append({
-                              title: "",
-                              values: [],
-                            })
+                            if (watchedOptions.length < 3) {
+                              options.append({
+                                title: "",
+                                values: [],
+                              })
+                            }
                           }}
                         >
                           {t("actions.add")}
                         </Button>
                       </div>
+                      {watchedOptions.length >= 3 && (
+                        <Alert dismissible variant="warning">
+                          {t(
+                            "products.create.variants.productOptions.maxOptionsReached"
+                          )}
+                        </Alert>
+                      )}
                       {showInvalidOptionsMessage && (
                         <Alert dismissible variant="error">
                           {t("products.create.errors.options")}

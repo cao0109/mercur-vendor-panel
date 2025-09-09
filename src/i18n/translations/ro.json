@@ -449,7 +449,8 @@
         },
         "productOptions": {
           "label": "Opțiuni de produs",
-          "hint": "Definiți opțiunile pentru produs, de ex. "
+          "hint": "Definiți opțiunile pentru produs, de ex. ",
+          "maxOptionsReached": "Puteți adăuga maxim 3 opțiuni"
         }
       },
       "successToast": "Produs {{title}} a fost creat cu succes."

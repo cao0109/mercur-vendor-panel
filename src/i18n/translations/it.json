@@ -438,7 +438,8 @@
         },
         "productOptions": {
           "label": "Opzioni di prodotto",
-          "hint": "Definisci le opzioni per il prodotto, ad esempio colore, dimensione, ecc."
+          "hint": "Definisci le opzioni per il prodotto, ad esempio colore, dimensione, ecc.",
+          "maxOptionsReached": "Puoi aggiungere fino a 3 opzioni"
         }
       },
       "successToast": "Il prodotto {{title}} è stato creato con successo."

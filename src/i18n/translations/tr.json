@@ -408,7 +408,7 @@
     "edit": {
       "header": "Ürünü Düzenle",
       "description": "Ürün detaylarını düzenleyin.",
-      "subtitlePlaceholder":"Необов'язково, макс. 150 символів",
+      "subtitlePlaceholder": "Необов'язково, макс. 150 символів",
       "successToast": "Ürün {{title}} başarıyla güncellendi."
     },
     "create": {
@@ -450,7 +450,8 @@
         },
         "productOptions": {
           "label": "Ürün seçenekleri",
-          "hint": "Ürün için seçenekleri belirleyin, örneğin renk, boyut vb."
+          "hint": "Ürün için seçenekleri belirleyin, örneğin renk, boyut vb.",
+          "maxOptionsReached": "En fazla 3 seçenek ekleyebilirsiniz"
         }
       },
       "successToast": "Ürün {{title}} başarıyla oluşturuldu."

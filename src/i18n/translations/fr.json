@@ -397,7 +397,7 @@
     "edit": {
       "header": "Modifier le produit",
       "description": "Modifiez les détails du produit.",
-      "subtitlePlaceholder": 	"Optionnel, max 150 caractères",
+      "subtitlePlaceholder": "Optionnel, max 150 caractères",
       "successToast": "Le produit {{title}} a été mis à jour avec succès."
     },
     "create": {
@@ -439,7 +439,8 @@
         },
         "productOptions": {
           "label": "Options de produit",
-          "hint": "Définissez les options du produit, par exemple la couleur, la taille, etc."
+          "hint": "Définissez les options du produit, par exemple la couleur, la taille, etc.",
+          "maxOptionsReached": "Vous pouvez ajouter au maximum 3 options"
         }
       },
       "successToast": "Le produit {{title}} a été créé avec succès."

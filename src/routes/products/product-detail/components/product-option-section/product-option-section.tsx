@@ -1,6 +1,6 @@
 import { PencilSquare, Plus, Trash } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
-import { Badge, Container, Heading, usePrompt } from "@medusajs/ui"
+import { Alert, Badge, Container, Heading, usePrompt } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 import { ActionMenu } from "../../../../../components/common/action-menu"
 import { SectionRow } from "../../../../../components/common/section"
@@ -61,13 +61,13 @@ const OptionActions = ({
 }
 
 type ProductOptionSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
 export const ProductOptionSection = ({
   product,
-  editable = true
+  editable = true,
 }: ProductOptionSectionProps) => {
   const { t } = useTranslation()
 
@@ -75,7 +75,14 @@ export const ProductOptionSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.options.header")}</Heading>
-        {editable? <ActionMenu
+        {editable && (product.options?.length ?? 0) >= 3 && (
+          <Alert dismissible={false} variant="warning">
+            {t("products.create.variants.productOptions.maxOptionsReached")}
+          </Alert>
+        )}
+      </div>
+      {editable && (product.options?.length ?? 0) < 3 ? (
+        <ActionMenu
           groups={[
             {
               actions: [
@@ -87,29 +94,32 @@ export const ProductOptionSection = ({
               ],
             },
           ]}
-        />:<></>}
-      </div>
+        />
+      ) : (
+        <></>
+      )}
 
-      {editable && product.options?.map((option) => {
-        return (
-          <SectionRow
-            title={option.title}
-            key={option.id}
-            value={option.values?.map((val) => {
-              return (
-                <Badge
-                  key={val.value}
-                  size="2xsmall"
-                  className="flex min-w-[20px] items-center justify-center"
-                >
-                  {val.value}
-                </Badge>
-              )
-            })}
-            actions={<OptionActions product={product} option={option} />}
-          />
-        )
-      })}
+      {editable &&
+        product.options?.map((option) => {
+          return (
+            <SectionRow
+              title={option.title}
+              key={option.id}
+              value={option.values?.map((val) => {
+                return (
+                  <Badge
+                    key={val.value}
+                    size="2xsmall"
+                    className="flex min-w-[20px] items-center justify-center"
+                  >
+                    {val.value}
+                  </Badge>
+                )
+              })}
+              actions={<OptionActions product={product} option={option} />}
+            />
+          )
+        })}
     </Container>
   )
 }

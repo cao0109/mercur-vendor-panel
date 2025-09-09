@@ -263,9 +263,9 @@
       "docs": "操作文档"
     },
     "table": {
-      "jumpTo":"跳至",
-      "confirm":"确认",
-      "page":"页"
+      "jumpTo": "跳至",
+      "confirm": "确认",
+      "page": "页"
     }
   },
   "dataGrid": {
@@ -416,13 +416,13 @@
       "description": "创建新产品。",
       "header": "常规",
       "tabs": {
-      "details": "基础",
-      "organize": "组织",
-      "variants": "变体",
-      "inventory": "库存套件",
-      "attributes": "属性",
-      "richText": "详情"
-    },
+        "details": "基础",
+        "organize": "组织",
+        "variants": "变体",
+        "inventory": "库存套件",
+        "attributes": "属性",
+        "richText": "详情"
+      },
       "errors": {
         "variants": "请至少选择一个变体。",
         "options": "请至少创建一个选项。",
@@ -452,7 +452,8 @@
         },
         "productOptions": {
           "label": "产品选项",
-          "hint": "定义产品的选项,例如颜色、尺寸等。"
+          "hint": "定义产品的选项,例如颜色、尺寸等。",
+          "maxOptionsReached": "最多只能添加 3 个产品选项"
         },
         "defaultOption": "默认选项",
         "defaultVariant": "默认变体",
