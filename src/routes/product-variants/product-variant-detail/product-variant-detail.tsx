@@ -14,8 +14,8 @@ import { VariantPricesSection } from "./components/variant-prices-section"
 
 export const ProductVariantDetail = () => {
   const { id, variant_id } = useParams()
-  const [searchParams] = useSearchParams();
-  const editable = searchParams.get("editable") !== "false";
+  const [searchParams] = useSearchParams()
+  const editable = searchParams.get("editable") !== "false"
   const { product, isLoading, isError, error } = useProduct(id!, {
     fields: "*variants.inventory_items",
   })
@@ -46,7 +46,7 @@ export const ProductVariantDetail = () => {
       }}
     >
       <TwoColumnPage.Main>
-        <VariantGeneralSection variant={variant} editable={editable}/>
+        <VariantGeneralSection variant={variant} editable={editable} />
         {!variant.manage_inventory ? (
           <InventorySectionPlaceholder />
         ) : (
@@ -65,7 +65,7 @@ export const ProductVariantDetail = () => {
         )}
       </TwoColumnPage.Main>
       <TwoColumnPage.Sidebar>
-        <VariantPricesSection variant={variant} editable={editable}/>
+        <VariantPricesSection variant={variant} editable={editable} />
       </TwoColumnPage.Sidebar>
     </TwoColumnPage>
   )

@@ -7,12 +7,12 @@ import { ActionMenu } from "../../../../components/common/action-menu"
 import { SectionRow } from "../../../../components/common/section"
 
 type InventoryItemGeneralSectionProps = {
-  inventoryItem: HttpTypes.AdminInventoryItemResponse["inventory_item"],
+  inventoryItem: HttpTypes.AdminInventoryItemResponse["inventory_item"]
   editable?: boolean
 }
 export const InventoryItemGeneralSection = ({
   inventoryItem,
-  editable = true
+  editable = true,
 }: InventoryItemGeneralSectionProps) => {
   const { t } = useTranslation()
 
@@ -34,19 +34,23 @@ export const InventoryItemGeneralSection = ({
         <Heading>
           {inventoryItem.title ?? inventoryItem.sku} {t("fields.details")}
         </Heading>
-        {editable ? <ActionMenu
-          groups={[
-            {
-              actions: [
-                {
-                  icon: <PencilSquare />,
-                  label: t("actions.edit"),
-                  to: "edit",
-                },
-              ],
-            },
-          ]}
-        /> : <></>}
+        {editable ? (
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    icon: <PencilSquare />,
+                    label: t("actions.edit"),
+                    to: "edit",
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       <SectionRow title={t("fields.sku")} value={inventoryItem.sku ?? "-"} />
       <SectionRow

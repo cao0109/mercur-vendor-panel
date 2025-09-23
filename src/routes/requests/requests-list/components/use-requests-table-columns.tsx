@@ -21,7 +21,7 @@ export const useRequestsTableColumns = () => {
         cell: ({ row }) => row.original.data.handle,
       }),
       columnHelper.accessor("created_at", {
-        header:  t("requests.date"),
+        header: t("requests.date"),
         cell: ({ getValue }) => <DateCell date={getValue()} />,
       }),
       columnHelper.accessor("status", {

@@ -82,9 +82,9 @@ export const CategoryComboboxMultiple = forwardRef<
   // 将新加载的类别数据合并到全量缓存（去重）
   useEffect(() => {
     if (product_categories && product_categories.length) {
-      setAllCategories(prev => {
+      setAllCategories((prev) => {
         const newCats = product_categories.filter(
-          cat => !prev.some(existing => existing.id === cat.id)
+          (cat) => !prev.some((existing) => existing.id === cat.id)
         )
         return [...prev, ...newCats]
       })
@@ -139,7 +139,7 @@ export const CategoryComboboxMultiple = forwardRef<
   const handleSelect = (option: ProductCategoryOption) => {
     const isSelected = value.includes(option.value)
     const newValues = isSelected
-      ? value.filter(id => id !== option.value)
+      ? value.filter((id) => id !== option.value)
       : [...value, option.value]
 
     if (newValues.length > 10) {
@@ -165,13 +165,16 @@ export const CategoryComboboxMultiple = forwardRef<
   const showTag = tags.length > 0
 
   // 优化标签宽度计算（支持换行）
-  const tagContainerStyle = useMemo(() => ({
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px",
-    width: "100%",
-    padding: "2px 0"
-  }), [])
+  const tagContainerStyle = useMemo(
+    () => ({
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "4px",
+      width: "100%",
+      padding: "2px 0",
+    }),
+    []
+  )
 
   const showLevelUp = !searchValue && level.length > 0
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
@@ -186,17 +189,20 @@ export const CategoryComboboxMultiple = forwardRef<
       switch (e.key) {
         case "ArrowDown":
           e.preventDefault()
-          setFocusedIndex(prev => Math.min(prev + 1, optionsLength - 1))
+          setFocusedIndex((prev) => Math.min(prev + 1, optionsLength - 1))
           break
         case "ArrowUp":
           e.preventDefault()
-          setFocusedIndex(prev => Math.max(prev - 1, 0))
+          setFocusedIndex((prev) => Math.max(prev - 1, 0))
           break
         case "ArrowRight": {
           const index = showLevelUp ? focusedIndex - 1 : focusedIndex
           if (options[index]?.has_children && !searchValue) {
             e.preventDefault()
-            setLevel([...level, { id: options[index].value, label: options[index].label }])
+            setLevel([
+              ...level,
+              { id: options[index].value, label: options[index].label },
+            ])
             setFocusedIndex(0)
           }
           break
@@ -229,19 +235,23 @@ export const CategoryComboboxMultiple = forwardRef<
   return (
     <div style={{ position: "relative" }}>
       {showAlert && (
-        <Alert variant="error" dismissible style={{ 
-          position: "absolute", 
-          top: "-40px", 
-          left: 0, 
-          zIndex: 999 
-        }}>
+        <Alert
+          variant="error"
+          dismissible
+          style={{
+            position: "absolute",
+            top: "-40px",
+            left: 0,
+            zIndex: 999,
+          }}
+        >
           <div>{t("validation.maxSelected", { value: 10 })}</div>
         </Alert>
       )}
 
       <RadixPopover.Root open={open} onOpenChange={handleOpenChange}>
-        <RadixPopover.Anchor 
-          asChild 
+        <RadixPopover.Anchor
+          asChild
           onClick={() => !open && handleOpenChange(true)}
         >
           <div
@@ -261,7 +271,7 @@ export const CategoryComboboxMultiple = forwardRef<
             {/* 标签回显区域（支持换行） */}
             {/* eslint-disable-next-line */}
             <div style={tagContainerStyle}>
-              {tags.map(tag => (
+              {tags.map((tag) => (
                 <div
                   key={tag.id} // 用id作为key，避免重复渲染
                   className="inline-flex items-center bg-ui-bg-accent text-ui-fg-accent rounded-full px-2 py-0.5 text-xs"
@@ -271,7 +281,7 @@ export const CategoryComboboxMultiple = forwardRef<
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation()
-                      onChange(value.filter(id => id !== tag.id))
+                      onChange(value.filter((id) => id !== tag.id))
                     }}
                     className="ml-1 text-ui-fg-accent hover:text-ui-fg-accent-hover"
                   >
@@ -320,7 +330,10 @@ export const CategoryComboboxMultiple = forwardRef<
           onInteractOutside={(e) => {
             e.preventDefault()
             // eslint-disable-next-line
-            if (!e?.target?.closest("[data-anchor]") && !e?.target?.closest("[role='listbox']")) {
+            if (
+              !e?.target?.closest("[data-anchor]") &&
+              !e?.target?.closest("[role='listbox']")
+            ) {
               handleOpenChange(false)
             }
           }}
@@ -354,11 +367,18 @@ export const CategoryComboboxMultiple = forwardRef<
                   key={option.value} // 用id作为key
                   className={clx(
                     "transition-fg bg-ui-bg-base grid cursor-pointer grid-cols-1 items-center gap-2",
-                    { "grid-cols-[1fr_32px]": option.has_children && !searchValue }
+                    {
+                      "grid-cols-[1fr_32px]":
+                        option.has_children && !searchValue,
+                    }
                   )}
                 >
                   <button
-                    data-active={showLevelUp ? focusedIndex === index + 1 : focusedIndex === index}
+                    data-active={
+                      showLevelUp
+                        ? focusedIndex === index + 1
+                        : focusedIndex === index
+                    }
                     type="button"
                     role="option"
                     className={clx(
@@ -367,7 +387,7 @@ export const CategoryComboboxMultiple = forwardRef<
                       { "bg-ui-bg-accent/10": value.includes(option.value) } // 已选项高亮
                     )}
                     onClick={() => handleSelect(option)}
-                    onMouseEnter={() => 
+                    onMouseEnter={() =>
                       setFocusedIndex(showLevelUp ? index + 1 : index)
                     }
                     onMouseLeave={() => setFocusedIndex(-1)}
@@ -376,7 +396,9 @@ export const CategoryComboboxMultiple = forwardRef<
                     <div className="flex h-5 w-5 items-center justify-center">
                       {value.includes(option.value) && <EllipseMiniSolid />}
                     </div>
-                    <Text size="small" className="truncate">{option.label}</Text>
+                    <Text size="small" className="truncate">
+                      {option.label}
+                    </Text>
                   </button>
 
                   {option.has_children && !searchValue && (
@@ -392,7 +414,10 @@ export const CategoryComboboxMultiple = forwardRef<
               ))
             ) : showLoading ? (
               Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="grid grid-cols-[20px_1fr_20px] gap-2 px-2 py-1.5">
+                <div
+                  key={index}
+                  className="grid grid-cols-[20px_1fr_20px] gap-2 px-2 py-1.5"
+                >
                   <div />
                   <TextSkeleton size="small" />
                   <div />
@@ -402,7 +427,10 @@ export const CategoryComboboxMultiple = forwardRef<
               <div className="px-2 py-1.5">
                 <Text size="small">
                   {query ? (
-                    <Trans i18nKey="general.noResultsTitle" tOptions={{ query }} />
+                    <Trans
+                      i18nKey="general.noResultsTitle"
+                      tOptions={{ query }}
+                    />
                   ) : (
                     t("general.noResultsTitle")
                   )}
@@ -417,7 +445,6 @@ export const CategoryComboboxMultiple = forwardRef<
 })
 
 CategoryComboboxMultiple.displayName = "CategoryComboboxMultiple"
-
 
 // 工具函数与类型定义
 type ProductCategoryOption = {
@@ -437,7 +464,7 @@ function getParentLabel(level: Level[]): string | null {
 function getOptions(
   categories: AdminProductCategoryResponse["product_category"][]
 ): ProductCategoryOption[] {
-  return categories.map(cat => ({
+  return categories.map((cat) => ({
     value: cat.id,
     label: cat.name,
     has_children: cat.category_children?.length > 0,
@@ -456,8 +483,10 @@ function findTagsFromCategories(
   const tags: Tag[] = []
   if (!categories || !ids.length) return tags
 
-  function findRecursive(cats: AdminProductCategoryResponse["product_category"][]) {
-    cats.forEach(cat => {
+  function findRecursive(
+    cats: AdminProductCategoryResponse["product_category"][]
+  ) {
+    cats.forEach((cat) => {
       if (ids.includes(cat.id)) {
         tags.push({ id: cat.id, label: cat.name })
       }
@@ -469,5 +498,5 @@ function findTagsFromCategories(
 
   findRecursive(categories)
   // 保持与ids相同的顺序
-  return ids.map(id => tags.find(t => t.id === id)).filter(Boolean) as Tag[]
+  return ids.map((id) => tags.find((t) => t.id === id)).filter(Boolean) as Tag[]
 }

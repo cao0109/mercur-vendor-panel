@@ -10,11 +10,14 @@ import { NoRecords } from "../../../../../components/common/empty-table-content"
 import { getLocaleAmount } from "../../../../../lib/money-amount-helpers"
 
 type VariantPricesSectionProps = {
-  variant: HttpTypes.AdminProductVariant,
+  variant: HttpTypes.AdminProductVariant
   editable?: boolean
 }
 
-export function VariantPricesSection({ variant, editable = true }: VariantPricesSectionProps) {
+export function VariantPricesSection({
+  variant,
+  editable = true,
+}: VariantPricesSectionProps) {
   const { t } = useTranslation()
   const prices = variant.prices
     ?.filter((p) => !Object.keys(p.rules || {}).length)
@@ -32,19 +35,23 @@ export function VariantPricesSection({ variant, editable = true }: VariantPrices
     <Container className="flex flex-col divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("labels.prices")}</Heading>
-        {editable ? <ActionMenu
-          groups={[
-            {
-              actions: [
-                {
-                  label: t("actions.edit"),
-                  to: `/products/${variant.product_id}/variants/${variant.id}/prices`,
-                  icon: <CurrencyDollar />,
-                },
-              ],
-            },
-          ]}
-        />: <></>}
+        {editable ? (
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    to: `/products/${variant.product_id}/variants/${variant.id}/prices`,
+                    icon: <CurrencyDollar />,
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       {!hasPrices && <NoRecords className="h-60" />}
       {displayPrices?.map((price) => {

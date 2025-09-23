@@ -8,9 +8,7 @@ import * as zod from "zod"
 
 import { RouteFocusModal, useRouteModal } from "../../../components/modals"
 import { KeyboundForm } from "../../../components/utilities/keybound-form"
-import {
-  useUpdateProductVariant
-} from "../../../hooks/api/products"
+import { useUpdateProductVariant } from "../../../hooks/api/products"
 import { useRegions } from "../../../hooks/api/regions"
 import { castNumber } from "../../../lib/cast-number"
 import { VariantPricingForm } from "../common/variant-pricing-form"

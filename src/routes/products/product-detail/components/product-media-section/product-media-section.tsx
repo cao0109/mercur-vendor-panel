@@ -18,11 +18,14 @@ import { ActionMenu } from "../../../../../components/common/action-menu"
 import { useUpdateProduct } from "../../../../../hooks/api/products"
 
 type ProductMedisaSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
-export const ProductMediaSection = ({ product, editable = true }: ProductMedisaSectionProps) => {
+export const ProductMediaSection = ({
+  product,
+  editable = true,
+}: ProductMedisaSectionProps) => {
   const { t } = useTranslation()
   const prompt = usePrompt()
   const [selection, setSelection] = useState<Record<string, boolean>>({})
@@ -86,19 +89,23 @@ export const ProductMediaSection = ({ product, editable = true }: ProductMedisaS
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.media.label")}</Heading>
-        {editable ? <ActionMenu
-          groups={[
-            {
-              actions: [
-                {
-                  label: t("actions.edit"),
-                  to: "media?view=edit",
-                  icon: <PencilSquare />,
-                },
-              ],
-            },
-          ]}
-        />: <></>}
+        {editable ? (
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    to: "media?view=edit",
+                    icon: <PencilSquare />,
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       {media.length > 0 ? (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-4 px-6 py-4">
@@ -156,11 +163,15 @@ export const ProductMediaSection = ({ product, editable = true }: ProductMedisaS
               {t("products.media.emptyState.description")}
             </Text>
           </div>
-          {editable ? <Button size="small" variant="secondary" asChild>
-            <Link to="media?view=edit">
-              {t("products.media.emptyState.action")}
-            </Link>
-          </Button> : <></>}
+          {editable ? (
+            <Button size="small" variant="secondary" asChild>
+              <Link to="media?view=edit">
+                {t("products.media.emptyState.action")}
+              </Link>
+            </Button>
+          ) : (
+            <></>
+          )}
         </div>
       )}
       <CommandBar open={!!Object.keys(selection).length}>

@@ -22,7 +22,7 @@ export const RequestReviewsList = () => {
           <div>
             <Heading>{t("requests.requestsOrders")}</Heading>
             <Text className="text-ui-fg-subtle" size="small">
-             {t("requests.cancelReview")}
+              {t("requests.cancelReview")}
             </Text>
           </div>
         </div>

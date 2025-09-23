@@ -8,13 +8,13 @@ import { useDashboardExtension } from "../../../../../extensions"
 import { getFormattedCountry } from "../../../../../lib/addresses"
 
 type ProductAttributeSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
 export const ProductAttributeSection = ({
   product,
-  editable = true
+  editable = true,
 }: ProductAttributeSectionProps) => {
   const { t } = useTranslation()
   const { getDisplays } = useDashboardExtension()
@@ -23,19 +23,23 @@ export const ProductAttributeSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.attributes")}</Heading>
-        {editable ? <ActionMenu
-          groups={[
-            {
-              actions: [
-                {
-                  label: t("actions.edit"),
-                  to: "attributes",
-                  icon: <PencilSquare />,
-                },
-              ],
-            },
-          ]}
-        />: <></>}
+        {editable ? (
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    to: "attributes",
+                    icon: <PencilSquare />,
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       <SectionRow title={t("fields.height")} value={product.height} />
       <SectionRow title={t("fields.width")} value={product.width} />

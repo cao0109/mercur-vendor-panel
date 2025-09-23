@@ -38,7 +38,7 @@ export const _DataTable = <TData,>({
   noHeader = false,
   layout = "fit",
   noRecords: noRecordsProps = {},
-  showJumpTo =false
+  showJumpTo = false,
 }: DataTableProps<TData>) => {
   if (isLoading) {
     return (

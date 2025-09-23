@@ -20,7 +20,7 @@ export const RequestsCategoriesList = () => {
           <div>
             <Heading>{t("requests.categoriesRequests")}</Heading>
             <Text className="text-ui-fg-subtle" size="small">
-            {t("requests.addCategories")}
+              {t("requests.addCategories")}
             </Text>
           </div>
           <Button variant="secondary" asChild>

@@ -16,7 +16,7 @@ const reasonList = [
 ]
 
 const ReviewReplySchema = z.object({
-  reason: z.string().min(1, { message: t("reviews.pleaseSelectReason")}),
+  reason: z.string().min(1, { message: t("reviews.pleaseSelectReason") }),
   comment: z.string().optional(),
 })
 
@@ -65,7 +65,7 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
         {
           onSuccess: () => {
             toast.success(t("reviews.requestIsUpdated"), {
-              description:t("reviews.pleaseWaitForAResponse"),
+              description: t("reviews.pleaseWaitForAResponse"),
             })
             handleSuccess(`/requests/reviews`)
           },
@@ -85,7 +85,7 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
         {
           onSuccess: () => {
             toast.success(t("reviews.reviewIsReported"), {
-              description:t("reviews.pleaseWaitModerator"),
+              description: t("reviews.pleaseWaitModerator"),
             })
             handleSuccess(`/reviews/${id}`)
           },
@@ -101,11 +101,13 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
     <RouteDrawer>
       <RouteDrawer.Header>
         <RouteDrawer.Title asChild>
-          <Heading>{isEditing ? t("reviews.editRequest") : t("reviews.reportReview") }</Heading>
+          <Heading>
+            {isEditing ? t("reviews.editRequest") : t("reviews.reportReview")}
+          </Heading>
         </RouteDrawer.Title>
         <RouteDrawer.Description>
           {isEditing
-            ?  t("reviews.editTheRequestToReport")
+            ? t("reviews.editTheRequestToReport")
             : t("reviews.reportReviewFromCustomer")}
         </RouteDrawer.Description>
       </RouteDrawer.Header>
@@ -163,7 +165,7 @@ export const ReviewReportForm = ({ request }: { request?: any }) => {
           className="px-6"
           isLoading={isPending || isUpdating}
         >
-          {isEditing ? t("reviews.reasons") : t("reviews.reportReview") }
+          {isEditing ? t("reviews.reasons") : t("reviews.reportReview")}
         </Button>
       </RouteDrawer.Footer>
     </RouteDrawer>

@@ -8,13 +8,13 @@ import { SectionRow } from "../../../../../components/common/section"
 import { getFormattedCountry } from "../../../../../lib/addresses"
 
 type InventoryItemAttributeSectionProps = {
-  inventoryItem: InventoryTypes.InventoryItemDTO,
+  inventoryItem: InventoryTypes.InventoryItemDTO
   editable?: boolean
 }
 
 export const InventoryItemAttributeSection = ({
   inventoryItem,
-  editable = true
+  editable = true,
 }: InventoryItemAttributeSectionProps) => {
   const { t } = useTranslation()
 
@@ -22,19 +22,23 @@ export const InventoryItemAttributeSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.attributes")}</Heading>
-        {editable ? <ActionMenu
-          groups={[
-            {
-              actions: [
-                {
-                  label: t("actions.edit"),
-                  to: "attributes",
-                  icon: <PencilSquare />,
-                },
-              ],
-            },
-          ]}
-        />: <></>}
+        {editable ? (
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    to: "attributes",
+                    icon: <PencilSquare />,
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       <SectionRow title={t("fields.height")} value={inventoryItem.height} />
       <SectionRow title={t("fields.width")} value={inventoryItem.width} />

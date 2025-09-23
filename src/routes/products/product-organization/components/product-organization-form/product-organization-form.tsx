@@ -194,7 +194,7 @@ export const ProductOrganizationForm = ({
                       {t("products.fields.categories.label")}
                     </Form.Label>
                     <Form.Control>
-                      <CategoryComboboxMultiple  {...field} enableOpen={true} />
+                      <CategoryComboboxMultiple {...field} enableOpen={true} />
                       {/* <CategoryCombobox {...field} enableOpen={true} /> */}
                       {/* <Combobox
                         {...field}

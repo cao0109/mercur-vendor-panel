@@ -14,13 +14,13 @@ import {
 const PAGE_SIZE = 20
 
 type VariantInventorySectionProps = {
-  inventoryItems: ExtendedInventoryItem[],
+  inventoryItems: ExtendedInventoryItem[]
   editable?: boolean
 }
 
 export function VariantInventorySection({
   inventoryItems,
-  editable
+  editable,
 }: VariantInventorySectionProps) {
   const { t } = useTranslation()
 
@@ -48,7 +48,9 @@ export function VariantInventorySection({
         columns={columns}
         pageSize={PAGE_SIZE}
         count={inventoryItems.length}
-        navigateTo={(row) => `/inventory/${row.original.id}?editable=${editable}`}
+        navigateTo={(row) =>
+          `/inventory/${row.original.id}?editable=${editable}`
+        }
       />
     </Container>
   )

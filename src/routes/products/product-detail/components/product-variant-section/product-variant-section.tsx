@@ -24,7 +24,7 @@ import { useDeleteVariantLazy } from "../../../../../hooks/api/products"
 import { PRODUCT_VARIANT_IDS_KEY } from "../../../common/constants"
 
 type ProductVariantSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
@@ -32,7 +32,7 @@ const PAGE_SIZE = 10
 
 export const ProductVariantSection = ({
   product,
-  editable
+  editable,
 }: ProductVariantSectionProps) => {
   const { t } = useTranslation()
 
@@ -65,10 +65,14 @@ export const ProductVariantSection = ({
             description: t("products.variants.filtered.description"),
           },
         }}
-        action={editable ? {
-          label: t("actions.create"),
-          to: `variants/create`,
-        }: undefined}
+        action={
+          editable
+            ? {
+                label: t("actions.create"),
+                to: `variants/create`,
+              }
+            : undefined
+        }
         commands={commands}
       />
     </Container>
@@ -259,7 +263,8 @@ const useColumns = (product: HttpTypes.AdminProduct, editable?: boolean) => {
   )
 
   return useMemo(() => {
-    const baseColumns = [  columnHelper.accessor("title", {
+    const baseColumns = [
+      columnHelper.accessor("title", {
         header: t("fields.title"),
         enableSorting: true,
         sortAscLabel: t("filters.sorting.alphabeticallyAsc"),
@@ -294,7 +299,7 @@ const useColumns = (product: HttpTypes.AdminProduct, editable?: boolean) => {
           )
         },
         maxSize: 250,
-      })
+      }),
     ]
 
     if (editable) {

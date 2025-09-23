@@ -8,13 +8,13 @@ import { SectionRow } from "../../../../../components/common/section"
 import { useDashboardExtension } from "../../../../../extensions"
 
 type ProductOrganizationSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
 export const ProductOrganizationSection = ({
   product,
-  editable = true
+  editable = true,
 }: ProductOrganizationSectionProps) => {
   const { t } = useTranslation()
   const { getDisplays } = useDashboardExtension()
@@ -23,19 +23,23 @@ export const ProductOrganizationSection = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("products.organization.header")}</Heading>
-        {editable ? <ActionMenu
-          groups={[
-            {
-              actions: [
-                {
-                  label: t("actions.edit"),
-                  to: "organization",
-                  icon: <PencilSquare />,
-                },
-              ],
-            },
-          ]}
-        />: <></>}
+        {editable ? (
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    to: "organization",
+                    icon: <PencilSquare />,
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : (
+          <></>
+        )}
       </div>
 
       <SectionRow

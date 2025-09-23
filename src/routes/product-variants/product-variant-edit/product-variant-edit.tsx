@@ -20,9 +20,7 @@ export const ProductVariantEdit = () => {
     fields: "*variants,*variants.inventory_items",
   })
 
-  const variant = product?.variants?.find(
-    (variant) => variant.id === variantId
-  )
+  const variant = product?.variants?.find((variant) => variant.id === variantId)
 
   const ready = !isProductPending && !!product
 

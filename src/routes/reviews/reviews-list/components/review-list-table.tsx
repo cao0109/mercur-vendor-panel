@@ -99,7 +99,7 @@ export const ReviewListTable = () => {
         // search
         queryObject={raw}
         noRecords={{
-          message: t("reviews.showTips")
+          message: t("reviews.showTips"),
         }}
       />
     </Container>

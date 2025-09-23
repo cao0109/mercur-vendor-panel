@@ -7,13 +7,13 @@ import { ProductVariantDTO } from "@medusajs/types"
 import { Thumbnail } from "../../../../../components/common/thumbnail"
 
 type InventoryItemVariantsSectionProps = {
-  variants: ProductVariantDTO[],
+  variants: ProductVariantDTO[]
   editable?: boolean
 }
 
 export const InventoryItemVariantsSection = ({
   variants,
-  editable = true
+  editable = true,
 }: InventoryItemVariantsSectionProps) => {
   const { t } = useTranslation()
 

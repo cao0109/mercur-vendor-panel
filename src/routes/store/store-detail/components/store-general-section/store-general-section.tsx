@@ -31,7 +31,6 @@ export const StoreGeneralSection = ({ seller }: { seller: StoreVendor }) => {
       </div>
       <div className="text-ui-fg-subtle grid grid-cols-2 px-6 py-4 items-center">
         <Text size="small" leading="compact" weight="plus">
-          
           {t("fields.image")}
         </Text>
         <ImageAvatar src={seller.photo || "/logo.png"} size={8} rounded />

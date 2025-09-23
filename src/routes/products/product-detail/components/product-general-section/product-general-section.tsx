@@ -25,13 +25,13 @@ const productStatusColor = (status: string) => {
 }
 
 type ProductGeneralSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
 export const ProductGeneralSection = ({
   product,
-  editable = true 
+  editable = true,
 }: ProductGeneralSectionProps) => {
   const { t } = useTranslation()
   const prompt = usePrompt()
@@ -71,28 +71,32 @@ export const ProductGeneralSection = ({
           <StatusBadge color={productStatusColor(product.status)}>
             {t(`products.productStatus.${product.status}`)}
           </StatusBadge>
-          {editable ? <ActionMenu
-            groups={[
-              {
-                actions: [
-                  {
-                    label: t("actions.edit"),
-                    to: "edit",
-                    icon: <PencilSquare />,
-                  },
-                ],
-              },
-              {
-                actions: [
-                  {
-                    label: t("actions.delete"),
-                    onClick: handleDelete,
-                    icon: <Trash />,
-                  },
-                ],
-              },
-            ]}
-          />: <></>}
+          {editable ? (
+            <ActionMenu
+              groups={[
+                {
+                  actions: [
+                    {
+                      label: t("actions.edit"),
+                      to: "edit",
+                      icon: <PencilSquare />,
+                    },
+                  ],
+                },
+                {
+                  actions: [
+                    {
+                      label: t("actions.delete"),
+                      onClick: handleDelete,
+                      icon: <Trash />,
+                    },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 

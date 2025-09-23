@@ -1,1 +1,1 @@
-export * from "./data-table-pagination";
+export * from "./data-table-pagination"

@@ -4,11 +4,7 @@ import { keepPreviousData } from "@tanstack/react-query"
 import { createColumnHelper } from "@tanstack/react-table"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import {
-  Link,
-  Outlet,
-  useLoaderData,
-} from "react-router-dom"
+import { Link, Outlet, useLoaderData } from "react-router-dom"
 
 import { HttpTypes } from "@medusajs/types"
 import { ActionMenu } from "../../../../../components/common/action-menu"

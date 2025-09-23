@@ -2,7 +2,7 @@ import { toast, usePrompt } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 import { useDeleteProductType } from "../../../../hooks/api/product-types"
 
-export const useDeleteProductTypeAction = (id: string, value: string = '') => {
+export const useDeleteProductTypeAction = (id: string, value: string = "") => {
   const { t } = useTranslation()
   const prompt = usePrompt()
 
@@ -11,7 +11,7 @@ export const useDeleteProductTypeAction = (id: string, value: string = '') => {
   const handleDelete = async () => {
     const result = await prompt({
       title: t("general.areYouSure"),
-      description: t("productTypes.delete.confirmation", {value: value}),
+      description: t("productTypes.delete.confirmation", { value: value }),
       confirmText: t("actions.delete"),
       cancelText: t("actions.cancel"),
     })

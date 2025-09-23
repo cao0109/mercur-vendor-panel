@@ -257,9 +257,11 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
                         {t("fields.description")}
                       </Form.Label>
                       <Form.Control>
-                        <Textarea {...field}  maxLength={150}
-                         placeholder={t("products.edit.subtitlePlaceholder")}
-                         />
+                        <Textarea
+                          {...field}
+                          maxLength={150}
+                          placeholder={t("products.edit.subtitlePlaceholder")}
+                        />
                       </Form.Control>
                       <Form.ErrorMessage />
                     </Form.Item>

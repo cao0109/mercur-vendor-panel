@@ -131,7 +131,7 @@ export const ProductCreateOrganizationSection = ({
                 </Form.Label>
                 <Form.Control>
                   {/* <CategoryCombobox {...field} /> */}
-                  <CategoryComboboxMultiple {...field} /> 
+                  <CategoryComboboxMultiple {...field} />
                   {/* <CategorySelect  /> */}
                 </Form.Control>
                 <Form.ErrorMessage />

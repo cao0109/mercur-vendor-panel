@@ -9,11 +9,14 @@ import { SectionRow } from "../../../../../components/common/section"
 import { useDeleteVariant } from "../../../../../hooks/api/products"
 
 type VariantGeneralSectionProps = {
-  variant: HttpTypes.AdminProductVariant,
+  variant: HttpTypes.AdminProductVariant
   editable?: boolean
 }
 
-export function VariantGeneralSection({ variant, editable = true }: VariantGeneralSectionProps) {
+export function VariantGeneralSection({
+  variant,
+  editable = true,
+}: VariantGeneralSectionProps) {
   const { t } = useTranslation()
   const prompt = usePrompt()
   const navigate = useNavigate()
@@ -60,28 +63,32 @@ export function VariantGeneralSection({ variant, editable = true }: VariantGener
           </span>
         </div>
         <div className="flex items-center gap-x-4">
-        {editable ? <ActionMenu
-            groups={[
-              {
-                actions: [
-                  {
-                    label: t("actions.edit"),
-                    to: "edit",
-                    icon: <PencilSquare />,
-                  },
-                ],
-              },
-              {
-                actions: [
-                  {
-                    label: t("actions.delete"),
-                    onClick: handleDelete,
-                    icon: <Trash />,
-                  },
-                ],
-              },
-            ]}
-          /> : <></>}
+          {editable ? (
+            <ActionMenu
+              groups={[
+                {
+                  actions: [
+                    {
+                      label: t("actions.edit"),
+                      to: "edit",
+                      icon: <PencilSquare />,
+                    },
+                  ],
+                },
+                {
+                  actions: [
+                    {
+                      label: t("actions.delete"),
+                      onClick: handleDelete,
+                      icon: <Trash />,
+                    },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 

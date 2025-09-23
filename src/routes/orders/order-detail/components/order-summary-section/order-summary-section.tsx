@@ -2,10 +2,7 @@ import { ReactNode, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
-import {
-  ArrowLongRight,
-  TriangleDownMini,
-} from "@medusajs/icons"
+import { ArrowLongRight, TriangleDownMini } from "@medusajs/icons"
 import {
   AdminOrder,
   AdminOrderLineItem,

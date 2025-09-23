@@ -41,13 +41,13 @@ const productStatusColor = (status: string) => {
 }
 
 type ProductGeneralSectionProps = {
-  product: HttpTypes.AdminProduct,
+  product: HttpTypes.AdminProduct
   editable?: boolean
 }
 
 export const ProductRichTextSection = ({
   product,
-  editable = true
+  editable = true,
 }: ProductGeneralSectionProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -181,19 +181,23 @@ export const ProductRichTextSection = ({
           <StatusBadge color={productStatusColor(product.status)}>
             {t(`products.productStatus.${product.status}`)}
           </StatusBadge>
-         { editable ? <ActionMenu
-            groups={[
-              {
-                actions: [
-                  {
-                    label: t("actions.save"),
-                    onClick: handleSubmit,
-                    icon: <CheckCircleMiniSolid />,
-                  },
-                ],
-              },
-            ]}
-          />:<></>}
+          {editable ? (
+            <ActionMenu
+              groups={[
+                {
+                  actions: [
+                    {
+                      label: t("actions.save"),
+                      onClick: handleSubmit,
+                      icon: <CheckCircleMiniSolid />,
+                    },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <ReactQuill

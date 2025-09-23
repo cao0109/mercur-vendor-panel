@@ -29,7 +29,7 @@ export const DashboardOnboarding = ({
         <div>
           <Heading>{t("dashboard.welcome")}</Heading>
           <Text className="text-ui-fg-subtle" size="small">
-        {  t("dashboard.pleaseCompleteSteps")}
+            {t("dashboard.pleaseCompleteSteps")}
           </Text>
         </div>
       </div>

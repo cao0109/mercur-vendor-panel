@@ -8,10 +8,10 @@ const PAGE_SIZE = 20
 
 export const ItemLocationListTable = ({
   inventory_item_id,
-  editable = true
+  editable = true,
 }: {
   inventory_item_id: string
-  editable?:boolean
+  editable?: boolean
 }) => {
   const { searchParams, raw } = useLocationLevelTableQuery({
     pageSize: PAGE_SIZE,

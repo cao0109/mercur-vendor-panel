@@ -92,10 +92,7 @@ export const ProductCreateAttributesForm: React.FC<
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label
-                    tooltip={t("fields.midCodeTooltip")}
-                    optional
-                  >
+                  <Form.Label tooltip={t("fields.midCodeTooltip")} optional>
                     {t("fields.midCode")}
                   </Form.Label>
                   <Form.Control>
@@ -113,10 +110,7 @@ export const ProductCreateAttributesForm: React.FC<
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label
-                    tooltip={t("fields.hsCodeTooltip")}
-                    optional
-                  >
+                  <Form.Label tooltip={t("fields.hsCodeTooltip")} optional>
                     {t("fields.hsCode")}
                   </Form.Label>
                   <Form.Control>

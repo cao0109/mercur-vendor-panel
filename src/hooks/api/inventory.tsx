@@ -314,7 +314,6 @@ export const useBatchInventoryItemsLocationLevels = (
   })
 }
 
-
 export const useBatchInventoryItemProduct = (
   id: string,
   query?: Record<string, any>,

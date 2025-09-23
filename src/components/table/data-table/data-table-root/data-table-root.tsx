@@ -5,13 +5,7 @@ import {
   Row,
   flexRender,
 } from "@tanstack/react-table"
-import {
-  Fragment,
-  UIEvent,
-  useEffect,
-  useRef,
-  useState
-} from "react"
+import { Fragment, UIEvent, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { NoResults } from "../../../common/empty-table-content"
@@ -322,9 +316,12 @@ export const DataTableRoot = <TData,>({
         )}
       </div>
       {pagination && (
-        <div className={clx({ "border-t": layout === "fill" })} style={{position:'relative'}}>
+        <div
+          className={clx({ "border-t": layout === "fill" })}
+          style={{ position: "relative" }}
+        >
           <Pagination
-            showJumpTo = {showJumpTo}
+            showJumpTo={showJumpTo}
             canNextPage={table.getCanNextPage()}
             canPreviousPage={table.getCanPreviousPage()}
             nextPage={table.nextPage}
@@ -364,4 +361,3 @@ export const DataTableRoot = <TData,>({
     </div>
   )
 }
-
