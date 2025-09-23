@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod"
 import { HttpTypes } from "@medusajs/types"
 import { Button, toast } from "@medusajs/ui"
 import { useRef } from "react"
@@ -49,7 +48,7 @@ export const PriceListPricesEditForm = ({
     defaultValues: {
       products: initialValue.current,
     },
-    resolver: zodResolver(PricingProductPricesSchema),
+    // resolver: zodResolver(PricingProductPricesSchema),
   })
 
   const { mutateAsync, isPending } = usePriceListLinkProducts(priceList.id)
@@ -129,7 +128,7 @@ function initRecord(
   const record: PriceListUpdateProductsSchema = {}
 
   const variantPrices = priceList.prices?.reduce((variants, price) => {
-    const variantObject = variants[price.variant_id] || {}
+    const variantObject = variants[price.price_set.variant.id] || {}
 
     const isRegionPrice = !!price.price_rules.find(
       (item) => item.attribute === "region_id"

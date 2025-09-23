@@ -7,7 +7,7 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query"
-import { sdk } from "../../lib/client"
+import { fetchQuery, sdk } from "../../lib/client"
 import { queryClient } from "../../lib/query-client"
 import { queryKeysFactory } from "../../lib/query-key-factory"
 
@@ -30,8 +30,9 @@ export const usePricePreference = (
   >
 ) => {
   const { data, ...rest } = useQuery({
+    // queryFn: () => fetchQuery(`/admin/price-preferences/${id}`, { query }),
     queryFn: () => sdk.admin.pricePreference.retrieve(id, query),
-    queryKey: pricePreferencesQueryKeys.detail(),
+    queryKey: pricePreferencesQueryKeys.detail(id),
     ...options,
   })
 
@@ -51,7 +52,11 @@ export const usePricePreferences = (
   >
 ) => {
   const { data, ...rest } = useQuery({
-    queryFn: () => sdk.admin.pricePreference.list(query),
+    queryFn: () =>
+      fetchQuery(`/vendor/price-preferences`, {
+        method: "GET",
+        query: query as Record<string, string | number>,
+      }),
     queryKey: pricePreferencesQueryKeys.list(query),
     ...options,
   })

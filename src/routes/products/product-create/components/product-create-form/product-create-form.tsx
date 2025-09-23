@@ -12,7 +12,7 @@ import {
   useDashboardExtension,
   useExtendableForm,
 } from "../../../../../extensions"
-import { useCreateProduct } from "../../../../../hooks/api/products"
+import { useCreateProduct } from "../../../../../hooks/api"
 import { uploadFilesQuery } from "../../../../../lib/client"
 import { generateHandle } from "../../../../../utils/handle-generator"
 import {
@@ -27,7 +27,9 @@ import {
   base64ToBlob,
 } from "../product-create-rich-text-form"
 import { ProductCreateVariantsForm } from "../product-create-variants-form"
-import { ProductCreateAttributesForm } from "../product-create-attributes-form/product-create-attributes-form"
+import { usePricePreferences } from "../../../../../hooks/api/price-preferences"
+import { useRegions } from "../../../../../hooks/api"
+import { ProductCreateAttributesForm } from "../product-create-attributes-form"
 
 enum Tab {
   DETAILS = "details",
@@ -69,6 +71,11 @@ export const ProductCreateForm = ({
   const { getFormConfigs } = useDashboardExtension()
   const configs = getFormConfigs("product", "create")
   const [isCreateLoading, setIsCreateLoading] = useState(false)
+
+  const { regions } = useRegions({ limit: 9999 })
+  const { price_preferences: pricePreferences } = usePricePreferences({
+    limit: 9999,
+  })
 
   const form = useExtendableForm({
     defaultValues: {
@@ -176,11 +183,9 @@ export const ProductCreateForm = ({
           )
         }
 
-        console.log("Uploading media files", media)
         const thumbnailReq = media.filter((m) => m.isThumbnail)
-        console.log("Thumbnail media files", thumbnailReq)
         const otherMediaReq = media.filter((m) => !m.isThumbnail)
-        console.log("Other media files", otherMediaReq)
+
         const fileReqs = []
         if (thumbnailReq?.length) {
           fileReqs.push(
@@ -547,8 +552,8 @@ export const ProductCreateForm = ({
               <ProductCreateVariantsForm
                 form={form}
                 store={store}
-                // regions={regions}
-                // pricePreferences={pricePreferences}
+                regions={regions}
+                pricePreferences={pricePreferences}
               />
             </ProgressTabs.Content>
             {showInventoryTab && (

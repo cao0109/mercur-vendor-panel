@@ -31,8 +31,9 @@ import {
   UpdateConditionalPrice,
   UpdateConditionalPriceSchema,
 } from "../../../common/schema"
+
+import { useRegions } from "../../../../../hooks/api"
 import { ConditionalPriceInfo } from "../../../common/types"
-import { buildShippingOptionPriceRules } from "../../../common/utils/price-rule-helpers"
 
 type PriceRecord = {
   id?: string
@@ -104,11 +105,17 @@ export function EditShippingOptionsPricingForm({
 
   const { price_preferences: pricePreferences } = usePricePreferences({})
 
+  const { regions } = useRegions({
+    fields: "id,name,currency_code",
+    limit: 999,
+  })
+
   const { setCloseOnEscape } = useRouteModal()
 
   const columns = useShippingOptionPriceColumns({
     name: shippingOption.name,
     currencies,
+    regions,
     pricePreferences,
   })
 
@@ -141,16 +148,16 @@ export function EditShippingOptionsPricingForm({
       })
       .filter((p): p is PriceRecord => !!p)
 
-    const conditionalCurrencyPrices = Object.entries(
-      data.conditional_currency_prices
-    ).flatMap(([currency_code, value]) =>
-      value?.map((rule) => ({
-        id: rule.id,
-        currency_code,
-        amount: castNumber(rule.amount),
-        rules: buildShippingOptionPriceRules(rule),
-      }))
-    )
+    // const conditionalCurrencyPrices = Object.entries(
+    //   data.conditional_currency_prices
+    // ).flatMap(([currency_code, value]) =>
+    //   value?.map((rule) => ({
+    //     id: rule.id,
+    //     currency_code,
+    //     amount: castNumber(rule.amount),
+    //     rules: buildShippingOptionPriceRules(rule),
+    //   }))
+    // )
 
     /**
      * TODO: If we try to update an existing region price the API throws an error.
@@ -161,28 +168,30 @@ export function EditShippingOptionsPricingForm({
         const priceRecord: PriceRecord = {
           region_id,
           amount: castNumber(value || 0),
+          // currency_code: regions?.find((r) => r.id === region_id)
+          //   ?.currency_code,
         }
 
         return priceRecord
       })
       .filter((p): p is PriceRecord => !!p)
 
-    const conditionalRegionPrices = Object.entries(
-      data.conditional_region_prices
-    ).flatMap(([region_id, value]) =>
-      value?.map((rule) => ({
-        id: rule.id,
-        region_id,
-        amount: castNumber(rule.amount),
-        rules: buildShippingOptionPriceRules(rule),
-      }))
-    )
+    // const conditionalRegionPrices = Object.entries(
+    //   data.conditional_region_prices
+    // ).flatMap(([region_id, value]) =>
+    //   value?.map((rule) => ({
+    //     id: rule.id,
+    //     region_id,
+    //     amount: castNumber(rule.amount),
+    //     rules: buildShippingOptionPriceRules(rule),
+    //   }))
+    // )
 
     const allPrices = [
-      ...currencyPrices,
-      ...conditionalCurrencyPrices,
+      // ...currencyPrices,
+      // ...conditionalCurrencyPrices,
       ...regionPrices,
-      ...conditionalRegionPrices,
+      // ...conditionalRegionPrices,
     ]
 
     await mutateAsync(
@@ -318,6 +327,15 @@ const getDefaultValues = (prices: HttpTypes.AdminShippingOptionPrice[]) => {
   prices.forEach((price) => {
     if (!price.price_rules?.length) {
       currency_prices[price.currency_code!] = price.amount
+      return
+    }
+
+    const region_id = price.price_rules?.find(
+      (r) => r.attribute === REGION_ID_ATTRIBUTE
+    )?.value
+
+    if (region_id) {
+      region_prices[region_id] = price.amount
       return
     }
 
