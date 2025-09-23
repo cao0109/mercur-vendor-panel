@@ -2735,6 +2735,11 @@
     "hint": "登录以访问账户区域",
     "notSellerYet": "还不是供应商？ - <0>创建账户</0>"
   },
+  "register": {
+    "title": "加入供应商面板",
+    "hint": "注册开始销售",
+    "alreadySeller": "已经有账户？ - <0>登录</0>"
+  },
   "invite": {
     "title": "欢迎使用WChain",
     "hint": "在下面创建您的账户",
