@@ -4,9 +4,12 @@ import {
   useUpdateOrderReturnRequest,
 } from "../../../hooks/api/requests"
 import { RouteDrawer } from "../../../components/modals"
-import { Button, Select, Textarea } from "@medusajs/ui"
+import { Button, Select, Textarea, toast } from "@medusajs/ui"
 import { useForm } from "react-hook-form"
 import { Form } from "../../../components/common/form"
+import { useStockLocations } from "../../../hooks/api"
+
+const STATUS_OPTIONS = ["refunded", "escalated"]
 
 export function RequestOrderReturn() {
   const { id } = useParams()
@@ -14,29 +17,34 @@ export function RequestOrderReturn() {
 
   const { order_return_request, isLoading } = useOrderReturnRequest(id!)
 
+  const { stock_locations, isLoading: isStockLocationsLoading } =
+    useStockLocations()
+
   const form = useForm({
     defaultValues: {
-      status: order_return_request?.status,
+      status: STATUS_OPTIONS[0],
       vendor_reviewer_note: order_return_request?.vendor_reviewer_note || "",
+      location_id: undefined,
     },
   })
 
   const { mutate: updateOrderReturnRequest } = useUpdateOrderReturnRequest(id!)
 
   const handleUpdateOrderReturnRequest = async (payload: any) => {
-    console.log(payload)
     updateOrderReturnRequest(payload, {
       onSuccess: () => {
         navigate("/requests/orders", { replace: true })
       },
+      onError: (error) => {
+        toast.error(error.message)
+      },
     })
   }
 
-  if (isLoading) {
+  if (isLoading || isStockLocationsLoading) {
     return <div>Loading...</div>
   }
 
-  console.log(order_return_request)
   return (
     <RouteDrawer prev="/requests/orders">
       <RouteDrawer.Header>
@@ -55,21 +63,23 @@ export function RequestOrderReturn() {
                   <Form.Item>
                     <Form.Label>Status</Form.Label>
                     <Form.Control>
-                      <Select {...field} onValueChange={onChange}>
+                      <Select
+                        {...field}
+                        onValueChange={onChange}
+                        defaultValue={STATUS_OPTIONS[0]}
+                      >
                         <Select.Trigger>
                           <Select.Value />
                         </Select.Trigger>
                         <Select.Content>
-                          {["refunded", "withdrawn", "escalated"].map(
-                            (reason, index) => (
-                              <Select.Item
-                                key={`select-option-${index}`}
-                                value={reason}
-                              >
-                                {reason}
-                              </Select.Item>
-                            )
-                          )}
+                          {STATUS_OPTIONS.map((reason, index) => (
+                            <Select.Item
+                              key={`select-option-${index}`}
+                              value={reason}
+                            >
+                              {reason}
+                            </Select.Item>
+                          ))}
                         </Select.Content>
                       </Select>
                     </Form.Control>
@@ -77,6 +87,35 @@ export function RequestOrderReturn() {
                 )
               }}
             />
+            {form.watch("status") === "refunded" &&
+              (stock_locations || []).length > 0 && (
+                <Form.Field
+                  control={form.control}
+                  name="location_id"
+                  render={({ field: { onChange, value, ...field } }) => (
+                    <Form.Item className="mt-4">
+                      <Form.Label>Location</Form.Label>
+                      <Form.Control>
+                        <Select {...field} onValueChange={onChange}>
+                          <Select.Trigger>
+                            <Select.Value />
+                          </Select.Trigger>
+                          <Select.Content>
+                            {stock_locations?.map((sl, index) => (
+                              <Select.Item
+                                key={`select-sl-${index}`}
+                                value={sl.id}
+                              >
+                                {sl.name}
+                              </Select.Item>
+                            ))}
+                          </Select.Content>
+                        </Select>
+                      </Form.Control>
+                    </Form.Item>
+                  )}
+                />
+              )}
             <Form.Field
               control={form.control}
               name="vendor_reviewer_note"

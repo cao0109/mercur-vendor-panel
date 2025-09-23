@@ -145,7 +145,10 @@ export const useOrderReturnRequest = (
   const { data, ...rest } = useQuery({
     queryKey: [REQUESTS_QUERY_KEY, "return-request", id],
     queryFn: () =>
-      fetchQuery(`/vendor/return-request/${id}`, { method: "GET" }),
+      fetchQuery(`/vendor/return-request/${id}`, {
+        method: "GET",
+        query: { fields: "*order" },
+      }),
     ...options,
   })
 

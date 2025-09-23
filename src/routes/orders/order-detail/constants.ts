@@ -45,6 +45,7 @@ const DEFAULT_RELATIONS = [
   "region.automatic_taxes",
   "*split_order_payment",
   "payment_status",
+  "*returns",
 ]
 
 export const DEFAULT_FIELDS = `${DEFAULT_PROPERTIES.join(

@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ArrrowRight } from "@medusajs/icons"
 import { AdminOrder, AdminReturn } from "@medusajs/types"
 import { Alert, Button, Input, Switch, Text, toast } from "@medusajs/ui"
 import { useEffect, useMemo } from "react"
@@ -43,7 +42,7 @@ export function OrderReceiveReturnForm({
   const previewItems = useMemo(() => {
     const idsMap = {}
 
-    orderReturn.items.forEach((i) => (idsMap[i.item_id] = true))
+    orderReturn.items?.forEach((i) => (idsMap[i.item_id] = true))
 
     return preview.items.filter((i) => idsMap[i.id])
   }, [preview.items, orderReturn])
@@ -135,7 +134,7 @@ export function OrderReceiveReturnForm({
         description: t("orders.returns.receive.toast.success"),
         dismissLabel: t("actions.close"),
       })
-    } catch (e) {
+    } catch (e: any) {
       toast.error(t("general.error"), {
         description: e.message,
         dismissLabel: t("actions.close"),
@@ -324,7 +323,7 @@ export function OrderReceiveReturnForm({
               </span>
               <span className="txt-small font-medium">
                 {getStylizedAmount(
-                  preview.summary.pending_difference || 0,
+                  preview.summary?.pending_difference || 0,
                   order.currency_code
                 )}
               </span>

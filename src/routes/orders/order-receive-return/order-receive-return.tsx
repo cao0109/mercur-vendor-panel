@@ -23,9 +23,12 @@ export function OrderReceiveReturn() {
    * HOOKS
    */
 
-  const { order } = useOrder(id!, { fields: "+currency_code,*items" })
-  const { order: preview } = useOrderPreview(id!)
-  const { return: orderReturn } = useReturn(return_id, {
+  const { order } = useOrder(id!, {
+    fields: "+currency_code,*items,*returns",
+  })
+  const { order: preview } = useOrderPreview(id!) as any
+
+  const { return: orderReturn } = useReturn(return_id!, {
     fields: "*items.item,*items.item.variant,*items.item.variant.product",
   }) // TODO: fix API needs to return 404 if return not exists and not an empty object
 
@@ -34,11 +37,11 @@ export function OrderReceiveReturn() {
    */
 
   const { mutateAsync: initiateReceiveReturn } = useInitiateReceiveReturn(
-    return_id,
-    id
+    return_id!,
+    id!
   )
 
-  const { mutateAsync: addReceiveItems } = useAddReceiveItems(return_id, id)
+  const { mutateAsync: addReceiveItems } = useAddReceiveItems(return_id!, id!)
 
   useEffect(() => {
     ;(async function () {
@@ -65,7 +68,7 @@ export function OrderReceiveReturn() {
             quantity: i.quantity,
           })),
         })
-      } catch (e) {
+      } catch (e: any) {
         toast.error(e.message)
       } finally {
         IS_REQUEST_RUNNING = false
@@ -87,7 +90,7 @@ export function OrderReceiveReturn() {
       {ready && (
         <OrderReceiveReturnForm
           order={order}
-          orderReturn={orderReturn}
+          orderReturn={orderReturn[0]}
           preview={preview}
         />
       )}

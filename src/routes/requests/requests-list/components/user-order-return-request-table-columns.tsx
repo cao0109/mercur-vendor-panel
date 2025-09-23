@@ -24,11 +24,11 @@ export const useOrderReturnRequestTableColumns = () => {
   const { t } = useTranslation()
   return [
     columnHelper.accessor("id", {
-      header:t("requests.order"),
+      header: t("requests.order"),
       cell: ({ row }) => `#${row.original.order.display_id}`,
     }),
     columnHelper.accessor("order.customer.first_name", {
-      header:t("requests.customer"),
+      header: t("requests.customer"),
       cell: ({ row }) =>
         `${row.original.order.customer.first_name} ${row.original.order.customer.last_name}`,
     }),
@@ -37,7 +37,7 @@ export const useOrderReturnRequestTableColumns = () => {
       cell: ({ row }) => row.original.order.customer.email,
     }),
     columnHelper.accessor("customer_note", {
-      header:  t("requests.reason"),
+      header: t("requests.reason"),
       cell: ({ row }) => row.original.customer_note,
     }),
     columnHelper.accessor("created_at", {
@@ -45,7 +45,7 @@ export const useOrderReturnRequestTableColumns = () => {
       cell: ({ row }) => <DateCell date={row.original.created_at} />,
     }),
     columnHelper.accessor("status", {
-      header:  t("requests.status"),
+      header: t("requests.status"),
       cell: ({ row }) => {
         return (
           <div className="flex h-full w-full items-center overflow-hidden">

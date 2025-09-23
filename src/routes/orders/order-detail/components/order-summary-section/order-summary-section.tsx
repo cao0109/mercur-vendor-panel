@@ -4,13 +4,11 @@ import { Link } from "react-router-dom"
 
 import {
   ArrowLongRight,
-  ArrowPath,
-  ArrowUturnLeft,
-  ExclamationCircle,
   TriangleDownMini,
 } from "@medusajs/icons"
 import {
   AdminOrder,
+  AdminOrderLineItem,
   AdminOrderPreview,
   AdminPaymentCollection,
   AdminRegion,
@@ -30,11 +28,9 @@ import {
 } from "@medusajs/ui"
 
 import { ActionMenu } from "../../../../../components/common/action-menu"
-import { Thumbnail } from "../../../../../components/common/thumbnail"
-import { useOrderPreview } from "../../../../../hooks/api/orders"
-import { useMarkPaymentCollectionAsPaid } from "../../../../../hooks/api/payment-collections"
-import { useReservationItems } from "../../../../../hooks/api/reservations"
-import { useReturns } from "../../../../../hooks/api/returns"
+import { useOrderPreview } from "../../../../../hooks/api"
+import { useMarkPaymentCollectionAsPaid } from "../../../../../hooks/api"
+import { useReservationItems } from "../../../../../hooks/api"
 import { formatCurrency } from "../../../../../lib/format-currency"
 import {
   getLocaleAmount,
@@ -43,11 +39,12 @@ import {
 } from "../../../../../lib/money-amount-helpers"
 import { getTotalCaptured } from "../../../../../lib/payment"
 import { getReturnableQuantity } from "../../../../../lib/rma"
-import { CopyPaymentLink } from "../copy-payment-link/copy-payment-link"
+import { CopyPaymentLink } from "../copy-payment-link"
 import ShippingInfoPopover from "./shipping-info-popover"
+import { Thumbnail } from "../../../../../components/common/thumbnail"
 
 type OrderSummarySectionProps = {
-  order: AdminOrder
+  order: AdminOrder & { returns: any[] }
 }
 
 export const OrderSummarySection = ({
@@ -65,15 +62,9 @@ export const OrderSummarySection = ({
 
   const { order: orderPreview } = useOrderPreview(order.id!)
 
-  const { returns = [] } = useReturns({
-    status: "requested",
-    order_id: order.id,
-    fields: "+received_at",
-  })
-
   const receivableReturns = useMemo(
-    () => returns.filter((r) => !r.canceled_at),
-    [returns]
+    () => order.returns.filter((r) => !r.canceled_at),
+    [order]
   )
 
   const showReturns = !!receivableReturns.length
@@ -213,7 +204,7 @@ export const OrderSummarySection = ({
 
                       return {
                         label: t("orders.returns.receive.receiveItems", {
-                          id: `#${id.slice(-7)}`,
+                          id: `#${id?.slice(-7)}`,
                           returnType,
                         }),
                         icon: <ArrowLongRight />,
@@ -291,7 +282,7 @@ const Header = ({
   return (
     <div className="flex items-center justify-between px-6 py-4">
       <Heading level="h2">{t("fields.summary")}</Heading>
-      <ActionMenu
+      {/* <ActionMenu
         groups={[
           {
             actions: [
@@ -338,7 +329,7 @@ const Header = ({
             ],
           },
         ]}
-      />
+      /> */}
     </div>
   )
 }
