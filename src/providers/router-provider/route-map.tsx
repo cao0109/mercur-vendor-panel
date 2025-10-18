@@ -1089,6 +1089,14 @@ export const RouteMap: RouteObject[] = [
             ],
           },
           {
+            path: "reset-password",
+            errorElement: <ErrorBoundary />,
+            lazy: () => import("../../routes/settings/reset-password"),
+            handle: {
+              breadcrumb: () => t("resetPassword.resetPassword"),
+            },
+          },
+          {
             path: "regions",
             errorElement: <ErrorBoundary />,
             element: <Outlet />,

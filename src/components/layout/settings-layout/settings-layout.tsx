@@ -72,6 +72,10 @@ const useMyAccountRoutes = (): INavItem[] => {
         label: t("profile.domain"),
         to: "/settings/profile",
       },
+      {
+        label: t("resetPassword.resetPassword"),
+        to: "/settings/reset-password",
+      },
     ],
     [t]
   )
