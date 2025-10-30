@@ -39,6 +39,14 @@ export const RouteMap: RouteObject[] = [
             lazy: () => import("../../routes/dashboard"),
           },
           {
+            path: "/invite-codes",
+            errorElement: <ErrorBoundary />,
+            handle: {
+              breadcrumb: () => t("inviteCodes.domain"),
+            },
+            lazy: () => import("../../routes/invite-codes/invite-overview"),
+          },
+          {
             path: "/requests",
             errorElement: <ErrorBoundary />,
             handle: {

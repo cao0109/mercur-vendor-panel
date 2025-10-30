@@ -4,6 +4,7 @@ import {
   CogSixTooth,
   Component,
   CurrencyDollar,
+  Envelope,
   ListCheckbox,
   MagnifyingGlass,
   MinusMini,
@@ -177,6 +178,11 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
       icon: <Star />,
       label: t("reviews.domain"),
       to: "/reviews",
+    },
+    {
+      icon: <Envelope />,
+      label: t("inviteCodes.domain"),
+      to: "/invite-codes",
     },
     // {
     //   icon: <ChatBubbleLeftRight />,

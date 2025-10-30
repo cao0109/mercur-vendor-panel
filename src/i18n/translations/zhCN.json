@@ -2758,6 +2758,51 @@
       "accepted": "邀请已成功接受"
     }
   },
+  "inviteCodes": {
+    "domain": "邀请管理",
+    "pageTitle": "邀请管理",
+    "pageDescription": "管理你的邀请信息并追踪记录",
+    "inviteCode": "邀请码",
+    "inviteCodeLabel": "邀请码：",
+    "loading": "加载中...",
+    "qrCode": "二维码",
+    "qrCodeTitle": "邀请二维码",
+    "qrCodeDescription": "扫描二维码或下载保存，分享给好友注册",
+    "qrCodeAlt": "邀请二维码",
+    "inviteLink": "邀请链接",
+    "downloadPng": "下载 PNG",
+    "downloadSvg": "下载 SVG",
+    "downloadSuccess": "成功",
+    "downloadPngDescription": "二维码已下载（PNG 格式）",
+    "downloadSvgDescription": "二维码已下载（SVG 格式）",
+    "close": "关闭",
+    "relations": {
+      "title": "邀请记录",
+      "description": "查看所有通过您的邀请码注册的用户",
+      "searchPlaceholder": "搜索...",
+      "filter": "筛选",
+      "filterByStatus": "按状态筛选",
+      "filterByType": "按类型筛选",
+      "allStatus": "全部状态",
+      "allTypes": "全部类型",
+      "clearAllFilters": "清除所有筛选",
+      "columns": {
+        "invitedUser": "被邀请人",
+        "type": "类型",
+        "status": "状态",
+        "inviteTime": "邀请时间"
+      },
+      "types": {
+        "buyer": "买手",
+        "seller": "卖家"
+      },
+      "status": {
+        "active": "活跃",
+        "completed": "已完成",
+        "cancelled": "已取消"
+      }
+    }
+  },
   "resetPassword": {
     "title": "重置密码",
     "hint": "在下面输入您的电子邮件,我们将向您发送如何重置密码的说明。",

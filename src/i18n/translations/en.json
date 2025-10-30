@@ -2754,6 +2754,51 @@
       "accepted": "Invite successfully accepted"
     }
   },
+  "inviteCodes": {
+    "domain": "Invite Codes",
+    "pageTitle": "Invite Codes",
+    "pageDescription": "Manage your invite information and track related records.",
+    "inviteCode": "Invite Code",
+    "inviteCodeLabel": "Invite Code:",
+    "loading": "Loading...",
+    "qrCode": "QR Code",
+    "qrCodeTitle": "Invite QR Code",
+    "qrCodeDescription": "Scan or download the QR code to share it with new users.",
+    "qrCodeAlt": "Invite QR Code",
+    "inviteLink": "Invite link",
+    "downloadPng": "Download PNG",
+    "downloadSvg": "Download SVG",
+    "downloadSuccess": "Success",
+    "downloadPngDescription": "QR code has been downloaded (PNG format).",
+    "downloadSvgDescription": "QR code has been downloaded (SVG format).",
+    "close": "Close",
+    "relations": {
+      "title": "Invite Records",
+      "description": "View all users who registered through your invite code.",
+      "searchPlaceholder": "Search...",
+      "filter": "Filter",
+      "filterByStatus": "Filter by status",
+      "filterByType": "Filter by type",
+      "allStatus": "All statuses",
+      "allTypes": "All types",
+      "clearAllFilters": "Clear all filters",
+      "columns": {
+        "invitedUser": "Invited user",
+        "type": "Type",
+        "status": "Status",
+        "inviteTime": "Invite time"
+      },
+      "types": {
+        "buyer": "Buyer",
+        "seller": "Seller"
+      },
+      "status": {
+        "active": "Active",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
+    }
+  },
   "resetPassword": {
     "title": "Reset password",
     "hint": "Enter your email below, and we will send you instructions on how to reset your password.",

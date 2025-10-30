@@ -10210,6 +10210,178 @@
       ],
       "additionalProperties": false
     },
+    "inviteCodes": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "pageTitle": {
+          "type": "string"
+        },
+        "pageDescription": {
+          "type": "string"
+        },
+        "inviteCode": {
+          "type": "string"
+        },
+        "inviteCodeLabel": {
+          "type": "string"
+        },
+        "loading": {
+          "type": "string"
+        },
+        "qrCode": {
+          "type": "string"
+        },
+        "qrCodeTitle": {
+          "type": "string"
+        },
+        "qrCodeDescription": {
+          "type": "string"
+        },
+        "qrCodeAlt": {
+          "type": "string"
+        },
+        "inviteLink": {
+          "type": "string"
+        },
+        "downloadPng": {
+          "type": "string"
+        },
+        "downloadSvg": {
+          "type": "string"
+        },
+        "downloadSuccess": {
+          "type": "string"
+        },
+        "downloadPngDescription": {
+          "type": "string"
+        },
+        "downloadSvgDescription": {
+          "type": "string"
+        },
+        "close": {
+          "type": "string"
+        },
+        "relations": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "searchPlaceholder": {
+              "type": "string"
+            },
+            "filter": {
+              "type": "string"
+            },
+            "filterByStatus": {
+              "type": "string"
+            },
+            "filterByType": {
+              "type": "string"
+            },
+            "allStatus": {
+              "type": "string"
+            },
+            "allTypes": {
+              "type": "string"
+            },
+            "clearAllFilters": {
+              "type": "string"
+            },
+            "columns": {
+              "type": "object",
+              "properties": {
+                "invitedUser": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "inviteTime": {
+                  "type": "string"
+                }
+              },
+              "required": ["invitedUser", "type", "status", "inviteTime"],
+              "additionalProperties": false
+            },
+            "types": {
+              "type": "object",
+              "properties": {
+                "buyer": {
+                  "type": "string"
+                },
+                "seller": {
+                  "type": "string"
+                }
+              },
+              "required": ["buyer", "seller"],
+              "additionalProperties": false
+            },
+            "status": {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "string"
+                },
+                "completed": {
+                  "type": "string"
+                },
+                "cancelled": {
+                  "type": "string"
+                }
+              },
+              "required": ["active", "completed", "cancelled"],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "title",
+            "description",
+            "searchPlaceholder",
+            "filter",
+            "filterByStatus",
+            "filterByType",
+            "allStatus",
+            "allTypes",
+            "clearAllFilters",
+            "columns",
+            "types",
+            "status"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "domain",
+        "pageTitle",
+        "pageDescription",
+        "inviteCode",
+        "inviteCodeLabel",
+        "loading",
+        "qrCode",
+        "qrCodeTitle",
+        "qrCodeDescription",
+        "qrCodeAlt",
+        "inviteLink",
+        "downloadPng",
+        "downloadSvg",
+        "downloadSuccess",
+        "downloadPngDescription",
+        "downloadSvgDescription",
+        "close",
+        "relations"
+      ],
+      "additionalProperties": false
+    },
     "resetPassword": {
       "type": "object",
       "properties": {
@@ -11490,6 +11662,7 @@
     "returnReasons",
     "login",
     "invite",
+    "inviteCodes",
     "resetPassword",
     "workflowExecutions",
     "productTypes",
